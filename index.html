@@ -4,11 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Aadhaar Find</title>
-    <!-- PWA Manifest -->
-    <link rel="manifest" href="manifest.json">
+    <link rel="manifest" href="manifest.json" />
     <meta name="theme-color" content="#FF9933" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <link rel="apple-touch-icon" href="icon-192.png" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet" />
@@ -20,27 +17,45 @@
             --saffron-light: #FFB366;
             --white: #FFFFFF;
             --green: #138808;
+            --green-light: #4CAF50;
+            --blue: #1a8cff;
             --navy: #1e3a8a;
+            --bg-cream: #fdf6f0;
             --bg-light: #f8fafc;
             --text-dark: #0f172a;
             --text-muted: #475569;
             --border: #e2e8f0;
             --shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 12px 40px rgba(0, 0, 0, 0.14);
             --radius: 16px;
+            --radius-lg: 24px;
+            --radius-input: 50px;
             --font: 'Inter', sans-serif;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
         body {
             font-family: var(--font);
-            background: var(--bg-light);
+            background: var(--bg-cream);
             min-height: 100vh;
             color: var(--text-dark);
             overflow-x: hidden;
+            position: relative;
         }
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23FF9933' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 0;
+        }
+
         button {
             cursor: pointer;
             font-family: var(--font);
@@ -81,7 +96,7 @@
         }
         .text-muted {
             color: var(--text-muted);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
         .w-full {
             width: 100%;
@@ -105,26 +120,26 @@
             margin-bottom: 16px;
         }
 
-        /* ----- BUTTONS with Gradient ----- */
+        /* ===== BUTTONS ===== */
         .btn-primary {
             background: linear-gradient(135deg, var(--saffron), var(--saffron-dark));
             color: #fff;
-            padding: 10px 24px;
+            padding: 12px 28px;
             border-radius: 50px;
-            font-weight: 600;
+            font-weight: 700;
             font-size: 0.95rem;
-            transition: 0.25s;
+            transition: var(--transition);
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
             min-width: 120px;
             border: none;
-            box-shadow: 0 4px 12px rgba(255, 153, 51, 0.3);
+            box-shadow: 0 4px 16px rgba(255, 153, 51, 0.3);
         }
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(255, 153, 51, 0.4);
+            box-shadow: 0 8px 28px rgba(255, 153, 51, 0.4);
         }
         .btn-primary:disabled {
             opacity: 0.6;
@@ -132,6 +147,68 @@
             transform: none !important;
             box-shadow: none !important;
         }
+
+        .btn-tricolor {
+            position: relative;
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            color: #fff;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            border: none;
+            overflow: hidden;
+            min-width: 160px;
+            transition: var(--transition);
+            background: linear-gradient(135deg, var(--saffron), var(--saffron-dark));
+            box-shadow: 0 4px 20px rgba(255, 153, 51, 0.35);
+        }
+        .btn-tricolor::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50px;
+            background: linear-gradient(90deg,
+                    #FF9933 0%,
+                    #FFB347 20%,
+                    #FFFFFF 40%,
+                    #A8D5A2 60%,
+                    #138808 80%,
+                    #FF9933 100%);
+            background-size: 300% 100%;
+            animation: tricolorShimmer 3s ease-in-out infinite;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        .btn-tricolor:hover::before {
+            opacity: 1;
+        }
+        .btn-tricolor:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 32px rgba(255, 153, 51, 0.5);
+        }
+        .btn-tricolor:active {
+            transform: scale(0.96);
+        }
+        .btn-tricolor .btn-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        @keyframes tricolorShimmer {
+            0% {
+                background-position: 0% 0%;
+            }
+            100% {
+                background-position: 300% 0%;
+            }
+        }
+
         .btn-secondary {
             background: linear-gradient(135deg, var(--navy), #1a3170);
             color: #fff;
@@ -139,7 +216,7 @@
             border-radius: 50px;
             font-weight: 600;
             font-size: 0.95rem;
-            transition: 0.25s;
+            transition: var(--transition);
             display: inline-flex;
             align-items: center;
             gap: 8px;
@@ -157,7 +234,7 @@
             border-radius: 50px;
             font-weight: 600;
             font-size: 0.95rem;
-            transition: 0.25s;
+            transition: var(--transition);
             border: none;
             box-shadow: 0 4px 12px rgba(19, 136, 8, 0.3);
         }
@@ -165,109 +242,135 @@
             transform: translateY(-2px);
             box-shadow: 0 8px 24px rgba(19, 136, 8, 0.4);
         }
-        .btn-danger {
-            background: linear-gradient(135deg, #dc2626, #b91c1c);
-            color: #fff;
-            padding: 10px 24px;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            transition: 0.25s;
-            border: none;
-        }
         .btn-sm {
             padding: 6px 16px;
             font-size: 0.8rem;
             min-width: auto;
         }
-        .btn-outline {
-            background: transparent;
-            color: var(--navy);
-            border: 2px solid var(--navy);
-            padding: 8px 20px;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: 0.25s;
-        }
-        .btn-outline:hover {
-            background: var(--navy);
-            color: #fff;
-        }
 
-        /* ===== PWA INSTALL BANNER ===== */
-        .pwa-install-banner {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: linear-gradient(135deg, var(--navy), #1a3170);
-            color: #fff;
-            padding: 12px 24px;
-            border-radius: 16px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            display: none;
-            align-items: center;
-            gap: 16px;
-            z-index: 1000;
-            max-width: 90%;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(8px);
+        /* ===== FLOATING LABEL INPUT ===== */
+        .floating-group {
+            position: relative;
+            margin-bottom: 18px;
+            width: 100%;
         }
-        .pwa-install-banner.show {
-            display: flex;
-        }
-        .pwa-install-banner .pwa-icon {
-            font-size: 1.8rem;
-            color: var(--saffron);
-        }
-        .pwa-install-banner .pwa-text {
-            font-size: 0.85rem;
+        .floating-group .floating-input {
+            width: 100%;
+            padding: 16px 20px;
+            font-size: 0.95rem;
+            border: 2px solid var(--border);
+            border-radius: var(--radius-input);
+            background: #f9fafb;
+            transition: var(--transition);
+            color: var(--text-dark);
             font-weight: 500;
+            height: 58px;
+            outline: none;
         }
-        .pwa-install-banner .pwa-text strong {
-            color: var(--saffron);
+        .floating-group .floating-input:focus {
+            border-color: var(--saffron);
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(255, 153, 51, 0.08);
         }
-        .pwa-install-banner .pwa-actions {
-            display: flex;
-            gap: 8px;
-            align-items: center;
+        .floating-group .floating-input:focus+.floating-label,
+        .floating-group .floating-input:not(:placeholder-shown)+.floating-label {
+            top: 6px;
+            font-size: 0.7rem;
+            color: var(--saffron-dark);
+            font-weight: 600;
+            transform: translateY(0);
+            background: transparent;
+            padding: 0 6px;
         }
-        .pwa-install-banner .pwa-actions .btn-install {
-            background: var(--saffron);
-            color: #fff;
-            padding: 6px 18px;
-            border-radius: 50px;
+        .floating-group .floating-input:focus+.floating-label {
+            color: var(--saffron-dark);
+        }
+        .floating-group .floating-input:hover {
+            border-color: var(--saffron-light);
+            background: #fff;
+        }
+        .floating-group .floating-input::placeholder {
+            color: transparent;
+        }
+        .floating-group .floating-label {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            pointer-events: none;
+            transition: var(--transition);
+            background: transparent;
+            font-weight: 500;
+            padding: 0 4px;
+        }
+        .floating-group .floating-input:focus+.floating-label,
+        .floating-group .floating-input:not(:placeholder-shown)+.floating-label {
+            top: 6px;
+            font-size: 0.65rem;
+            color: var(--saffron-dark);
             font-weight: 700;
-            font-size: 0.8rem;
-            transition: 0.25s;
-            border: none;
-            box-shadow: 0 4px 12px rgba(255, 153, 51, 0.3);
+            transform: translateY(0);
+            background: #fff;
+            padding: 0 8px;
+            border-radius: 8px;
+            letter-spacing: 0.3px;
         }
-        .pwa-install-banner .pwa-actions .btn-install:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 20px rgba(255, 153, 51, 0.4);
+        .floating-group .floating-input:focus {
+            border-color: var(--saffron);
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(255, 153, 51, 0.08);
         }
-        .pwa-install-banner .pwa-actions .btn-close-install {
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 1.2rem;
-            padding: 4px 8px;
-            transition: 0.25s;
+        .floating-group .floating-input:not(:placeholder-shown) {
+            background: #fff;
         }
-        .pwa-install-banner .pwa-actions .btn-close-install:hover {
-            color: #fff;
-            transform: rotate(90deg);
+        .floating-group .floating-input:not(:placeholder-shown) {
+            border-color: var(--saffron-light);
+        }
+        .floating-group .floating-input:focus+.floating-label {
+            color: var(--saffron-dark);
+        }
+        .floating-group select.floating-input {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23475569' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            padding-right: 40px;
+            cursor: pointer;
+        }
+        .floating-group select.floating-input:focus {
+            border-color: var(--saffron);
+            background-color: #fff;
+            box-shadow: 0 0 0 4px rgba(255, 153, 51, 0.08);
+        }
+        .floating-group select.floating-input:focus+.floating-label,
+        .floating-group select.floating-input:not(:placeholder-shown)+.floating-label {
+            top: 6px;
+            font-size: 0.65rem;
+            color: var(--saffron-dark);
+            font-weight: 700;
+            transform: translateY(0);
+            background: #fff;
+            padding: 0 8px;
+            border-radius: 8px;
+        }
+        .floating-group select.floating-input option {
+            color: var(--text-dark);
+            background: #fff;
         }
 
-        /* ===== AUTH ===== */
+        /* ===== AUTH SCREEN ===== */
         #authBlock {
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 20px;
-            background: linear-gradient(145deg, #fdf6f0, #f0ebe6);
+            background: var(--bg-cream);
             position: relative;
             overflow: hidden;
+            z-index: 1;
         }
         #authBlock::before {
             content: '';
@@ -277,32 +380,25 @@
             right: 0;
             height: 6px;
             background: linear-gradient(90deg, #FF9933 0%, #FFB347 25%, #FFFFFF 50%, #A8D5A2 75%, #138808 100%);
+            z-index: 2;
         }
-        #authBlock::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23FF9933' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            pointer-events: none;
-        }
-
         .auth-card {
             background: #fff;
-            border-radius: 28px;
-            padding: 28px 32px 26px;
+            border-radius: var(--radius-lg);
+            padding: 32px 32px 28px;
             max-width: 420px;
             width: 100%;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.10);
             position: relative;
-            z-index: 1;
-            border: 1px solid rgba(255, 153, 51, 0.15);
+            z-index: 2;
+            border: 1px solid rgba(255, 153, 51, 0.10);
         }
         .auth-card .logo-container {
             text-align: center;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
         .auth-card .logo-container img {
-            max-height: 48px;
+            max-height: 50px;
             width: auto;
             display: inline-block;
             object-fit: contain;
@@ -324,13 +420,13 @@
             letter-spacing: 2px;
             text-transform: uppercase;
             margin-top: -2px;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
         .auth-card .subtitle {
             text-align: center;
             color: var(--text-muted);
             font-size: 0.9rem;
-            margin-bottom: 18px;
+            margin-bottom: 20px;
         }
         .auth-card .form-group {
             margin-bottom: 14px;
@@ -347,9 +443,10 @@
             display: flex;
             align-items: center;
             background: #f9fafb;
-            border: 1.5px solid var(--border);
-            border-radius: 12px;
-            transition: 0.25s;
+            border: 2px solid var(--border);
+            border-radius: var(--radius-input);
+            transition: var(--transition);
+            height: 58px;
         }
         .auth-card .form-group .input-wrap:focus-within {
             border-color: var(--saffron);
@@ -357,20 +454,21 @@
             box-shadow: 0 0 0 4px rgba(255, 153, 51, 0.08);
         }
         .auth-card .form-group .input-wrap .input-icon {
-            padding: 0 0 0 14px;
+            padding: 0 0 0 18px;
             color: var(--text-muted);
             font-size: 0.95rem;
         }
         .auth-card .form-group .input-wrap input {
             width: 100%;
-            padding: 11px 14px 11px 10px;
+            padding: 16px 18px 16px 12px;
             font-size: 0.95rem;
             background: transparent;
             border: none;
             outline: none;
+            height: 100%;
         }
         .auth-card .form-group .input-wrap .password-toggle {
-            padding: 0 14px 0 6px;
+            padding: 0 18px 0 6px;
             color: var(--text-muted);
             cursor: pointer;
             font-size: 0.95rem;
@@ -405,23 +503,6 @@
         .auth-card .auth-toggle a:hover {
             text-decoration: underline;
         }
-        .otp-row {
-            display: none;
-            animation: fadeSlide 0.3s ease;
-        }
-        .otp-row.show {
-            display: flex;
-        }
-        @keyframes fadeSlide {
-            0% {
-                opacity: 0;
-                transform: translateY(-8px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
         .timer-text {
             font-size: 0.85rem;
             color: var(--text-muted);
@@ -434,109 +515,104 @@
         #dashboardBlock {
             display: none;
             min-height: 100vh;
-            background: var(--bg-light);
+            background: var(--bg-cream);
+            position: relative;
+            z-index: 1;
+            padding-bottom: 90px;
         }
         #dashboardBlock.active {
             display: block;
         }
 
-        /* ===== HEADER - Saffron Gradient ===== */
+        /* ===== HEADER ===== */
         .dash-header {
             background: linear-gradient(135deg, #FF9933 0%, #FF8C1A 25%, #E07B1A 50%, #CC6E14 75%, #B85E0E 100%);
-            padding: 6px 12px;
+            padding: 12px 20px 10px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             flex-wrap: nowrap;
-            gap: 6px;
+            gap: 10px;
             position: sticky;
             top: 0;
-            z-index: 100;
-            box-shadow: 0 4px 20px rgba(255, 153, 51, 0.25);
-            min-height: 56px;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.15);
+            z-index: 50;
+            box-shadow: 0 4px 24px rgba(255, 153, 51, 0.25);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.12);
+            min-height: 62px;
         }
-
         .dash-header .header-left {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
             flex-shrink: 0;
-        }
-        .dash-header .header-left .menu-toggle {
-            font-size: 1.4rem;
             cursor: pointer;
-            padding: 4px 6px;
-            border-radius: 8px;
-            color: #fff;
-            transition: 0.25s;
-            display: flex;
-            align-items: center;
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
         }
-        .dash-header .header-left .menu-toggle:hover {
-            background: rgba(255, 255, 255, 0.15);
-        }
-
-        .dash-header .header-center {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-width: 0;
-        }
-        .dash-header .header-center .brand-logo {
-            height: 36px;
+        .dash-header .header-left .header-logo {
+            height: 32px;
             width: auto;
             display: inline-block;
             border-radius: 4px;
-            flex-shrink: 0;
-            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
         }
-
-        .dash-header .header-right {
+        .dash-header .header-left .brand-text {
             display: flex;
             flex-direction: column;
-            align-items: flex-end;
-            gap: 2px;
-            flex-shrink: 0;
+            line-height: 1.2;
         }
-        .dash-header .header-right .wallet {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 2px 12px;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 0.7rem;
+        .dash-header .header-left .brand-text .brand-name {
+            font-size: 1rem;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: -0.3px;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+        }
+        .dash-header .header-left .brand-text .brand-sub {
+            font-size: 0.55rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.8);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .dash-header .header-right {
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: 10px;
+            flex-shrink: 0;
+        }
+        .dash-header .header-right .notification-btn {
             color: #fff;
-            cursor: pointer;
-            transition: 0.25s;
-            white-space: nowrap;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(4px);
+            font-size: 1.2rem;
+            padding: 4px 6px;
+            border-radius: 50%;
+            transition: var(--transition);
+            position: relative;
         }
-        .dash-header .header-right .wallet:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: scale(1.02);
+        .dash-header .header-right .notification-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
         }
-        .dash-header .header-right .wallet i {
-            font-size: 0.7rem;
+        .dash-header .header-right .notification-btn .badge-dot {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            width: 8px;
+            height: 8px;
+            background: #dc2626;
+            border-radius: 50%;
+            border: 2px solid #FF8C1A;
         }
         .dash-header .header-right .header-avatar {
-            width: 30px;
-            height: 30px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.25);
+            background: rgba(255, 255, 255, 0.2);
             color: #fff;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 700;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             cursor: pointer;
-            transition: 0.25s;
+            transition: var(--transition);
             border: 2px solid rgba(255, 255, 255, 0.4);
             overflow: hidden;
             flex-shrink: 0;
@@ -552,48 +628,48 @@
             transform: scale(1.05);
         }
 
-        .dash-header .marquee {
-            display: none;
-        }
-
         /* ===== SIDEBAR ===== */
-        .dash-layout {
-            display: flex;
-            min-height: calc(100vh - 56px);
-            position: relative;
-            overflow: hidden;
-        }
-
         .dash-sidebar {
             position: fixed;
-            top: 56px;
+            top: 0;
             left: 0;
-            width: 270px;
-            height: calc(100vh - 56px);
+            width: 280px;
+            height: 100vh;
             background: #fff;
-            border-right: 1px solid var(--border);
-            padding: 0 0 16px 0;
-            flex-shrink: 0;
-            overflow-y: auto;
-            z-index: 60;
+            z-index: 200;
             transform: translateX(-100%);
-            transition: transform 0.32s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            box-shadow: 4px 0 30px rgba(0, 0, 0, 0.08);
+            transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: 4px 0 40px rgba(0, 0, 0, 0.1);
+            padding: 20px 0;
+            overflow-y: auto;
         }
         .dash-sidebar.open {
             transform: translateX(0);
         }
-
         .dash-sidebar .sidebar-header {
+            padding: 0 20px 16px;
+            border-bottom: 1px solid var(--border);
             display: flex;
             align-items: center;
-            justify-content: flex-end;
-            padding: 10px 16px 6px 16px;
-            border-bottom: 1px solid var(--border);
-            margin-bottom: 4px;
+            justify-content: space-between;
+        }
+        .dash-sidebar .sidebar-header .sidebar-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--navy);
+        }
+        .dash-sidebar .sidebar-header .sidebar-brand img {
+            height: 30px;
+            width: auto;
+        }
+        .dash-sidebar .sidebar-header .sidebar-brand span {
+            color: var(--saffron);
         }
         .dash-sidebar .sidebar-header .sidebar-close {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             color: var(--text-muted);
             cursor: pointer;
             padding: 4px 8px;
@@ -604,161 +680,551 @@
             color: #dc2626;
             background: rgba(220, 38, 38, 0.08);
         }
-
-        .dash-sidebar .nav-item {
+        .dash-sidebar .sidebar-item {
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 10px 20px;
+            gap: 14px;
+            padding: 12px 20px;
             color: var(--text-muted);
             font-weight: 500;
-            font-size: 0.88rem;
+            font-size: 0.9rem;
             transition: 0.2s;
             cursor: pointer;
             border-left: 3px solid transparent;
         }
-        .dash-sidebar .nav-item:hover {
+        .dash-sidebar .sidebar-item:hover {
             background: #f1f5f9;
             color: var(--text-dark);
         }
-        .dash-sidebar .nav-item.active {
+        .dash-sidebar .sidebar-item.active {
             color: var(--saffron);
             background: #fef3ed;
             border-left-color: var(--saffron);
             font-weight: 600;
         }
-        .dash-sidebar .nav-item i {
-            width: 20px;
+        .dash-sidebar .sidebar-item i {
+            width: 22px;
             text-align: center;
             font-size: 1rem;
         }
-        .dash-sidebar .nav-divider {
+        .dash-sidebar .sidebar-divider {
             height: 1px;
             background: var(--border);
             margin: 8px 16px;
         }
-        .dash-sidebar .nav-item .badge-admin {
-            background: var(--saffron);
-            color: #fff;
-            font-size: 0.55rem;
-            padding: 2px 10px;
-            border-radius: 50px;
-            margin-left: auto;
-            font-weight: 700;
-        }
-
         .sidebar-overlay {
             position: fixed;
             inset: 0;
             background: rgba(0, 0, 0, 0.35);
-            z-index: 55;
+            z-index: 150;
             display: none;
             opacity: 0;
             transition: opacity 0.3s ease;
-            top: 56px;
         }
         .sidebar-overlay.show {
             display: block;
             opacity: 1;
         }
 
+        /* ===== MAIN CONTENT ===== */
         .dash-content {
-            flex: 1;
-            padding: 16px 20px;
-            overflow-y: auto;
-            max-height: calc(100vh - 56px);
-            width: 100%;
-            transition: margin-left 0.3s ease;
+            padding: 16px 20px 0;
+            max-width: 480px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
         }
 
-        .low-balance-banner {
-            background: linear-gradient(135deg, #dc2626, #b91c1c);
-            color: #fff;
-            padding: 10px 20px;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            display: none;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 16px;
-            box-shadow: 0 4px 12px rgba(220, 38, 38, 0.2);
-        }
-        .low-balance-banner.show {
-            display: flex;
-        }
-
+        /* ===== PAGE SECTIONS ===== */
         .page-section {
             display: none;
-            animation: fadeSlide 0.3s ease;
+            animation: fadeSlide 0.35s ease;
         }
         .page-section.active {
             display: block;
         }
-        .page-section h2 {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: var(--navy);
-            margin-bottom: 2px;
+        @keyframes fadeSlide {
+            0% {
+                opacity: 0;
+                transform: translateY(16px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
-        .page-section .section-desc {
-            color: var(--text-muted);
-            margin-bottom: 16px;
+
+        /* ===== WELCOME ===== */
+        .welcome-section {
+            margin-bottom: 20px;
+        }
+        .welcome-section .greeting {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            letter-spacing: -0.5px;
+        }
+        .welcome-section .greeting span {
+            color: var(--saffron);
+        }
+        .welcome-section .sub-greeting {
             font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 2px;
         }
 
-        .card {
-            background: #fff;
-            border-radius: var(--radius);
-            padding: 18px 20px;
+        /* ===== BALANCE CARD ===== */
+        .balance-card {
+            background: linear-gradient(135deg, #ffffff, #faf8f6);
+            border-radius: var(--radius-lg);
+            padding: 18px 22px;
             box-shadow: var(--shadow);
-            transition: 0.25s;
-            background: linear-gradient(145deg, #ffffff, #f8fafc);
-            border: 1px solid rgba(255, 153, 51, 0.05);
+            margin-bottom: 24px;
+            border: 1px solid rgba(255, 153, 51, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
-        .card .card-title {
+        .balance-card .balance-left .balance-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+        .balance-card .balance-left .balance-amount {
+            font-size: 1.6rem;
             font-weight: 700;
-            font-size: 1.05rem;
-            margin-bottom: 12px;
-            color: var(--navy);
+            color: var(--text-dark);
+            letter-spacing: -0.5px;
+        }
+        .balance-card .balance-left .balance-amount span {
+            color: var(--saffron);
+        }
+        .balance-card .balance-action .btn-add {
+            background: linear-gradient(135deg, var(--saffron), var(--saffron-dark));
+            color: #fff;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            transition: var(--transition);
+            box-shadow: 0 2px 12px rgba(255, 153, 51, 0.25);
+        }
+        .balance-card .balance-action .btn-add:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 153, 51, 0.35);
         }
 
-        .form-row {
+        /* ===== SERVICE GRID ===== */
+        .section-title {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 14px;
+        }
+        .service-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 14px;
+            margin-bottom: 28px;
         }
-        .form-row.single {
-            grid-template-columns: 1fr;
-        }
-        .form-group {
-            margin-bottom: 12px;
-        }
-        .form-group label {
-            display: block;
-            font-weight: 600;
-            font-size: 0.82rem;
-            color: var(--text-dark);
-            margin-bottom: 4px;
-        }
-        .form-group input,
-        .form-group select {
-            width: 100%;
-            padding: 9px 12px;
-            border: 1.5px solid var(--border);
-            border-radius: 10px;
-            font-size: 0.9rem;
-            background: #f9fafb;
-            transition: 0.25s;
-        }
-        .form-group input:focus,
-        .form-group select:focus {
-            border-color: var(--saffron);
+        .service-card {
             background: #fff;
-            box-shadow: 0 0 0 4px rgba(255, 153, 51, 0.08);
+            border-radius: var(--radius);
+            padding: 20px 16px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(255, 153, 51, 0.04);
+            text-align: center;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        .service-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255, 153, 51, 0.03), transparent);
+            pointer-events: none;
+            border-radius: var(--radius);
+        }
+        .service-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+            border-color: rgba(255, 153, 51, 0.15);
+        }
+        .service-card .service-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            font-size: 1.3rem;
+            transition: var(--transition);
+        }
+        .service-card .service-icon.orange {
+            background: rgba(255, 153, 51, 0.12);
+            color: var(--saffron-dark);
+        }
+        .service-card .service-icon.blue {
+            background: rgba(26, 140, 255, 0.10);
+            color: var(--blue);
+        }
+        .service-card .service-icon.green {
+            background: rgba(19, 136, 8, 0.10);
+            color: var(--green);
+        }
+        .service-card .service-icon.navy {
+            background: rgba(30, 58, 138, 0.10);
+            color: var(--navy);
+        }
+        .service-card .service-icon.purple {
+            background: rgba(120, 80, 200, 0.10);
+            color: #7850c8;
+        }
+        .service-card .service-icon.teal {
+            background: rgba(0, 150, 150, 0.10);
+            color: #009696;
+        }
+        .service-card .service-icon.red {
+            background: rgba(220, 38, 38, 0.10);
+            color: #dc2626;
+        }
+        .service-card .service-icon.indigo {
+            background: rgba(75, 0, 130, 0.10);
+            color: #4b0082;
+        }
+        .service-card .service-name {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 2px;
+        }
+        .service-card .service-desc {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            line-height: 1.3;
         }
 
-        /* ===== RESULT CARD - Tricolor Gradient Background ===== */
+        /* ===== QUICK ACTIONS ===== */
+        .quick-actions {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 28px;
+            flex-wrap: wrap;
+        }
+        .quick-actions .quick-btn {
+            flex: 1;
+            min-width: 80px;
+            padding: 10px 16px;
+            background: #fff;
+            border-radius: 50px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 153, 51, 0.06);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        .quick-actions .quick-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+            border-color: rgba(255, 153, 51, 0.15);
+        }
+        .quick-actions .quick-btn i {
+            color: var(--saffron);
+            font-size: 0.9rem;
+        }
+
+        /* ===== BOTTOM NAV ===== */
+        .bottom-nav {
+            position: fixed;
+            bottom: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 32px);
+            max-width: 420px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.12);
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            padding: 8px 12px;
+            z-index: 100;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(12px);
+        }
+        .bottom-nav .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+            padding: 6px 12px;
+            border-radius: 12px;
+            transition: var(--transition);
+            cursor: pointer;
+            position: relative;
+            min-width: 50px;
+        }
+        .bottom-nav .nav-item i {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            transition: var(--transition);
+        }
+        .bottom-nav .nav-item .nav-label {
+            font-size: 0.55rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            transition: var(--transition);
+        }
+        .bottom-nav .nav-item.active i {
+            color: var(--saffron);
+            background: linear-gradient(135deg, var(--saffron), var(--saffron-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .bottom-nav .nav-item.active .nav-label {
+            color: var(--saffron-dark);
+            font-weight: 700;
+        }
+        .bottom-nav .nav-item.active::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--saffron), var(--saffron-dark));
+            border-radius: 4px;
+        }
+
+        /* ===== CARDS ===== */
+        .card {
+            background: #fff;
+            border-radius: var(--radius);
+            padding: 20px 22px;
+            box-shadow: var(--shadow);
+            transition: 0.25s;
+            border: 1px solid rgba(255, 153, 51, 0.04);
+        }
+        .card .card-title {
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 14px;
+            color: var(--navy);
+        }
+
+        /* ===== ADD WALLET ===== */
+        .add-wallet-container {
+            padding: 4px 0;
+        }
+        .add-wallet-container .qr-wrapper {
+            text-align: center;
+            padding: 20px 0 16px;
+            position: relative;
+        }
+        .add-wallet-container .qr-wrapper .qr-code {
+            display: inline-block;
+            padding: 12px;
+            background: #fff;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            position: relative;
+            animation: qrPulse 2.5s ease-in-out infinite;
+        }
+        @keyframes qrPulse {
+            0%,
+            100% {
+                box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            }
+            50% {
+                box-shadow: 0 8px 40px rgba(255, 153, 51, 0.2), 0 0 60px rgba(255, 153, 51, 0.08);
+            }
+        }
+        .add-wallet-container .qr-wrapper .qr-code img {
+            max-width: 180px;
+            border-radius: 8px;
+            display: block;
+        }
+        .add-wallet-container .qr-wrapper .qr-code .qr-ripple {
+            position: absolute;
+            inset: -8px;
+            border-radius: var(--radius);
+            border: 2px solid rgba(255, 153, 51, 0.2);
+            animation: qrRipple 2s ease-out infinite;
+            pointer-events: none;
+        }
+        @keyframes qrRipple {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1.08);
+                opacity: 0;
+            }
+        }
+        .add-wallet-container .upi-id-display {
+            text-align: center;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--navy);
+            margin: 6px 0 16px;
+            background: rgba(255, 153, 51, 0.06);
+            padding: 8px 16px;
+            border-radius: 50px;
+            display: inline-block;
+            width: auto;
+        }
+        .add-wallet-container .upi-id-display i {
+            color: var(--saffron);
+            margin-right: 6px;
+        }
+        .add-wallet-container .pay-btn-upi {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #1a8cff, #0066cc);
+            color: #fff;
+            padding: 14px 28px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            width: 100%;
+            transition: var(--transition);
+            box-shadow: 0 4px 16px rgba(26, 140, 255, 0.3);
+            border: none;
+            cursor: pointer;
+        }
+        .add-wallet-container .pay-btn-upi:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(26, 140, 255, 0.4);
+        }
+        .add-wallet-container .pay-btn-upi i {
+            font-size: 1.2rem;
+        }
+        .add-wallet-container .pay-btn-upi-100 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: linear-gradient(135deg, var(--green), #0d6e0a);
+            color: #fff;
+            padding: 14px 28px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            width: 100%;
+            transition: var(--transition);
+            box-shadow: 0 4px 16px rgba(19, 136, 8, 0.3);
+            border: none;
+            cursor: pointer;
+            margin-bottom: 12px;
+        }
+        .add-wallet-container .pay-btn-upi-100:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(19, 136, 8, 0.4);
+        }
+        .add-wallet-container .pay-btn-upi-100 i {
+            font-size: 1.2rem;
+        }
+
+        /* ===== HISTORY ===== */
+        .history-full .history-table-wrap {
+            overflow-x: auto;
+            width: 100%;
+        }
+        .history-full table.history-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.78rem;
+            background: #fff;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+        .history-full table.history-table thead {
+            background: var(--navy);
+            color: #fff;
+        }
+        .history-full table.history-table th {
+            padding: 10px 12px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.7rem;
+        }
+        .history-full table.history-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid var(--border);
+            vertical-align: middle;
+            font-size: 0.75rem;
+        }
+        .history-full table.history-table tr:hover td {
+            background: #f8fafc;
+        }
+        .history-full .history-status {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+        }
+        .history-full .history-status .view-icon {
+            cursor: pointer;
+            color: var(--navy);
+            font-size: 1rem;
+            transition: 0.25s;
+            padding: 4px 8px;
+            border-radius: 8px;
+            background: rgba(30, 58, 138, 0.06);
+        }
+        .history-full .history-status .view-icon:hover {
+            background: rgba(30, 58, 138, 0.15);
+            transform: scale(1.1);
+        }
+        .history-full .history-status .btn-dont-worry {
+            background: #f97316;
+            color: #fff;
+            border: none;
+            padding: 2px 8px;
+            border-radius: 50px;
+            font-size: 0.55rem;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 2px;
+        }
+        .history-full .history-status .btn-dont-worry:hover {
+            transform: scale(1.05);
+        }
+        .history-full .history-status .delete-btn {
+            background: #dc2626;
+            color: #fff;
+            border: none;
+            padding: 2px 8px;
+            border-radius: 50px;
+            font-size: 0.55rem;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 2px;
+        }
+        .history-full .history-status .delete-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* ===== RESULT CARD ===== */
         #secResult .result-card {
             background: linear-gradient(145deg, #fef8f0 0%, #fdf0e0 25%, #f8e8d0 50%, #f0e0c8 75%, #e8f5e8 100%);
             border-radius: var(--radius);
@@ -769,40 +1235,18 @@
             border: 1px solid rgba(255, 153, 51, 0.12);
             position: relative;
         }
-        #secResult .result-card::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg,
-                    rgba(255, 153, 51, 0.06) 0%,
-                    rgba(255, 255, 255, 0.10) 33%,
-                    rgba(19, 136, 8, 0.05) 66%,
-                    rgba(255, 153, 51, 0.04) 100%);
-            pointer-events: none;
-            border-radius: var(--radius);
-        }
         #secResult .result-card .tricolor-bar {
             height: 6px;
-            background: linear-gradient(90deg,
-                    #FF9933 0%,
-                    #FFB347 25%,
-                    #FFFFFF 50%,
-                    #A8D5A2 75%,
-                    #138808 100%);
-            position: relative;
-            z-index: 1;
+            background: linear-gradient(90deg, #FF9933 0%, #FFB347 25%, #FFFFFF 50%, #A8D5A2 75%, #138808 100%);
         }
         #secResult .result-card .card-body {
             padding: 22px 28px;
             background: rgba(255, 255, 255, 0.70);
             backdrop-filter: blur(2px);
-            position: relative;
-            z-index: 1;
         }
         #secResult .result-card .result-header {
             text-align: center;
             margin-bottom: 16px;
-            position: relative;
         }
         #secResult .result-card .result-header .result-logo {
             height: 40px;
@@ -906,91 +1350,13 @@
             gap: 10px;
             transition: 0.3s;
             box-shadow: 0 4px 16px rgba(30, 58, 138, 0.3);
-            letter-spacing: 0.3px;
-        }
-        #secResult .result-card .result-footer .print-btn i {
-            font-size: 1.1rem;
         }
         #secResult .result-card .result-footer .print-btn:hover {
             transform: translateY(-3px) scale(1.02);
             box-shadow: 0 8px 28px rgba(30, 58, 138, 0.4);
-            background: linear-gradient(135deg, #1a3170, #0f1f4a);
-        }
-        #secResult .result-card .result-footer .print-btn:active {
-            transform: scale(0.96);
         }
 
-        /* ===== HISTORY - Full Page, No Scroll, Only Eye Icon ===== */
-        #secHistory .history-full {
-            padding: 0;
-        }
-        #secHistory .history-full .history-table-wrap {
-            overflow-x: auto;
-            width: 100%;
-            overflow-y: visible;
-        }
-        #secHistory .history-full table.history-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.82rem;
-            background: #fff;
-            border-radius: var(--radius);
-            overflow: hidden;
-            box-shadow: var(--shadow);
-        }
-        #secHistory .history-full table.history-table thead {
-            background: var(--navy);
-            color: #fff;
-        }
-        #secHistory .history-full table.history-table th {
-            padding: 10px 14px;
-            text-align: left;
-            font-weight: 600;
-            font-size: 0.8rem;
-        }
-        #secHistory .history-full table.history-table td {
-            padding: 10px 14px;
-            border-bottom: 1px solid var(--border);
-            vertical-align: middle;
-        }
-        #secHistory .history-full table.history-table tr:hover td {
-            background: #f8fafc;
-        }
-        #secHistory .history-full .history-status {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 2px;
-        }
-        #secHistory .history-full .history-status .view-icon {
-            cursor: pointer;
-            color: var(--navy);
-            font-size: 1.2rem;
-            transition: 0.25s;
-            padding: 4px 8px;
-            border-radius: 8px;
-            background: rgba(30, 58, 138, 0.06);
-        }
-        #secHistory .history-full .history-status .view-icon:hover {
-            background: rgba(30, 58, 138, 0.15);
-            transform: scale(1.1);
-        }
-        #secHistory .history-full .history-status .btn-dont-worry {
-            background: #f97316;
-            color: #fff;
-            border: none;
-            padding: 2px 8px;
-            border-radius: 50px;
-            font-size: 0.55rem;
-            font-weight: 700;
-            cursor: pointer;
-            margin-top: 2px;
-        }
-        #secHistory .history-full .history-status .btn-dont-worry:hover {
-            transform: scale(1.05);
-        }
-
-        /* ===== Modals ===== */
+        /* ===== MODALS ===== */
         .modal-overlay {
             position: fixed;
             inset: 0;
@@ -1045,6 +1411,36 @@
             line-height: 1.6;
             font-size: 0.9rem;
         }
+        .modal-box .notification-item {
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+        .modal-box .notification-item:last-child {
+            border-bottom: none;
+        }
+        .modal-box .notification-item .noti-icon {
+            color: var(--saffron);
+            font-size: 1.1rem;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+        .modal-box .notification-item .noti-content .noti-title {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--text-dark);
+        }
+        .modal-box .notification-item .noti-content .noti-desc {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+        .modal-box .notification-item .noti-content .noti-time {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
         @keyframes slideUp {
             0% {
                 opacity: 0;
@@ -1056,7 +1452,7 @@
             }
         }
 
-        /* ===== Profile Page ===== */
+        /* ===== PROFILE ===== */
         .profile-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -1107,35 +1503,14 @@
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(220, 38, 38, 0.15);
         }
-        .profile-add-admin-btn {
-            margin-top: 8px;
-            width: 100%;
-            padding: 10px;
-            border-radius: 10px;
-            background: #e8f0fe;
-            color: var(--navy);
-            font-weight: 600;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            transition: 0.25s;
-            border: 1.5px solid #d0dff0;
-        }
-        .profile-add-admin-btn:hover {
-            background: #d0dff0;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(30, 58, 138, 0.12);
-        }
 
-        /* ===== Admin ===== */
+        /* ===== ADMIN ===== */
         .admin-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 14px;
         }
-        .admin-grid .form-group {
+        .admin-grid .floating-group {
             margin-bottom: 0;
         }
         .admin-pending-table {
@@ -1146,19 +1521,19 @@
         .admin-pending-table table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 0.8rem;
+            font-size: 0.78rem;
         }
         .admin-pending-table th {
             background: var(--navy);
             color: #fff;
             padding: 6px 10px;
             text-align: left;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
         }
         .admin-pending-table td {
             padding: 6px 10px;
             border-bottom: 1px solid var(--border);
-            font-size: 0.78rem;
+            font-size: 0.75rem;
         }
         .admin-user-mgmt {
             display: grid;
@@ -1185,43 +1560,181 @@
             color: var(--saffron);
         }
 
-        /* ===== QR / Payment ===== */
-        .qr-container {
-            text-align: center;
-            margin: 8px 0 16px;
-        }
-        .qr-container img {
-            max-width: 180px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-        .qr-container .upi-id {
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--navy);
-            margin-top: 6px;
-        }
-
-        /* ===== Footer ===== */
-        .footer {
-            background: var(--navy);
+        /* ===== AVATAR EDITOR ===== */
+        .avatar-preview {
+            width: 76px;
+            height: 76px;
+            border-radius: 50%;
+            background: var(--saffron);
             color: #fff;
-            padding: 14px 20px;
-            text-align: center;
-            font-size: 0.75rem;
-            border-top: 3px solid var(--saffron);
-            background: linear-gradient(135deg, var(--navy), #1a3170);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin: 0 auto 14px;
+            overflow: hidden;
+            border: 3px solid var(--navy);
         }
-        .footer a {
-            color: var(--saffron);
-            cursor: pointer;
-            margin: 0 8px;
-        }
-        .footer a:hover {
-            text-decoration: underline;
+        .avatar-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
-        /* ===== PRINT - preserve background colors ===== */
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 480px) {
+            .dash-header {
+                padding: 10px 14px 8px;
+                min-height: 56px;
+            }
+            .dash-header .header-left .header-logo {
+                height: 26px;
+            }
+            .dash-header .header-left .brand-text .brand-name {
+                font-size: 0.85rem;
+            }
+            .dash-header .header-left .brand-text .brand-sub {
+                font-size: 0.48rem;
+            }
+            .dash-header .header-right .header-avatar {
+                width: 30px;
+                height: 30px;
+                font-size: 0.75rem;
+            }
+            .dash-content {
+                padding: 12px 14px 0;
+            }
+            .welcome-section .greeting {
+                font-size: 1.3rem;
+            }
+            .balance-card .balance-left .balance-amount {
+                font-size: 1.3rem;
+            }
+            .service-grid {
+                gap: 10px;
+            }
+            .service-card {
+                padding: 16px 12px;
+            }
+            .service-card .service-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 1.1rem;
+            }
+            .service-card .service-name {
+                font-size: 0.8rem;
+            }
+            .quick-actions .quick-btn {
+                font-size: 0.7rem;
+                padding: 8px 12px;
+            }
+            .bottom-nav {
+                padding: 6px 8px;
+                bottom: 12px;
+                width: calc(100% - 20px);
+            }
+            .bottom-nav .nav-item {
+                padding: 4px 8px;
+                min-width: 40px;
+            }
+            .bottom-nav .nav-item i {
+                font-size: 1rem;
+            }
+            .bottom-nav .nav-item .nav-label {
+                font-size: 0.5rem;
+            }
+            .auth-card {
+                padding: 24px 18px;
+            }
+            .auth-card .logo-container img {
+                max-height: 40px;
+            }
+            .auth-card .brand {
+                font-size: 1.2rem;
+            }
+            .floating-group .floating-input {
+                height: 52px;
+                padding: 14px 16px;
+                font-size: 0.88rem;
+            }
+            .floating-group .floating-label {
+                font-size: 0.88rem;
+                left: 16px;
+            }
+            .floating-group .floating-input:focus+.floating-label,
+            .floating-group .floating-input:not(:placeholder-shown)+.floating-label {
+                font-size: 0.6rem;
+                top: 4px;
+            }
+            .add-wallet-container .qr-wrapper .qr-code img {
+                max-width: 140px;
+            }
+            .admin-grid {
+                grid-template-columns: 1fr;
+            }
+            .admin-user-mgmt {
+                grid-template-columns: 1fr;
+            }
+            .profile-grid {
+                grid-template-columns: 1fr;
+            }
+            .card {
+                padding: 16px 14px;
+            }
+            #secResult .result-card .card-body {
+                padding: 16px 14px;
+            }
+            #secResult .result-card .result-header .uid-number {
+                font-size: 20px;
+            }
+            .history-full table.history-table {
+                font-size: 0.7rem;
+            }
+            .history-full table.history-table th,
+            .history-full table.history-table td {
+                padding: 6px 8px;
+            }
+            .btn-tricolor {
+                padding: 12px 20px;
+                font-size: 0.85rem;
+                min-width: 130px;
+            }
+            .add-wallet-container .pay-btn-upi-100 {
+                font-size: 0.85rem;
+                padding: 12px 20px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .service-grid {
+                gap: 8px;
+            }
+            .service-card {
+                padding: 12px 8px;
+            }
+            .service-card .service-icon {
+                width: 34px;
+                height: 34px;
+                font-size: 0.9rem;
+            }
+            .service-card .service-name {
+                font-size: 0.7rem;
+            }
+            .quick-actions .quick-btn {
+                font-size: 0.65rem;
+                padding: 6px 10px;
+                gap: 4px;
+            }
+            .dash-header .header-left .brand-text .brand-name {
+                font-size: 0.75rem;
+            }
+            .dash-header .header-left .brand-text .brand-sub {
+                font-size: 0.4rem;
+            }
+        }
+
+        /* ===== PRINT ===== */
         @media print {
             body * {
                 visibility: hidden;
@@ -1256,11 +1769,10 @@
             #secResult .result-card .result-footer .print-btn {
                 display: none !important;
             }
-            .dash-sidebar,
+            .bottom-nav,
             .dash-header,
-            .low-balance-banner,
-            .page-section:not(#secResult),
-            .footer {
+            .footer,
+            .page-section:not(#secResult) {
                 display: none !important;
             }
             .dash-content {
@@ -1268,240 +1780,9 @@
                 max-height: none !important;
             }
         }
-
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 992px) {
-            .dash-content {
-                padding: 14px 16px;
-            }
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-            .admin-grid {
-                grid-template-columns: 1fr;
-            }
-            .profile-grid {
-                grid-template-columns: 1fr;
-            }
-            .admin-user-mgmt {
-                grid-template-columns: 1fr;
-            }
-        }
-        @media (max-width: 768px) {
-            .dash-header {
-                padding: 4px 10px;
-                min-height: 50px;
-            }
-            .dash-header .header-center .brand-logo {
-                height: 28px;
-            }
-            .dash-header .header-right .wallet {
-                font-size: 0.6rem;
-                padding: 2px 8px;
-            }
-            .dash-header .header-right .header-avatar {
-                width: 26px;
-                height: 26px;
-                font-size: 0.7rem;
-            }
-            .dash-header .header-left .menu-toggle {
-                font-size: 1.2rem;
-                padding: 2px 4px;
-            }
-            .dash-sidebar {
-                width: 250px;
-                top: 50px;
-                height: calc(100vh - 50px);
-            }
-            .sidebar-overlay {
-                top: 50px;
-            }
-            .dash-content {
-                padding: 12px 14px;
-                max-height: calc(100vh - 50px);
-            }
-            .auth-card {
-                padding: 24px 18px;
-            }
-            .auth-card .logo-container img {
-                max-height: 40px;
-            }
-            .card {
-                padding: 14px 12px;
-            }
-            #secResult .result-card .card-body {
-                padding: 16px 12px;
-            }
-            #secResult .result-card .result-header .uid-number {
-                font-size: 20px;
-            }
-            #secResult .result-card .result-header .blue-tick {
-                width: 18px;
-                height: 18px;
-                font-size: 10px;
-            }
-            .page-section h2 {
-                font-size: 1.2rem;
-            }
-            #secHistory .history-full table.history-table {
-                font-size: 0.75rem;
-            }
-            #secHistory .history-full table.history-table th,
-            #secHistory .history-full table.history-table td {
-                padding: 8px 10px;
-            }
-            #secHistory .history-full .history-status .view-icon {
-                font-size: 1rem;
-            }
-            .pwa-install-banner {
-                padding: 10px 16px;
-                bottom: 12px;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            .pwa-install-banner .pwa-text {
-                font-size: 0.75rem;
-                text-align: center;
-            }
-        }
-        @media (max-width: 480px) {
-            .auth-card {
-                padding: 18px 12px;
-            }
-            .auth-card .form-group .input-wrap .input-icon {
-                display: none;
-            }
-            .modal-box {
-                padding: 20px 16px;
-            }
-            #secResult .result-card .result-footer .print-btn {
-                width: 100%;
-                justify-content: center;
-            }
-            .dash-header .header-center .brand-logo {
-                height: 24px;
-            }
-            .dash-header .header-right .wallet {
-                font-size: 0.55rem;
-                padding: 1px 6px;
-            }
-            .dash-header .header-right .header-avatar {
-                width: 22px;
-                height: 22px;
-                font-size: 0.6rem;
-            }
-            .dash-header .header-left .menu-toggle {
-                font-size: 1.1rem;
-            }
-            .dash-sidebar {
-                width: 220px;
-            }
-            #secHistory .history-full table.history-table {
-                font-size: 0.7rem;
-            }
-            #secHistory .history-full table.history-table th,
-            #secHistory .history-full table.history-table td {
-                padding: 6px 8px;
-            }
-            .pwa-install-banner {
-                padding: 8px 12px;
-                gap: 8px;
-            }
-            .pwa-install-banner .pwa-icon {
-                font-size: 1.4rem;
-            }
-            .pwa-install-banner .pwa-actions .btn-install {
-                padding: 4px 12px;
-                font-size: 0.7rem;
-            }
-        }
-
-        /* ===== AVATAR EDITOR MODAL ===== */
-        .avatar-preview {
-            width: 76px;
-            height: 76px;
-            border-radius: 50%;
-            background: var(--saffron);
-            color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.2rem;
-            font-weight: 700;
-            margin: 0 auto 14px;
-            overflow: hidden;
-            border: 3px solid var(--navy);
-        }
-        .avatar-preview img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .avatar-preview .avatar-preview-initial {
-            display: block;
-        }
-        .avatar-preview .avatar-preview-initial.hidden {
-            display: none;
-        }
-        .avatar-preview img.hidden {
-            display: none;
-        }
-
-        /* Desktop: sidebar visible by default */
-        @media (min-width: 769px) {
-            .dash-sidebar {
-                transform: translateX(0) !important;
-                position: sticky;
-                top: 56px;
-                height: calc(100vh - 56px);
-                box-shadow: none;
-                border-right: 1px solid var(--border);
-                width: 220px;
-            }
-            .dash-sidebar .sidebar-header {
-                display: none;
-            }
-            .sidebar-overlay {
-                display: none !important;
-            }
-            .dash-header .header-left .menu-toggle {
-                display: none;
-            }
-            .dash-content {
-                max-height: calc(100vh - 56px);
-                padding: 20px 28px;
-            }
-            .dash-layout {
-                overflow: visible;
-            }
-        }
-
-        /* Mobile: sidebar hidden by default */
-        @media (max-width: 768px) {
-            .dash-sidebar .sidebar-header {
-                display: flex;
-            }
-            .dash-header .header-left .menu-toggle {
-                display: flex;
-            }
-        }
     </style>
 </head>
 <body>
-
-    <!-- ============================================================
-    PWA INSTALL BANNER
-    ============================================================ -->
-    <div class="pwa-install-banner" id="pwaInstallBanner">
-        <div class="pwa-icon"><i class="fas fa-mobile-alt"></i></div>
-        <div class="pwa-text">
-            <strong>Install App</strong> – Add to home screen for faster access
-        </div>
-        <div class="pwa-actions">
-            <button class="btn-install" id="pwaInstallBtn">Install</button>
-            <button class="btn-close-install" id="pwaInstallClose"><i class="fas fa-times"></i></button>
-        </div>
-    </div>
 
     <!-- ============================================================
     AUTH CONTAINER
@@ -1618,20 +1899,20 @@
     DASHBOARD
     ============================================================ -->
     <div id="dashboardBlock">
+        <!-- ===== HEADER ===== -->
         <header class="dash-header">
-            <!-- LEFT: Hamburger -->
-            <div class="header-left">
-                <div class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></div>
+            <div class="header-left" id="headerLeftClick">
+                <img src="https://blogger.googleusercontent.com/img/a/AVvXsEhdHBrmzwSoARIy-GQ0vUBft7WOKi2uIi6D3paX01w2DAb47vH5jxenn9Wzoh-INA5wW0Qcu_yV9AbjZDgWNmcdw9hUSO0mrmF9niQgGML0ESlDxWBdO8vqVkGAo6J_wfJ8KWU6jHWJH3dULZ5zCc6fhw9KTivIoK2UEBBqKPDdUuegEUs3YkeVET9ah6vk" alt="Aadhaar Find" class="header-logo" />
+                <div class="brand-text">
+                    <span class="brand-name">Aadhaar Find</span>
+                    <span class="brand-sub">UIDAI • VERIFIED IDENTITY</span>
+                </div>
             </div>
-
-            <!-- CENTER: UIDAI Logo only -->
-            <div class="header-center">
-                <img src="https://blogger.googleusercontent.com/img/a/AVvXsEhdHBrmzwSoARIy-GQ0vUBft7WOKi2uIi6D3paX01w2DAb47vH5jxenn9Wzoh-INA5wW0Qcu_yV9AbjZDgWNmcdw9hUSO0mrmF9niQgGML0ESlDxWBdO8vqVkGAo6J_wfJ8KWU6jHWJH3dULZ5zCc6fhw9KTivIoK2UEBBqKPDdUuegEUs3YkeVET9ah6vk" alt="UIDAI" class="brand-logo" />
-            </div>
-
-            <!-- RIGHT: Wallet + Avatar -->
             <div class="header-right">
-                <div class="wallet" id="walletClick"><i class="fas fa-wallet"></i> ₹<span id="walletBalance">0</span></div>
+                <button class="notification-btn" id="notificationBtn">
+                    <i class="fas fa-bell"></i>
+                    <span class="badge-dot" id="notiDot"></span>
+                </button>
                 <div class="header-avatar" id="headerAvatar">
                     <span id="headerAvatarInitial">U</span>
                     <img id="headerAvatarImg" style="display:none;" alt="DP" />
@@ -1639,251 +1920,455 @@
             </div>
         </header>
 
-        <div class="dash-layout">
-            <div class="sidebar-overlay" id="sidebarOverlay"></div>
-
-            <nav class="dash-sidebar" id="dashSidebar">
-                <div class="sidebar-header">
-                    <span class="sidebar-close" id="sidebarClose"><i class="fas fa-times"></i></span>
+        <!-- ===== SIDEBAR ===== -->
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
+        <nav class="dash-sidebar" id="dashSidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-brand">
+                    <img src="https://blogger.googleusercontent.com/img/a/AVvXsEhdHBrmzwSoARIy-GQ0vUBft7WOKi2uIi6D3paX01w2DAb47vH5jxenn9Wzoh-INA5wW0Qcu_yV9AbjZDgWNmcdw9hUSO0mrmF9niQgGML0ESlDxWBdO8vqVkGAo6J_wfJ8KWU6jHWJH3dULZ5zCc6fhw9KTivIoK2UEBBqKPDdUuegEUs3YkeVET9ah6vk" alt="Aadhaar Find" />
+                    Aadhaar <span>Find</span>
                 </div>
-                <div class="nav-item active" data-page="findByName"><i class="fas fa-user-search"></i> Find by Name</div>
-                <div class="nav-item" data-page="findByUid"><i class="fas fa-hashtag"></i> Find by UID</div>
-                <div class="nav-item" data-page="addMoney" id="addMoneyNav"><i class="fas fa-rupee-sign"></i> Add Money / QR</div>
-                <div class="nav-item" data-page="history"><i class="fas fa-history"></i> Search History</div>
-                <div class="nav-item" data-page="profile"><i class="fas fa-user-circle"></i> My Profile</div>
-                <div class="nav-divider"></div>
-                <div class="nav-item" data-page="adminPanel" id="adminNavItem" style="display:none;"><i class="fas fa-user-cog"></i> Admin Panel <span class="badge-admin">Admin</span></div>
-            </nav>
+                <span class="sidebar-close" id="sidebarClose"><i class="fas fa-times"></i></span>
+            </div>
+            <div class="sidebar-item active" data-page="home"><i class="fas fa-home"></i> Home</div>
+            <div class="sidebar-item" data-page="search"><i class="fas fa-search"></i> Search</div>
+            <div class="sidebar-item" data-page="history"><i class="fas fa-history"></i> History</div>
+            <div class="sidebar-item" data-page="addWallet"><i class="fas fa-wallet"></i> Add Wallet</div>
+            <div class="sidebar-item" data-page="profile"><i class="fas fa-user-circle"></i> Profile</div>
+            <div class="sidebar-divider"></div>
+            <div class="sidebar-item" data-page="adminPanel" id="adminNavItem" style="display:none;"><i class="fas fa-user-cog"></i> Admin Panel</div>
+            <div class="sidebar-item" id="sidebarLogout"><i class="fas fa-sign-out-alt"></i> Logout</div>
+        </nav>
 
-            <main class="dash-content" id="dashContent">
-                <div class="low-balance-banner" id="lowBalanceBanner">
-                    <i class="fas fa-exclamation-triangle"></i>
-                    <span>⚠️ Please add money to search!</span>
+        <!-- ===== MAIN CONTENT ===== -->
+        <main class="dash-content" id="dashContent">
+
+            <!-- ===== HOME ===== -->
+            <section class="page-section active" id="secHome">
+                <div class="welcome-section">
+                    <div class="greeting">Welcome Back, <span id="userNameDisplay">User</span>!</div>
+                    <div class="sub-greeting">Manage your Aadhaar services easily</div>
                 </div>
 
-                <!-- PAGE: Find by Name -->
-                <section class="page-section active" id="secFindByName">
-                    <h2>Find Your UID</h2>
-                    <p class="section-desc">Enter your details exactly as per your record.</p>
-                    <div class="card">
-                        <div class="form-row">
-                            <div class="form-group"><label>Full Name</label><input type="text" id="findName" placeholder="Full name" /></div>
-                            <div class="form-group"><label>Father's Name</label><input type="text" id="findFather" placeholder="Father's name" /></div>
-                            <div class="form-group"><label>Date of Birth</label><input type="date" id="findDob" /></div>
-                            <div class="form-group"><label>State</label><input type="text" id="findState" placeholder="State" /></div>
-                            <div class="form-group"><label>District</label><input type="text" id="findDistrict" placeholder="District" /></div>
-                            <div class="form-group"><label>Pincode</label><input type="text" id="findPincode" placeholder="Pincode" maxlength="6" /></div>
-                        </div>
-                        <div id="findError" class="error-msg"></div>
-                        <button class="btn-primary" id="findByNameBtn"><i class="fas fa-search"></i> Fetch Document</button>
+                <div class="balance-card">
+                    <div class="balance-left">
+                        <div class="balance-label">Wallet Balance</div>
+                        <div class="balance-amount">₹<span id="walletBalance">0</span></div>
                     </div>
-                </section>
-
-                <!-- PAGE: Find by UID -->
-                <section class="page-section" id="secFindByUid">
-                    <h2>Find by UID Number</h2>
-                    <p class="section-desc">Enter the 12-digit UID number.</p>
-                    <div class="card">
-                        <div class="form-group"><label>UID Number</label><input type="text" id="findUidInput" placeholder="12-digit UID" maxlength="12" /></div>
-                        <div id="findUidError" class="error-msg"></div>
-                        <button class="btn-primary" id="findByUidBtn"><i class="fas fa-search"></i> Fetch Document</button>
+                    <div class="balance-action">
+                        <button class="btn-add" id="walletClick"><i class="fas fa-plus"></i> Add</button>
                     </div>
-                </section>
+                </div>
 
-                <!-- PAGE: Add Money -->
-                <section class="page-section" id="secAddMoney">
-                    <h2>Add Money / QR Code</h2>
-                    <p class="section-desc">Scan the QR code to make a payment via UPI.</p>
-                    <div class="card" style="max-width:480px;">
-                        <div class="qr-container">
-                            <img src="https://api.qrserver.com/v1/create-qr-code/?data=upi://pay?pa=sadiks486.wallete@phonepe&pn=AadhaarFind&cu=INR&size=200x200" alt="UPI QR" />
-                            <div class="upi-id">UPI: sadiks486.wallete@phonepe</div>
+                <div class="section-title">Services</div>
+                <div class="service-grid" id="serviceGrid">
+                    <!-- Cards will be dynamically loaded from admin settings -->
+                    <!-- Default cards shown, but admin can override -->
+                    <div class="service-card" data-page="search" data-service="aadhaar">
+                        <div class="service-icon orange"><i class="fas fa-id-card"></i></div>
+                        <div class="service-name">Find Aadhaar</div>
+                        <div class="service-desc">Search Aadhaar details</div>
+                    </div>
+                    <div class="service-card" data-page="search" data-service="pan">
+                        <div class="service-icon blue"><i class="fas fa-credit-card"></i></div>
+                        <div class="service-name">Find PAN Card</div>
+                        <div class="service-desc">Search PAN details</div>
+                    </div>
+                    <div class="service-card" data-page="search" data-service="voter">
+                        <div class="service-icon green"><i class="fas fa-check-circle"></i></div>
+                        <div class="service-name">Find Voter ID</div>
+                        <div class="service-desc">Search voter details</div>
+                    </div>
+                    <div class="service-card" data-page="search" data-service="ration">
+                        <div class="service-icon navy"><i class="fas fa-utensils"></i></div>
+                        <div class="service-name">Find Ration Card</div>
+                        <div class="service-desc">Search ration details</div>
+                    </div>
+                    <div class="service-card" data-page="search" data-service="govt">
+                        <div class="service-icon purple"><i class="fas fa-file-alt"></i></div>
+                        <div class="service-name">Govt Documents</div>
+                        <div class="service-desc">Search govt records</div>
+                    </div>
+                    <div class="service-card" data-page="history" data-service="history">
+                        <div class="service-icon teal"><i class="fas fa-clock"></i></div>
+                        <div class="service-name">History</div>
+                        <div class="service-desc">View activity log</div>
+                    </div>
+                </div>
+
+                <div class="section-title">Quick Actions</div>
+                <div class="quick-actions">
+                    <button class="quick-btn" data-page="search"><i class="fas fa-search"></i> Search</button>
+                    <button class="quick-btn" data-page="search"><i class="fas fa-shield-alt"></i> Verify</button>
+                    <button class="quick-btn" data-page="addWallet"><i class="fas fa-wallet"></i> Wallet</button>
+                </div>
+            </section>
+
+            <!-- ===== SEARCH ===== -->
+            <section class="page-section" id="secSearch">
+                <h2 style="font-size:1.2rem;font-weight:700;color:var(--navy);margin-bottom:4px;">Search</h2>
+                <p class="text-muted" style="margin-bottom:16px;">Find your UID or beneficiary details</p>
+
+                <div class="card" style="margin-bottom:16px;">
+                    <div class="card-title">Find by Name</div>
+                    <div class="floating-group">
+                        <input type="text" class="floating-input" id="findName" placeholder=" " />
+                        <label class="floating-label" for="findName">Full Name</label>
+                    </div>
+                    <div class="floating-group">
+                        <input type="text" class="floating-input" id="findFather" placeholder=" " />
+                        <label class="floating-label" for="findFather">Father's Name</label>
+                    </div>
+                    <div class="floating-group">
+                        <input type="date" class="floating-input" id="findDob" placeholder=" " />
+                        <label class="floating-label" for="findDob">Date of Birth</label>
+                    </div>
+                    <div class="floating-group">
+                        <input type="text" class="floating-input" id="findState" placeholder=" " />
+                        <label class="floating-label" for="findState">State</label>
+                    </div>
+                    <div class="floating-group">
+                        <input type="text" class="floating-input" id="findDistrict" placeholder=" " />
+                        <label class="floating-label" for="findDistrict">District</label>
+                    </div>
+                    <div class="floating-group">
+                        <input type="text" class="floating-input" id="findPincode" placeholder=" " maxlength="6" />
+                        <label class="floating-label" for="findPincode">Pincode</label>
+                    </div>
+                    <div id="findError" class="error-msg"></div>
+                    <button class="btn-tricolor w-full" id="findByNameBtn">
+                        <span class="btn-content"><i class="fas fa-search"></i> Fetch Document</span>
+                    </button>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">Find by UID</div>
+                    <div class="floating-group">
+                        <input type="text" class="floating-input" id="findUidInput" placeholder=" " maxlength="12" />
+                        <label class="floating-label" for="findUidInput">UID Number</label>
+                    </div>
+                    <div id="findUidError" class="error-msg"></div>
+                    <button class="btn-tricolor w-full" id="findByUidBtn">
+                        <span class="btn-content"><i class="fas fa-search"></i> Fetch Document</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- ===== HISTORY ===== -->
+            <section class="page-section" id="secHistory">
+                <h2 style="font-size:1.2rem;font-weight:700;color:var(--navy);margin-bottom:4px;">Search History</h2>
+                <p class="text-muted" style="margin-bottom:16px;">View all your past searches</p>
+                <div class="history-full">
+                    <div class="history-table-wrap">
+                        <table class="history-table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>UID</th>
+                                    <th>Searched Name</th>
+                                    <th style="text-align:center;">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="historyBody">
+                                <tr>
+                                    <td colspan="4" class="text-center text-muted">No history found.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== ADD WALLET ===== -->
+            <section class="page-section" id="secAddWallet">
+                <h2 style="font-size:1.2rem;font-weight:700;color:var(--navy);margin-bottom:4px;">Add Wallet</h2>
+                <p class="text-muted" style="margin-bottom:16px;">Add money to your wallet via UPI</p>
+
+                <div class="card add-wallet-container">
+                    <!-- Pay ₹100 via UPI Button - Direct UPI Intent -->
+                    <button class="pay-btn-upi-100" id="upiPay100Btn">
+                        <i class="fas fa-phone-alt"></i> Pay ₹100 via UPI
+                    </button>
+
+                    <div class="qr-wrapper">
+                        <div class="qr-code">
+                            <img src="https://api.qrserver.com/v1/create-qr-code/?data=upi://pay?pa=sadiks486.wallet@phonepe&pn=Sadik%20Husain&tn=Thanks%20for%20Payment%20Aadhar%20find&cu=INR&am=100" alt="UPI QR" />
+                            <div class="qr-ripple"></div>
                         </div>
-                        <div class="form-group"><label>Transaction ID (UTR)</label><input type="text" id="paymentTxn" placeholder="Enter UTR" /></div>
-                        <div class="form-group"><label>Amount (₹)</label><input type="number" id="paymentAmount" placeholder="Enter amount" /></div>
+                        <div style="margin-top:8px;text-align:center;">
+                            <span class="upi-id-display"><i class="fas fa-credit-card"></i> sadiks486.wallet@phonepe</span>
+                        </div>
+                    </div>
+
+                    <button class="pay-btn-upi" id="upiPayBtn">
+                        <i class="fas fa-phone-alt"></i> Pay via UPI (Custom Amount)
+                    </button>
+
+                    <div style="margin-top:20px;border-top:1px solid var(--border);padding-top:16px;">
+                        <div class="card-title" style="font-size:0.95rem;margin-bottom:10px;">Verify Payment</div>
+                        <div class="floating-group">
+                            <input type="text" class="floating-input" id="paymentTxn" placeholder=" " />
+                            <label class="floating-label" for="paymentTxn">Transaction ID (UTR)</label>
+                        </div>
+                        <div class="floating-group">
+                            <input type="number" class="floating-input" id="paymentAmount" placeholder=" " value="100" />
+                            <label class="floating-label" for="paymentAmount">Amount (₹)</label>
+                        </div>
                         <div id="paymentError" class="error-msg"></div>
                         <button class="btn-success w-full" id="paymentBtn"><i class="fas fa-check-circle"></i> Submit Payment</button>
                     </div>
-                </section>
+                </div>
+            </section>
 
-                <!-- PAGE: History - Only Eye Icon -->
-                <section class="page-section" id="secHistory">
-                    <h2>Search History</h2>
-                    <p class="section-desc">View all your past searches and status.</p>
-                    <div class="history-full">
-                        <div class="history-table-wrap">
-                            <table class="history-table">
-                                <thead>
-                                    <tr>
-                                        <th>Date</th>
-                                        <th>UID</th>
-                                        <th>Searched Name</th>
-                                        <th style="text-align:center;">View</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="historyBody">
-                                    <tr>
-                                        <td colspan="4" class="text-center text-muted">No history found.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- PAGE: Profile -->
-                <section class="page-section" id="secProfile">
-                    <h2>My Profile</h2>
-                    <p class="section-desc">Your personal information and account details.</p>
-                    <div class="card">
-                        <div class="profile-grid">
-                            <div class="profile-item" style="grid-column:1/3; text-align:center;">
-                                <div style="display:flex; align-items:center; justify-content:center; gap:16px; flex-wrap:wrap;">
-                                    <div class="avatar" style="width:76px;height:76px;font-size:2.2rem;background:var(--saffron);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;overflow:hidden;border:3px solid var(--navy);">
-                                        <span id="profileAvatarInitial">U</span>
-                                        <img id="profileAvatarImg" style="display:none;width:100%;height:100%;object-fit:cover;" alt="Profile" />
-                                    </div>
-                                    <div style="text-align:left;">
-                                        <button class="btn-secondary btn-sm" id="profilePicEditBtn"><i class="fas fa-pen"></i> Change Photo</button>
-                                    </div>
+            <!-- ===== PROFILE ===== -->
+            <section class="page-section" id="secProfile">
+                <h2 style="font-size:1.2rem;font-weight:700;color:var(--navy);margin-bottom:4px;">My Profile</h2>
+                <p class="text-muted" style="margin-bottom:16px;">Your personal information and account details</p>
+                <div class="card">
+                    <div class="profile-grid">
+                        <div class="profile-item" style="grid-column:1/3; text-align:center;">
+                            <div style="display:flex; align-items:center; justify-content:center; gap:16px; flex-wrap:wrap;">
+                                <div class="avatar" style="width:76px;height:76px;font-size:2.2rem;background:var(--saffron);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;overflow:hidden;border:3px solid var(--navy);">
+                                    <span id="profileAvatarInitial">U</span>
+                                    <img id="profileAvatarImg" style="display:none;width:100%;height:100%;object-fit:cover;" alt="Profile" />
                                 </div>
-                            </div>
-                            <div class="profile-item"><div class="label">Beneficiary ID</div><div class="value" id="profileBeneficiaryId">—</div></div>
-                            <div class="profile-item"><div class="label">Full Name</div><div class="value" id="profileFullName">—</div></div>
-                            <div class="profile-item"><div class="label">Email</div><div class="value" id="profileEmail">—</div></div>
-                            <div class="profile-item"><div class="label">Mobile</div><div class="value" id="profileMobile">—</div></div>
-                            <div class="profile-item"><div class="label">Balance</div><div class="value" id="profileBalance">₹0</div></div>
-                            <div class="profile-item" style="grid-column:1/3;">
-                                <div class="label">Password</div>
-                                <div class="value" style="display:flex; align-items:center; gap:8px;">
-                                    <span id="profilePasswordDisplay">••••••••</span>
-                                    <span class="password-toggle-icon" id="profilePassToggle"><i class="fas fa-eye"></i></span>
+                                <div style="text-align:left;">
+                                    <button class="btn-secondary btn-sm" id="profilePicEditBtn"><i class="fas fa-pen"></i> Change Photo</button>
                                 </div>
                             </div>
                         </div>
-                        <!-- Add Admin option below profile -->
-                        <button class="profile-add-admin-btn" id="profileAddAdminBtn"><i class="fas fa-user-shield"></i> Add Admin</button>
-                        <button class="profile-logout-btn" id="profileLogoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</button>
-                    </div>
-                </section>
-
-                <!-- PAGE: Admin -->
-                <section class="page-section" id="secAdminPanel">
-                    <h2>Admin Panel</h2>
-                    <p class="section-desc">Add new UID records and manage pending requests.</p>
-                    <div class="card">
-                        <div class="card-title">Add New UID Record</div>
-                        <div class="admin-grid">
-                            <div class="form-group"><label>UID</label><input type="text" id="adminUid" placeholder="12-digit UID" maxlength="12" /></div>
-                            <div class="form-group"><label>Full Name</label><input type="text" id="adminName" placeholder="Full name" /></div>
-                            <div class="form-group"><label>Father's Name</label><input type="text" id="adminFather" placeholder="Father's name" /></div>
-                            <div class="form-group"><label>DOB</label><input type="date" id="adminDob" /></div>
-                            <div class="form-group"><label>Age Band</label><input type="text" id="adminAgeBand" placeholder="e.g. 25-34" /></div>
-                            <div class="form-group"><label>Gender</label><select id="adminGender"><option>Male</option><option>Female</option><option>Other</option></select></div>
-                            <div class="form-group"><label>Mobile</label><input type="text" id="adminMobile" placeholder="10-digit" maxlength="10" /></div>
-                            <div class="form-group"><label>State</label><input type="text" id="adminState" placeholder="State" /></div>
-                            <div class="form-group"><label>District</label><input type="text" id="adminDistrict" placeholder="District" /></div>
-                            <div class="form-group"><label>Pincode</label><input type="text" id="adminPincode" placeholder="Pincode" maxlength="6" /></div>
-                            <div class="form-group"><label>Enrolment No</label><input type="text" id="adminEnrolNo" placeholder="Enrolment number" /></div>
-                            <div class="form-group"><label>Enrolment Date</label><input type="date" id="adminEnrolDate" /></div>
-                            <div class="form-group"><label>Enrolment Time <span style="font-size:0.7rem;color:var(--text-muted);">(HH:MM:SS)</span></label>
-                                <input type="text" id="adminEnrolTime" placeholder="e.g. 12:30:00" pattern="\d{2}:\d{2}(:\d{2})?" title="HH:MM or HH:MM:SS" />
-                            </div>
-                        </div>
-                        <div id="adminError" class="error-msg"></div>
-                        <button class="btn-primary" id="adminAddBtn"><i class="fas fa-plus-circle"></i> Add UID Data</button>
-                    </div>
-
-                    <!-- Admin: Add Admin & Add User -->
-                    <div class="card" style="margin-top:20px;">
-                        <div class="card-title">User Management</div>
-                        <div class="admin-user-mgmt">
-                            <div class="mgmt-card">
-                                <div class="mgmt-title"><i class="fas fa-user-shield"></i> Add Admin</div>
-                                <div class="form-group"><label>Full Name</label><input type="text" id="addAdminName" placeholder="Admin full name" /></div>
-                                <div class="form-group"><label>Email</label><input type="email" id="addAdminEmail" placeholder="Admin email" /></div>
-                                <div class="form-group"><label>Mobile</label><input type="text" id="addAdminMobile" placeholder="10-digit mobile" maxlength="10" /></div>
-                                <div class="form-group"><label>Password</label><input type="password" id="addAdminPass" placeholder="Password" /></div>
-                                <div id="addAdminError" class="error-msg"></div>
-                                <button class="btn-secondary w-full" id="addAdminBtn"><i class="fas fa-user-plus"></i> Create Admin</button>
-                            </div>
-                            <div class="mgmt-card">
-                                <div class="mgmt-title"><i class="fas fa-user"></i> Add User</div>
-                                <div class="form-group"><label>Full Name</label><input type="text" id="addUserName" placeholder="User full name" /></div>
-                                <div class="form-group"><label>Email</label><input type="email" id="addUserEmail" placeholder="User email" /></div>
-                                <div class="form-group"><label>Mobile</label><input type="text" id="addUserMobile" placeholder="10-digit mobile" maxlength="10" /></div>
-                                <div class="form-group"><label>Password</label><input type="password" id="addUserPass" placeholder="Password" /></div>
-                                <div id="addUserError" class="error-msg"></div>
-                                <button class="btn-success w-full" id="addUserBtn"><i class="fas fa-user-plus"></i> Create User</button>
+                        <div class="profile-item"><div class="label">Beneficiary ID</div><div class="value" id="profileBeneficiaryId">—</div></div>
+                        <div class="profile-item"><div class="label">Full Name</div><div class="value" id="profileFullName">—</div></div>
+                        <div class="profile-item"><div class="label">Email</div><div class="value" id="profileEmail">—</div></div>
+                        <div class="profile-item"><div class="label">Mobile</div><div class="value" id="profileMobile">—</div></div>
+                        <div class="profile-item"><div class="label">Balance</div><div class="value" id="profileBalance">₹0</div></div>
+                        <div class="profile-item" style="grid-column:1/3;">
+                            <div class="label">Password</div>
+                            <div class="value" style="display:flex; align-items:center; gap:8px;">
+                                <span id="profilePasswordDisplay">••••••••</span>
+                                <span class="password-toggle-icon" id="profilePassToggle"><i class="fas fa-eye"></i></span>
                             </div>
                         </div>
                     </div>
+                    <button class="profile-logout-btn" id="profileLogoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                </div>
+            </section>
 
-                    <div class="card" style="margin-top:20px;">
-                        <div class="card-title">Pending Requests</div>
-                        <div class="admin-pending-table"><table><thead><tr><th>Beneficiary</th><th>Date</th><th>Name</th><th>Action</th></tr></thead><tbody id="pendingTableBody"><tr><td colspan="4" class="text-center text-muted">No pending.</td></tr></tbody></table></div>
+            <!-- ===== ADMIN ===== -->
+            <section class="page-section" id="secAdminPanel">
+                <h2 style="font-size:1.2rem;font-weight:700;color:var(--navy);margin-bottom:4px;">Admin Panel</h2>
+                <p class="text-muted" style="margin-bottom:16px;">Add new UID records, manage services & pending requests</p>
+
+                <!-- Service Management -->
+                <div class="card" style="margin-bottom:16px;">
+                    <div class="card-title">Manage Service Cards</div>
+                    <p class="text-muted" style="font-size:0.8rem;margin-bottom:12px;">Add, edit or remove service cards shown on home page</p>
+                    <div id="serviceManagementList" style="margin-bottom:12px;">
+                        <!-- Dynamic list of services -->
+                    </div>
+                    <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                        <div class="floating-group" style="flex:2;min-width:140px;">
+                            <input type="text" class="floating-input" id="newServiceName" placeholder=" " />
+                            <label class="floating-label" for="newServiceName">Service Name</label>
+                        </div>
+                        <div class="floating-group" style="flex:2;min-width:140px;">
+                            <input type="text" class="floating-input" id="newServiceIcon" placeholder=" " value="fas fa-id-card" />
+                            <label class="floating-label" for="newServiceIcon">Icon Class (fa-...)</label>
+                        </div>
+                        <button class="btn-primary btn-sm" id="addServiceBtn" style="flex-shrink:0;"><i class="fas fa-plus"></i> Add</button>
+                    </div>
+                    <div id="serviceMgmtError" class="error-msg" style="margin-top:6px;"></div>
+                </div>
+
+                <div class="card" style="margin-bottom:16px;">
+                    <div class="card-title">Add New UID Record</div>
+                    <div class="admin-grid">
+                        <div class="floating-group">
+                            <input type="text" class="floating-input" id="adminUid" placeholder=" " maxlength="12" />
+                            <label class="floating-label" for="adminUid">UID</label>
+                        </div>
+                        <div class="floating-group">
+                            <input type="text" class="floating-input" id="adminName" placeholder=" " />
+                            <label class="floating-label" for="adminName">Full Name</label>
+                        </div>
+                        <div class="floating-group">
+                            <input type="text" class="floating-input" id="adminFather" placeholder=" " />
+                            <label class="floating-label" for="adminFather">Father's Name</label>
+                        </div>
+                        <div class="floating-group">
+                            <input type="date" class="floating-input" id="adminDob" placeholder=" " />
+                            <label class="floating-label" for="adminDob">DOB</label>
+                        </div>
+                        <div class="floating-group">
+                            <input type="text" class="floating-input" id="adminAgeBand" placeholder=" " />
+                            <label class="floating-label" for="adminAgeBand">Age Band</label>
+                        </div>
+                        <div class="floating-group">
+                            <select class="floating-input" id="adminGender">
+                                <option value="" disabled selected hidden></option>
+                                <option>Male</option>
+                                <option>Female</option>
+                                <option>Other</option>
+                            </select>
+                            <label class="floating-label" for="adminGender">Gender</label>
+                        </div>
+                        <div class="floating-group">
+                            <input type="text" class="floating-input" id="adminMobile" placeholder=" " maxlength="10" />
+                            <label class="floating-label" for="adminMobile">Mobile</label>
+                        </div>
+                        <div class="floating-group">
+                            <input type="text" class="floating-input" id="adminState" placeholder=" " />
+                            <label class="floating-label" for="adminState">State</label>
+                        </div>
+                        <div class="floating-group">
+                            <input type="text" class="floating-input" id="adminDistrict" placeholder=" " />
+                            <label class="floating-label" for="adminDistrict">District</label>
+                        </div>
+                        <div class="floating-group">
+                            <input type="text" class="floating-input" id="adminPincode" placeholder=" " maxlength="6" />
+                            <label class="floating-label" for="adminPincode">Pincode</label>
+                        </div>
+                        <div class="floating-group">
+                            <input type="text" class="floating-input" id="adminEnrolNo" placeholder=" " />
+                            <label class="floating-label" for="adminEnrolNo">Enrolment No</label>
+                        </div>
+                        <div class="floating-group">
+                            <input type="date" class="floating-input" id="adminEnrolDate" placeholder=" " />
+                            <label class="floating-label" for="adminEnrolDate">Enrolment Date</label>
+                        </div>
+                        <div class="floating-group" style="grid-column:1/3;">
+                            <input type="text" class="floating-input" id="adminEnrolTime" placeholder=" " pattern="\d{2}:\d{2}(:\d{2})?" />
+                            <label class="floating-label" for="adminEnrolTime">Enrolment Time (HH:MM:SS)</label>
+                        </div>
+                    </div>
+                    <div id="adminError" class="error-msg"></div>
+                    <button class="btn-tricolor w-full" id="adminAddBtn">
+                        <span class="btn-content"><i class="fas fa-plus-circle"></i> Add UID Data</span>
+                    </button>
+                </div>
+
+                <div class="card" style="margin-bottom:16px;">
+                    <div class="card-title">User Management</div>
+                    <div class="admin-user-mgmt">
+                        <div class="mgmt-card">
+                            <div class="mgmt-title"><i class="fas fa-user-shield"></i> Add Admin</div>
+                            <div class="floating-group">
+                                <input type="text" class="floating-input" id="addAdminName" placeholder=" " />
+                                <label class="floating-label" for="addAdminName">Full Name</label>
+                            </div>
+                            <div class="floating-group">
+                                <input type="email" class="floating-input" id="addAdminEmail" placeholder=" " />
+                                <label class="floating-label" for="addAdminEmail">Email</label>
+                            </div>
+                            <div class="floating-group">
+                                <input type="text" class="floating-input" id="addAdminMobile" placeholder=" " maxlength="10" />
+                                <label class="floating-label" for="addAdminMobile">Mobile</label>
+                            </div>
+                            <div class="floating-group">
+                                <input type="password" class="floating-input" id="addAdminPass" placeholder=" " />
+                                <label class="floating-label" for="addAdminPass">Password</label>
+                            </div>
+                            <div id="addAdminError" class="error-msg"></div>
+                            <button class="btn-secondary w-full" id="addAdminBtn"><i class="fas fa-user-plus"></i> Create Admin</button>
+                        </div>
+                        <div class="mgmt-card">
+                            <div class="mgmt-title"><i class="fas fa-user"></i> Add User</div>
+                            <div class="floating-group">
+                                <input type="text" class="floating-input" id="addUserName" placeholder=" " />
+                                <label class="floating-label" for="addUserName">Full Name</label>
+                            </div>
+                            <div class="floating-group">
+                                <input type="email" class="floating-input" id="addUserEmail" placeholder=" " />
+                                <label class="floating-label" for="addUserEmail">Email</label>
+                            </div>
+                            <div class="floating-group">
+                                <input type="text" class="floating-input" id="addUserMobile" placeholder=" " maxlength="10" />
+                                <label class="floating-label" for="addUserMobile">Mobile</label>
+                            </div>
+                            <div class="floating-group">
+                                <input type="password" class="floating-input" id="addUserPass" placeholder=" " />
+                                <label class="floating-label" for="addUserPass">Password</label>
+                            </div>
+                            <div id="addUserError" class="error-msg"></div>
+                            <button class="btn-success w-full" id="addUserBtn"><i class="fas fa-user-plus"></i> Create User</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title" style="display:flex;justify-content:space-between;align-items:center;">
+                        <span>Pending Requests</span>
                         <button class="btn-secondary btn-sm" id="refreshPendingBtn"><i class="fas fa-sync"></i> Refresh</button>
                     </div>
-                </section>
+                    <div class="admin-pending-table">
+                        <table>
+                            <thead><tr><th>Beneficiary</th><th>Date</th><th>Name</th><th>Action</th></tr></thead>
+                            <tbody id="pendingTableBody"><tr><td colspan="4" class="text-center text-muted">No pending.</td></tr></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
 
-                <!-- PAGE: Result -->
-                <section class="page-section" id="secResult">
-                    <div class="result-card">
-                        <div class="tricolor-bar"></div>
-                        <div class="card-body">
-                            <div class="result-header">
-                                <img src="https://blogger.googleusercontent.com/img/a/AVvXsEhdHBrmzwSoARIy-GQ0vUBft7WOKi2uIi6D3paX01w2DAb47vH5jxenn9Wzoh-INA5wW0Qcu_yV9AbjZDgWNmcdw9hUSO0mrmF9niQgGML0ESlDxWBdO8vqVkGAo6J_wfJ8KWU6jHWJH3dULZ5zCc6fhw9KTivIoK2UEBBqKPDdUuegEUs3YkeVET9ah6vk" alt="UIDAI" class="result-logo" />
-                                <div class="uid-row">
-                                    <span class="uid-number" id="resultUid">—</span>
-                                    <span class="blue-tick"><i class="fas fa-check"></i></span>
-                                </div>
-                                <div class="status-badge">Verification Completed</div>
+            <!-- ===== RESULT ===== -->
+            <section class="page-section" id="secResult">
+                <div class="result-card">
+                    <div class="tricolor-bar"></div>
+                    <div class="card-body">
+                        <div class="result-header">
+                            <img src="https://blogger.googleusercontent.com/img/a/AVvXsEhdHBrmzwSoARIy-GQ0vUBft7WOKi2uIi6D3paX01w2DAb47vH5jxenn9Wzoh-INA5wW0Qcu_yV9AbjZDgWNmcdw9hUSO0mrmF9niQgGML0ESlDxWBdO8vqVkGAo6J_wfJ8KWU6jHWJH3dULZ5zCc6fhw9KTivIoK2UEBBqKPDdUuegEUs3YkeVET9ah6vk" alt="UIDAI" class="result-logo" />
+                            <div class="uid-row">
+                                <span class="uid-number" id="resultUid">—</span>
+                                <span class="blue-tick"><i class="fas fa-check"></i></span>
                             </div>
+                            <div class="status-badge">Verification Completed</div>
+                        </div>
 
-                            <div class="section-title">Personal Details</div>
-                            <div class="row"><span class="label">Full Name</span><span class="value" id="rFullName">—</span></div>
-                            <div class="row"><span class="label">Father's Name</span><span class="value" id="rFatherName">—</span></div>
-                            <div class="row"><span class="label">Date of Birth</span><span class="value" id="rDob">—</span></div>
-                            <div class="row"><span class="label">Age Band</span><span class="value" id="rAgeBand">—</span></div>
-                            <div class="row"><span class="label">Gender</span><span class="value" id="rGender">—</span></div>
-                            <div class="row"><span class="label">Mobile Number</span><span class="value" id="rMobile">—</span></div>
-                            <div class="row"><span class="label">State</span><span class="value" id="rState">—</span></div>
-                            <div class="row"><span class="label">District</span><span class="value" id="rDistrict">—</span></div>
-                            <div class="row"><span class="label">Pincode</span><span class="value" id="rPincode">—</span></div>
+                        <div class="section-title">Personal Details</div>
+                        <div class="row"><span class="label">Full Name</span><span class="value" id="rFullName">—</span></div>
+                        <div class="row"><span class="label">Father's Name</span><span class="value" id="rFatherName">—</span></div>
+                        <div class="row"><span class="label">Date of Birth</span><span class="value" id="rDob">—</span></div>
+                        <div class="row"><span class="label">Age Band</span><span class="value" id="rAgeBand">—</span></div>
+                        <div class="row"><span class="label">Gender</span><span class="value" id="rGender">—</span></div>
+                        <div class="row"><span class="label">Mobile Number</span><span class="value" id="rMobile">—</span></div>
+                        <div class="row"><span class="label">State</span><span class="value" id="rState">—</span></div>
+                        <div class="row"><span class="label">District</span><span class="value" id="rDistrict">—</span></div>
+                        <div class="row"><span class="label">Pincode</span><span class="value" id="rPincode">—</span></div>
 
-                            <div class="section-title">Aadhaar Details</div>
-                            <div class="row"><span class="label">Enrolment Number</span><span class="value" id="rEnrolNo">—</span></div>
-                            <div class="row"><span class="label">Date of Enrolment</span><span class="value" id="rEnrolDate">—</span></div>
-                            <div class="row"><span class="label">Time of Enrolment</span><span class="value" id="rEnrolTime">—</span></div>
+                        <div class="section-title">Aadhaar Details</div>
+                        <div class="row"><span class="label">Enrolment Number</span><span class="value" id="rEnrolNo">—</span></div>
+                        <div class="row"><span class="label">Date of Enrolment</span><span class="value" id="rEnrolDate">—</span></div>
+                        <div class="row"><span class="label">Time of Enrolment</span><span class="value" id="rEnrolTime">—</span></div>
 
-                            <div class="section-title">Additional Details</div>
-                            <div class="row"><span class="label">Beneficiary ID</span><span class="value" id="resultBeneficiary">—</span></div>
+                        <div class="section-title">Additional Details</div>
+                        <div class="row"><span class="label">Beneficiary ID</span><span class="value" id="resultBeneficiary">—</span></div>
 
-                            <div class="result-footer">
-                                <span class="beneficiary-tag" id="resultBeneficiaryTag">ID: —</span>
-                                <button class="print-btn" id="printResultBtn"><i class="fas fa-print"></i> Print / PDF</button>
-                            </div>
+                        <div class="result-footer">
+                            <span class="beneficiary-tag" id="resultBeneficiaryTag">ID: —</span>
+                            <button class="print-btn" id="printResultBtn"><i class="fas fa-print"></i> Print / PDF</button>
                         </div>
                     </div>
-                    <div style="text-align:center;margin-top:16px;">
-                        <button class="btn-secondary btn-sm" id="backFromResult"><i class="fas fa-arrow-left"></i> Back</button>
-                    </div>
-                </section>
+                </div>
+                <div style="text-align:center;margin-top:16px;">
+                    <button class="btn-secondary btn-sm" id="backFromResult"><i class="fas fa-arrow-left"></i> Back</button>
+                </div>
+            </section>
 
-            </main>
-        </div>
+        </main>
 
-        <!-- FOOTER -->
-        <div class="footer">
-            &copy; 2026 Aadhaar Find | All rights reserved.
-            <a href="#">About</a> | <a href="#">Contact</a>
-            <br><small style="color:#94a3b8;">Aadhaar Find – A verified identity platform</small>
-        </div>
+        <!-- ===== BOTTOM NAV ===== -->
+        <nav class="bottom-nav" id="bottomNav">
+            <div class="nav-item active" data-page="home"><i class="fas fa-home"></i><span class="nav-label">Home</span></div>
+            <div class="nav-item" data-page="search"><i class="fas fa-search"></i><span class="nav-label">Search</span></div>
+            <div class="nav-item" data-page="addWallet"><i class="fas fa-wallet"></i><span class="nav-label">Wallet</span></div>
+            <div class="nav-item" data-page="history"><i class="fas fa-clock"></i><span class="nav-label">History</span></div>
+            <div class="nav-item" data-page="profile"><i class="fas fa-user"></i><span class="nav-label">Profile</span></div>
+        </nav>
     </div>
 
     <!-- ============================================================
     MODALS
     ============================================================ -->
+    <!-- Don't Worry -->
     <div class="modal-overlay" id="dontWorryModal">
         <div class="modal-box">
             <span class="modal-close" id="dontWorryClose">&times;</span>
@@ -1893,6 +2378,7 @@
         </div>
     </div>
 
+    <!-- Avatar Editor -->
     <div class="modal-overlay avatar-editor" id="avatarEditorModal">
         <div class="modal-box">
             <span class="modal-close" id="avatarEditorClose">&times;</span>
@@ -1902,24 +2388,24 @@
                 <span class="avatar-preview-initial" id="avatarPreviewInitial">U</span>
                 <img id="avatarPreviewImg" style="display:none;" alt="Preview" />
             </div>
-            <div class="form-group"><label>Image URL</label><input type="text" id="avatarUrlInput" placeholder="https://example.com/photo.jpg" /></div>
+            <div class="floating-group">
+                <input type="text" class="floating-input" id="avatarUrlInput" placeholder=" " />
+                <label class="floating-label" for="avatarUrlInput">Image URL</label>
+            </div>
             <div id="avatarError" class="error-msg"></div>
             <button class="btn-primary w-full" id="avatarSaveBtn"><i class="fas fa-save"></i> Update</button>
         </div>
     </div>
 
-    <!-- Add Wallet Modal -->
-    <div class="modal-overlay" id="addWalletModal">
+    <!-- Notification Modal -->
+    <div class="modal-overlay" id="notificationModal">
         <div class="modal-box">
-            <span class="modal-close" id="addWalletClose">&times;</span>
-            <div class="modal-icon">💰</div>
-            <h3>Add Wallet</h3>
-            <p style="margin-bottom:12px;">Scan the QR code below or pay via UPI to add money to your wallet.</p>
-            <div class="qr-container" style="margin:4px 0 12px;">
-                <img src="https://api.qrserver.com/v1/create-qr-code/?data=upi://pay?pa=sadiks486.wallete@phonepe&pn=AadhaarFind&cu=INR&size=200x200" alt="UPI QR" style="max-width:160px;" />
-                <div class="upi-id" style="font-size:0.9rem;">UPI: sadiks486.wallete@phonepe</div>
+            <span class="modal-close" id="notificationModalClose">&times;</span>
+            <div class="modal-icon"><i class="fas fa-bell" style="color:var(--saffron);"></i></div>
+            <h3>Notifications</h3>
+            <div id="notificationList" style="margin-top:12px;max-height:320px;overflow-y:auto;">
+                <p class="text-muted text-center" style="padding:20px 0;">No notifications yet</p>
             </div>
-            <button class="btn-primary w-full" id="addWalletGoToPayBtn"><i class="fas fa-external-link-alt"></i> Go to Add Money</button>
         </div>
     </div>
 
@@ -1934,69 +2420,179 @@
             const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw5WkBaO9h6_Wskewau9eusnPXtB_EGGGTtcoerV4sM0SlxQPhYBYomseiH8_byr7qBJw/exec';
 
             let currentUser = null;
-            let currentPage = 'findByName';
+            let currentPage = 'home';
             let signupTimerInterval = null;
             let forgotTimerInterval = null;
             let signupOtpVerified = false;
             let forgotOtpVerified = false;
 
-            // ===== PWA INSTALL =====
-            let deferredPrompt = null;
-            const pwaBanner = document.getElementById('pwaInstallBanner');
-            const pwaInstallBtn = document.getElementById('pwaInstallBtn');
-            const pwaInstallClose = document.getElementById('pwaInstallClose');
+            // ===== SERVICE CARDS MANAGEMENT =====
+            let serviceCards = [];
 
-            // Check if already installed or dismissed
-            if (localStorage.getItem('pwaDismissed') === 'true') {
-                pwaBanner.classList.remove('show');
+            function loadServiceCards() {
+                const saved = localStorage.getItem('aadhaarServices');
+                if (saved) {
+                    try {
+                        serviceCards = JSON.parse(saved);
+                        return serviceCards;
+                    } catch (e) { serviceCards = []; }
+                }
+                // Default services
+                serviceCards = [
+                    { id: 'aadhaar', name: 'Find Aadhaar', icon: 'fas fa-id-card', color: 'orange', desc: 'Search Aadhaar details',
+                        page: 'search' },
+                    { id: 'pan', name: 'Find PAN Card', icon: 'fas fa-credit-card', color: 'blue', desc: 'Search PAN details',
+                        page: 'search' },
+                    { id: 'voter', name: 'Find Voter ID', icon: 'fas fa-check-circle', color: 'green',
+                        desc: 'Search voter details', page: 'search' },
+                    { id: 'ration', name: 'Find Ration Card', icon: 'fas fa-utensils', color: 'navy',
+                        desc: 'Search ration details', page: 'search' },
+                    { id: 'govt', name: 'Govt Documents', icon: 'fas fa-file-alt', color: 'purple', desc: 'Search govt records',
+                        page: 'search' },
+                    { id: 'history', name: 'History', icon: 'fas fa-clock', color: 'teal', desc: 'View activity log',
+                        page: 'history' }
+                ];
+                saveServiceCards();
+                return serviceCards;
             }
 
-            window.addEventListener('beforeinstallprompt', function(e) {
-                e.preventDefault();
-                deferredPrompt = e;
-                // Show banner only if not dismissed
-                if (localStorage.getItem('pwaDismissed') !== 'true') {
-                    pwaBanner.classList.add('show');
-                }
-            });
+            function saveServiceCards() {
+                localStorage.setItem('aadhaarServices', JSON.stringify(serviceCards));
+            }
 
-            window.addEventListener('appinstalled', function() {
-                pwaBanner.classList.remove('show');
-                deferredPrompt = null;
-                localStorage.setItem('pwaDismissed', 'true');
-                // Show a small toast or notification
-                alert('🎉 App installed successfully!');
-            });
-
-            pwaInstallBtn.addEventListener('click', async function() {
-                if (deferredPrompt) {
-                    deferredPrompt.prompt();
-                    const result = await deferredPrompt.userChoice;
-                    if (result.outcome === 'accepted') {
-                        pwaBanner.classList.remove('show');
-                        localStorage.setItem('pwaDismissed', 'true');
-                    }
-                    deferredPrompt = null;
-                } else {
-                    // Fallback: show instructions
-                    alert('To install this app, open this page in your browser and tap "Add to Home Screen" or "Install App".');
-                }
-            });
-
-            pwaInstallClose.addEventListener('click', function() {
-                pwaBanner.classList.remove('show');
-                localStorage.setItem('pwaDismissed', 'true');
-            });
-
-            // ===== SERVICE WORKER REGISTRATION (CORRECTED) =====
-            if ('serviceWorker' in navigator) {
-                navigator.serviceWorker.register('sw.js')
-                    .then(function(reg) {
-                        console.log('✅ Service Worker registered successfully.');
-                    })
-                    .catch(function(err) {
-                        console.warn('⚠️ Service Worker registration failed:', err);
+            function renderServiceCards() {
+                const grid = document.getElementById('serviceGrid');
+                if (!grid) return;
+                grid.innerHTML = '';
+                serviceCards.forEach(card => {
+                    const colorMap = {
+                        orange: 'orange',
+                        blue: 'blue',
+                        green: 'green',
+                        navy: 'navy',
+                        purple: 'purple',
+                        teal: 'teal',
+                        red: 'red',
+                        indigo: 'indigo'
+                    };
+                    const colorClass = colorMap[card.color] || 'orange';
+                    const div = document.createElement('div');
+                    div.className = 'service-card';
+                    div.dataset.page = card.page || 'search';
+                    div.dataset.service = card.id;
+                    div.innerHTML = `
+                        <div class="service-icon ${colorClass}"><i class="${card.icon}"></i></div>
+                        <div class="service-name">${card.name}</div>
+                        <div class="service-desc">${card.desc || 'Click to search'}</div>
+                    `;
+                    div.addEventListener('click', function() {
+                        const page = this.dataset.page;
+                        if (page === 'history') {
+                            navigateTo('history');
+                        } else {
+                            navigateTo('search');
+                        }
                     });
+                    grid.appendChild(div);
+                });
+            }
+
+            function renderServiceManagement() {
+                const list = document.getElementById('serviceManagementList');
+                if (!list) return;
+                if (serviceCards.length === 0) {
+                    list.innerHTML = '<p class="text-muted" style="padding:8px 0;font-size:0.85rem;">No services added yet.</p>';
+                    return;
+                }
+                let html = '';
+                serviceCards.forEach((card, index) => {
+                    html += `
+                        <div style="display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border);">
+                            <span style="font-size:0.85rem;font-weight:500;"><i class="${card.icon}" style="color:var(--saffron);margin-right:8px;"></i>${card.name}</span>
+                            <div>
+                                <button class="btn-sm btn-danger" data-index="${index}" style="background:#dc2626;color:#fff;padding:2px 10px;border-radius:50px;font-size:0.7rem;">Remove</button>
+                            </div>
+                        </div>
+                    `;
+                });
+                list.innerHTML = html;
+
+                list.querySelectorAll('.btn-danger').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const idx = parseInt(this.dataset.index);
+                        if (!isNaN(idx) && confirm('Remove this service card?')) {
+                            serviceCards.splice(idx, 1);
+                            saveServiceCards();
+                            renderServiceCards();
+                            renderServiceManagement();
+                            document.getElementById('serviceMgmtError').textContent = 'Service removed!';
+                            document.getElementById('serviceMgmtError').className = 'success-msg';
+                        }
+                    });
+                });
+            }
+
+            // Add service
+            document.getElementById('addServiceBtn')?.addEventListener('click', function() {
+                const name = document.getElementById('newServiceName').value.trim();
+                const icon = document.getElementById('newServiceIcon').value.trim();
+                const errEl = document.getElementById('serviceMgmtError');
+                if (!name) {
+                    errEl.textContent = 'Please enter a service name.';
+                    errEl.className = 'error-msg';
+                    return;
+                }
+                if (!icon) {
+                    errEl.textContent = 'Please enter an icon class (e.g., fas fa-id-card).';
+                    errEl.className = 'error-msg';
+                    return;
+                }
+                const newCard = {
+                    id: 'custom_' + Date.now(),
+                    name: name,
+                    icon: icon,
+                    color: 'orange',
+                    desc: 'Custom service',
+                    page: 'search'
+                };
+                serviceCards.push(newCard);
+                saveServiceCards();
+                renderServiceCards();
+                renderServiceManagement();
+                document.getElementById('newServiceName').value = '';
+                document.getElementById('newServiceIcon').value = 'fas fa-id-card';
+                errEl.textContent = '✅ Service added successfully!';
+                errEl.className = 'success-msg';
+                setTimeout(() => { errEl.textContent = '';
+                    errEl.className = 'error-msg'; }, 3000);
+            });
+
+            // ===== SESSION =====
+            function loadSession() {
+                const savedUser = localStorage.getItem('aadhaarUser');
+                if (savedUser) {
+                    try {
+                        const user = JSON.parse(savedUser);
+                        if (user && user.beneficiaryId) {
+                            currentUser = user;
+                            enterDashboard();
+                            return true;
+                        } else {
+                            localStorage.removeItem('aadhaarUser');
+                        }
+                    } catch (e) {
+                        localStorage.removeItem('aadhaarUser');
+                    }
+                }
+                return false;
+            }
+
+            function saveSession(user) {
+                localStorage.setItem('aadhaarUser', JSON.stringify(user));
+            }
+
+            function clearSession() {
+                localStorage.removeItem('aadhaarUser');
             }
 
             const $ = id => document.getElementById(id);
@@ -2041,24 +2637,25 @@
             const headerAvatarInitial = $('headerAvatarInitial');
             const headerAvatarImg = $('headerAvatarImg');
             const headerAvatar = $('headerAvatar');
-            const lowBalanceBanner = $('lowBalanceBanner');
             const dashSidebar = $('dashSidebar');
             const sidebarOverlay = $('sidebarOverlay');
             const sidebarClose = $('sidebarClose');
             const adminNavItem = $('adminNavItem');
-            const addMoneyNav = $('addMoneyNav');
-            const menuToggle = $('menuToggle');
+            const userNameDisplay = $('userNameDisplay');
+            const headerLeftClick = $('headerLeftClick');
 
+            // Pages
             const pages = {
-                findByName: $('secFindByName'),
-                findByUid: $('secFindByUid'),
-                addMoney: $('secAddMoney'),
+                home: $('secHome'),
+                search: $('secSearch'),
                 history: $('secHistory'),
+                addWallet: $('secAddWallet'),
                 profile: $('secProfile'),
                 adminPanel: $('secAdminPanel'),
                 result: $('secResult'),
             };
 
+            // Search
             const findName = $('findName');
             const findFather = $('findFather');
             const findDob = $('findDob');
@@ -2067,18 +2664,22 @@
             const findPincode = $('findPincode');
             const findError = $('findError');
             const findByNameBtn = $('findByNameBtn');
-
             const findUidInput = $('findUidInput');
             const findUidError = $('findUidError');
             const findByUidBtn = $('findByUidBtn');
 
+            // History
+            const historyBody = $('historyBody');
+
+            // Add Wallet
             const paymentTxn = $('paymentTxn');
             const paymentAmount = $('paymentAmount');
             const paymentError = $('paymentError');
             const paymentBtn = $('paymentBtn');
+            const upiPayBtn = $('upiPayBtn');
+            const upiPay100Btn = $('upiPay100Btn');
 
-            const historyBody = $('historyBody');
-
+            // Admin
             const adminUid = $('adminUid');
             const adminName = $('adminName');
             const adminFather = $('adminFather');
@@ -2097,7 +2698,6 @@
             const pendingTableBody = $('pendingTableBody');
             const refreshPendingBtn = $('refreshPendingBtn');
 
-            // Admin User Management
             const addAdminName = $('addAdminName');
             const addAdminEmail = $('addAdminEmail');
             const addAdminMobile = $('addAdminMobile');
@@ -2112,7 +2712,7 @@
             const addUserError = $('addUserError');
             const addUserBtn = $('addUserBtn');
 
-            // Profile DOM
+            // Profile
             const profileBeneficiaryId = $('profileBeneficiaryId');
             const profileFullName = $('profileFullName');
             const profileEmail = $('profileEmail');
@@ -2124,8 +2724,8 @@
             const profileAvatarImg = $('profileAvatarImg');
             const profilePicEditBtn = $('profilePicEditBtn');
             const profileLogoutBtn = $('profileLogoutBtn');
-            const profileAddAdminBtn = $('profileAddAdminBtn');
 
+            // Result
             const resultUid = $('resultUid');
             const resultBeneficiary = $('resultBeneficiary');
             const resultBeneficiaryTag = $('resultBeneficiaryTag');
@@ -2144,6 +2744,7 @@
             const rEnrolDate = $('rEnrolDate');
             const rEnrolTime = $('rEnrolTime');
 
+            // Modals
             const dontWorryModal = $('dontWorryModal');
             const dontWorryClose = $('dontWorryClose');
             const avatarEditorModal = $('avatarEditorModal');
@@ -2153,11 +2754,11 @@
             const avatarUrlInput = $('avatarUrlInput');
             const avatarError = $('avatarError');
             const avatarSaveBtn = $('avatarSaveBtn');
-
-            // Add Wallet Modal
-            const addWalletModal = $('addWalletModal');
-            const addWalletClose = $('addWalletClose');
-            const addWalletGoToPayBtn = $('addWalletGoToPayBtn');
+            const notificationModal = $('notificationModal');
+            const notificationModalClose = $('notificationModalClose');
+            const notificationList = $('notificationList');
+            const notificationBtn = $('notificationBtn');
+            const notiDot = $('notiDot');
 
             // ========== UTILITY ==========
             function showAuthError(el, msg) { el.textContent = msg;
@@ -2166,7 +2767,32 @@
             function showAuthSuccess(el, msg) { el.textContent = msg;
                 el.className = 'success-msg'; }
 
-            // ========== API CALL ==========
+            function formatDateForDisplay(dateStr) {
+                if (!dateStr || dateStr === '—') return '—';
+                try {
+                    const d = new Date(dateStr);
+                    if (isNaN(d.getTime())) return dateStr;
+                    const dd = String(d.getDate()).padStart(2, '0');
+                    const mm = String(d.getMonth() + 1).padStart(2, '0');
+                    const yyyy = d.getFullYear();
+                    return `${dd}/${mm}/${yyyy}`;
+                } catch (e) { return dateStr; }
+            }
+
+            function formatDateTimeForDisplay(dateStr) {
+                if (!dateStr || dateStr === '—') return '—';
+                try {
+                    const d = new Date(dateStr);
+                    if (isNaN(d.getTime())) return dateStr;
+                    const dd = String(d.getDate()).padStart(2, '0');
+                    const mm = String(d.getMonth() + 1).padStart(2, '0');
+                    const yyyy = d.getFullYear();
+                    const hh = String(d.getHours()).padStart(2, '0');
+                    const min = String(d.getMinutes()).padStart(2, '0');
+                    return `${dd}/${mm}/${yyyy} ${hh}:${min}`;
+                } catch (e) { return dateStr; }
+            }
+
             async function apiCall(action, payload = {}) {
                 try {
                     const resp = await fetch(SCRIPT_URL, {
@@ -2195,39 +2821,120 @@
                 return interval;
             }
 
-            function formatDateForDisplay(dateStr) {
-                if (!dateStr || dateStr === '—') return '—';
-                try {
-                    const d = new Date(dateStr);
-                    if (isNaN(d.getTime())) return dateStr;
-                    const dd = String(d.getDate()).padStart(2, '0');
-                    const mm = String(d.getMonth() + 1).padStart(2, '0');
-                    const yyyy = d.getFullYear();
-                    return `${dd}/${mm}/${yyyy}`;
-                } catch (e) { return dateStr; }
+            // ===== NOTIFICATIONS =====
+            function loadNotifications() {
+                const saved = localStorage.getItem('aadhaarNotifications');
+                if (saved) {
+                    try {
+                        return JSON.parse(saved);
+                    } catch (e) { return []; }
+                }
+                return [];
             }
 
-            // ========== SIDEBAR TOGGLE ==========
-            function isMobile() {
-                return window.innerWidth <= 768;
+            function saveNotifications(notifications) {
+                localStorage.setItem('aadhaarNotifications', JSON.stringify(notifications));
+                updateNotiDot(notifications);
             }
 
+            function updateNotiDot(notifications) {
+                if (notifications && notifications.length > 0) {
+                    const unread = notifications.filter(n => !n.read);
+                    if (unread.length > 0) {
+                        notiDot.style.display = 'block';
+                    } else {
+                        notiDot.style.display = 'none';
+                    }
+                } else {
+                    notiDot.style.display = 'none';
+                }
+            }
+
+            function addNotification(title, desc) {
+                const notis = loadNotifications();
+                notis.unshift({
+                    id: Date.now(),
+                    title: title,
+                    desc: desc,
+                    time: new Date().toISOString(),
+                    read: false
+                });
+                saveNotifications(notis);
+                updateNotiDot(notis);
+            }
+
+            function renderNotifications() {
+                const notis = loadNotifications();
+                if (notis.length === 0) {
+                    notificationList.innerHTML = '<p class="text-muted text-center" style="padding:20px 0;">No notifications yet</p>';
+                    return;
+                }
+                let html = '';
+                notis.forEach(n => {
+                    const timeStr = formatDateTimeForDisplay(n.time);
+                    html += `
+                        <div class="notification-item">
+                            <div class="noti-icon"><i class="fas fa-bell"></i></div>
+                            <div class="noti-content">
+                                <div class="noti-title">${n.title}</div>
+                                <div class="noti-desc">${n.desc}</div>
+                                <div class="noti-time">${timeStr}</div>
+                            </div>
+                        </div>
+                    `;
+                });
+                notificationList.innerHTML = html;
+                const updated = notis.map(n => ({ ...n, read: true }));
+                saveNotifications(updated);
+                notiDot.style.display = 'none';
+            }
+
+            // ===== NAVIGATION =====
+            function navigateTo(page) {
+                if (page === 'result') return;
+                currentPage = page;
+
+                document.querySelectorAll('.sidebar-item[data-page]').forEach(el => {
+                    el.classList.toggle('active', el.dataset.page === page);
+                });
+
+                document.querySelectorAll('.bottom-nav .nav-item').forEach(el => {
+                    el.classList.toggle('active', el.dataset.page === page);
+                });
+
+                Object.entries(pages).forEach(([key, el]) => {
+                    el.classList.toggle('active', key === page);
+                });
+
+                pages.result.classList.remove('active');
+
+                if (page === 'history') loadHistory();
+                if (page === 'adminPanel' && currentUser?.isAdmin) {
+                    loadPendingRequests();
+                    renderServiceManagement();
+                }
+                if (page === 'profile') updateProfilePage();
+                if (page === 'addWallet') {
+                    if (paymentAmount) paymentAmount.value = 100;
+                }
+
+                closeSidebar();
+            }
+
+            // ===== SIDEBAR =====
             function openSidebar() {
-                if (!isMobile()) return;
                 dashSidebar.classList.add('open');
                 sidebarOverlay.classList.add('show');
                 document.body.style.overflow = 'hidden';
             }
 
             function closeSidebar() {
-                if (!isMobile()) return;
                 dashSidebar.classList.remove('open');
                 sidebarOverlay.classList.remove('show');
                 document.body.style.overflow = '';
             }
 
             function toggleSidebar() {
-                if (!isMobile()) return;
                 if (dashSidebar.classList.contains('open')) {
                     closeSidebar();
                 } else {
@@ -2235,35 +2942,7 @@
                 }
             }
 
-            menuToggle.addEventListener('click', toggleSidebar);
-            sidebarClose.addEventListener('click', closeSidebar);
-            sidebarOverlay.addEventListener('click', closeSidebar);
-
-            // ===== SWIPE =====
-            let touchStartX = 0;
-
-            document.addEventListener('touchstart', function(e) {
-                touchStartX = e.changedTouches[0].screenX;
-            }, { passive: true });
-
-            document.addEventListener('touchend', function(e) {
-                if (!isMobile()) return;
-                if (!touchStartX) return;
-                const deltaX = e.changedTouches[0].screenX - touchStartX;
-                const isOpen = dashSidebar.classList.contains('open');
-                if (Math.abs(deltaX) > 50) {
-                    if (touchStartX < 60 && deltaX > 0 && !isOpen) {
-                        openSidebar();
-                        e.preventDefault();
-                    } else if (isOpen && deltaX < -50) {
-                        closeSidebar();
-                        e.preventDefault();
-                    }
-                }
-                touchStartX = 0;
-            }, { passive: false });
-
-            // ========== AUTH TOGGLES ==========
+            // ===== AUTH TOGGLES =====
             function showAuthForm(form) {
                 [loginForm, signupForm, forgotForm].forEach(f => f.classList.add('hidden'));
                 form.classList.remove('hidden');
@@ -2287,7 +2966,7 @@
             document.getElementById('gotoForgot').addEventListener('click', () => showAuthForm(forgotForm));
             document.getElementById('gotoLoginFromForgot').addEventListener('click', () => showAuthForm(loginForm));
 
-            // ========== PASSWORD TOGGLE ==========
+            // ===== PASSWORD TOGGLE =====
             loginPassToggle.addEventListener('click', function() {
                 const type = loginPass.getAttribute('type') === 'password' ? 'text' : 'password';
                 loginPass.setAttribute('type', type);
@@ -2473,6 +3152,7 @@
                 const res = await apiCall('login', { beneficiaryId: id, password: pass });
                 if (res.status === 'success') {
                     currentUser = res.user;
+                    saveSession(currentUser);
                     enterDashboard();
                 } else {
                     loginError.textContent = res.message;
@@ -2485,24 +3165,26 @@
             function enterDashboard() {
                 authBlock.style.display = 'none';
                 dashboardBlock.classList.add('active');
+                loadServiceCards();
+                renderServiceCards();
                 updateUserUI();
                 loadHistory();
                 checkBalance();
                 if (currentUser.isAdmin) {
                     adminNavItem.style.display = 'flex';
-                    addMoneyNav.style.display = 'none';
-                    loadPendingRequests();
                 } else {
                     adminNavItem.style.display = 'none';
-                    addMoneyNav.style.display = 'flex';
                 }
-                navigateTo('findByName');
+                navigateTo('home');
                 updateProfilePage();
+                updateNotiDot(loadNotifications());
             }
 
             function updateUserUI() {
                 const name = currentUser.fullName || 'User';
                 const initial = name.charAt(0).toUpperCase();
+                userNameDisplay.textContent = name;
+
                 headerAvatarInitial.textContent = initial;
                 headerAvatarInitial.style.display = 'block';
                 headerAvatarImg.style.display = 'none';
@@ -2533,80 +3215,76 @@
                 }
             }
 
-            function checkBalance() {
-                const bal = currentUser.balance || 0;
-                if (bal < 100 && !currentUser.isAdmin) {
-                    lowBalanceBanner.classList.add('show');
-                } else {
-                    lowBalanceBanner.classList.remove('show');
-                }
-            }
+            function checkBalance() {}
 
             function updateBalance(newBal) {
                 currentUser.balance = newBal;
                 walletBalance.textContent = newBal;
                 profileBalance.textContent = '₹' + newBal;
-                checkBalance();
+                saveSession(currentUser);
             }
 
             // ========== LOGOUT ==========
             function performLogout() {
                 currentUser = null;
+                clearSession();
                 dashboardBlock.classList.remove('active');
                 authBlock.style.display = 'flex';
                 loginId.value = '';
                 loginPass.value = '';
                 loginError.textContent = '';
                 Object.values(pages).forEach(p => p.classList.remove('active'));
-                pages.findByName.classList.add('active');
-                hideResult();
+                pages.home.classList.add('active');
                 closeSidebar();
             }
 
             profileLogoutBtn.addEventListener('click', performLogout);
+            document.getElementById('sidebarLogout').addEventListener('click', performLogout);
 
-            // ========== PROFILE ADD ADMIN ==========
-            profileAddAdminBtn.addEventListener('click', function() {
-                if (currentUser && currentUser.isAdmin) {
-                    navigateTo('adminPanel');
-                } else {
-                    alert('Only admin can access this feature.');
-                }
-                closeSidebar();
+            // ========== EVENT LISTENERS ==========
+            headerAvatar.addEventListener('click', function() {
+                navigateTo('profile');
             });
 
-            // ========== SIDEBAR NAV ==========
-            document.querySelectorAll('.nav-item[data-page]').forEach(item => {
+            headerLeftClick.addEventListener('click', function(e) {
+                if (!e.target.closest('.header-avatar') && !e.target.closest('.notification-btn')) {
+                    toggleSidebar();
+                }
+            });
+
+            walletClick.addEventListener('click', function() {
+                navigateTo('addWallet');
+            });
+
+            sidebarClose.addEventListener('click', closeSidebar);
+            sidebarOverlay.addEventListener('click', closeSidebar);
+
+            document.querySelectorAll('.sidebar-item[data-page]').forEach(item => {
                 item.addEventListener('click', function() {
                     const page = this.dataset.page;
                     if (page === 'adminPanel' && !currentUser?.isAdmin) return;
-                    if (page === 'addMoney' && currentUser?.isAdmin) return;
                     navigateTo(page);
-                    closeSidebar();
                 });
             });
 
-            // ========== WALLET CLICK ==========
-            walletClick.addEventListener('click', function() {
-                addWalletModal.classList.add('show');
+            document.querySelectorAll('.bottom-nav .nav-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    navigateTo(this.dataset.page);
+                });
             });
 
-            addWalletClose.addEventListener('click', () => addWalletModal.classList.remove('show'));
-            addWalletModal.addEventListener('click', function(e) {
+            // ===== NOTIFICATIONS =====
+            notificationBtn.addEventListener('click', function() {
+                renderNotifications();
+                notificationModal.classList.add('show');
+            });
+
+            notificationModalClose.addEventListener('click', () => notificationModal.classList.remove('show'));
+            notificationModal.addEventListener('click', function(e) {
                 if (e.target === this) this.classList.remove('show');
             });
-            addWalletGoToPayBtn.addEventListener('click', function() {
-                addWalletModal.classList.remove('show');
-                navigateTo('addMoney');
-            });
 
-            // ========== HEADER AVATAR CLICK -> PROFILE ==========
-            headerAvatar.addEventListener('click', function() {
-                navigateTo('profile');
-                closeSidebar();
-            });
-
-            // ========== PROFILE PASSWORD TOGGLE ==========
+            // ===== PROFILE PASSWORD TOGGLE =====
             let profilePasswordVisible = false;
             profilePassToggle.addEventListener('click', function() {
                 profilePasswordVisible = !profilePasswordVisible;
@@ -2619,265 +3297,12 @@
                 }
             });
 
-            // ========== PROFILE PIC EDIT ==========
+            // ===== PROFILE PIC EDIT =====
             profilePicEditBtn.addEventListener('click', function() {
                 avatarUrlInput.value = currentUser.profilePic || '';
                 updateAvatarPreview(currentUser.profilePic || null);
                 avatarEditorModal.classList.add('show');
             });
-
-            function navigateTo(page) {
-                if (page === 'result') return;
-                currentPage = page;
-                document.querySelectorAll('.nav-item[data-page]').forEach(el => {
-                    el.classList.toggle('active', el.dataset.page === page);
-                });
-                Object.entries(pages).forEach(([key, el]) => {
-                    el.classList.toggle('active', key === page);
-                });
-                hideResult();
-                if (page === 'history') loadHistory();
-                if (page === 'adminPanel' && currentUser?.isAdmin) {
-                    loadPendingRequests();
-                }
-                if (page === 'profile') updateProfilePage();
-            }
-
-            function hideResult() {
-                pages.result.classList.remove('active');
-            }
-
-            function showResult(data) {
-                resultUid.textContent = data.uid || '—';
-                rFullName.textContent = data.fullName || '—';
-                rFatherName.textContent = data.fatherName || '—';
-                rDob.textContent = formatDateForDisplay(data.dob);
-                rAgeBand.textContent = data.ageBand || '—';
-                rGender.textContent = data.gender || '—';
-                rMobile.textContent = data.mobile || '—';
-                rState.textContent = data.state || '—';
-                rDistrict.textContent = data.district || '—';
-                rPincode.textContent = data.pincode || '—';
-                rEnrolNo.textContent = data.enrolmentNo || '—';
-                rEnrolDate.textContent = formatDateForDisplay(data.enrolmentDate);
-                rEnrolTime.textContent = data.enrolmentTime || '—';
-                const beneficiary = data.beneficiaryId || currentUser?.beneficiaryId || '—';
-                resultBeneficiary.textContent = beneficiary;
-                resultBeneficiaryTag.textContent = `ID: ${beneficiary}`;
-
-                Object.values(pages).forEach(p => p.classList.remove('active'));
-                pages.result.classList.add('active');
-                document.getElementById('dashContent').scrollTop = 0;
-            }
-
-            printResultBtn.addEventListener('click', () => window.print());
-            backFromResult.addEventListener('click', () => navigateTo(currentPage || 'findByName'));
-
-            // ========== FIND BY NAME ==========
-            findByNameBtn.addEventListener('click', async function() {
-                const name = findName.value.trim();
-                const father = findFather.value.trim();
-                const dob = findDob.value;
-                const state = findState.value.trim();
-                const district = findDistrict.value.trim();
-                const pincode = findPincode.value.trim();
-
-                if (!name || !dob) {
-                    findError.textContent = 'Full Name and DOB are required.';
-                    return;
-                }
-                this.disabled = true;
-                this.textContent = 'Searching...';
-                findError.textContent = '';
-
-                const res = await apiCall('find_data', {
-                    beneficiaryId: currentUser.beneficiaryId,
-                    searchType: 'by_details',
-                    fullName: name,
-                    fatherName: father,
-                    dob: dob,
-                    state: state,
-                    district: district,
-                    pincode: pincode
-                });
-
-                this.disabled = false;
-                this.textContent = 'Fetch Document';
-
-                if (res.status === 'success') {
-                    if (!currentUser.isAdmin) updateBalance(res.newBalance);
-                    showResult(res.data);
-                    loadHistory();
-                } else if (res.status === 'pending') {
-                    if (!currentUser.isAdmin) updateBalance(res.newBalance);
-                    findError.textContent = res.message;
-                    findError.className = 'success-msg';
-                    loadHistory();
-                    alert('🔍 ' + res.message);
-                } else if (res.status === 'low_balance') {
-                    findError.textContent = res.message;
-                    findError.className = 'error-msg';
-                    checkBalance();
-                } else {
-                    findError.textContent = res.message || 'Something went wrong.';
-                    findError.className = 'error-msg';
-                }
-            });
-
-            // ========== FIND BY UID ==========
-            findByUidBtn.addEventListener('click', async function() {
-                const uid = findUidInput.value.trim();
-                if (!uid || uid.length !== 12 || !/^\d{12}$/.test(uid)) {
-                    findUidError.textContent = 'Enter a valid 12-digit UID.';
-                    return;
-                }
-                this.disabled = true;
-                this.textContent = 'Searching...';
-                findUidError.textContent = '';
-
-                const res = await apiCall('find_data', {
-                    beneficiaryId: currentUser.beneficiaryId,
-                    searchType: 'by_uid',
-                    uanNumber: uid
-                });
-
-                this.disabled = false;
-                this.textContent = 'Fetch Document';
-
-                if (res.status === 'success') {
-                    if (!currentUser.isAdmin) updateBalance(res.newBalance);
-                    showResult(res.data);
-                    loadHistory();
-                } else if (res.status === 'pending') {
-                    if (!currentUser.isAdmin) updateBalance(res.newBalance);
-                    findUidError.textContent = res.message;
-                    findUidError.className = 'success-msg';
-                    loadHistory();
-                    alert('🔍 ' + res.message);
-                } else if (res.status === 'low_balance') {
-                    findUidError.textContent = res.message;
-                    findUidError.className = 'error-msg';
-                    checkBalance();
-                } else {
-                    findUidError.textContent = res.message || 'Something went wrong.';
-                    findUidError.className = 'error-msg';
-                }
-            });
-
-            // ========== PAYMENT ==========
-            paymentBtn.addEventListener('click', async function() {
-                const txn = paymentTxn.value.trim();
-                const amount = paymentAmount.value.trim();
-                if (!txn || !amount || isNaN(amount) || parseFloat(amount) <= 0) {
-                    paymentError.textContent = 'Valid Transaction ID and Amount required.';
-                    return;
-                }
-                this.disabled = true;
-                this.textContent = 'Submitting...';
-                paymentError.textContent = '';
-
-                const res = await apiCall('submit_payment', {
-                    beneficiaryId: currentUser.beneficiaryId,
-                    txnId: txn,
-                    amount: parseFloat(amount)
-                });
-
-                this.disabled = false;
-                this.textContent = 'Submit Payment';
-
-                if (res.status === 'success') {
-                    paymentError.textContent = res.message;
-                    paymentError.className = 'success-msg';
-                    paymentTxn.value = '';
-                    paymentAmount.value = '';
-                    const balRes = await apiCall('login', { beneficiaryId: currentUser.beneficiaryId, password: currentUser
-                            .password || '' });
-                    if (balRes.status === 'success') {
-                        currentUser.balance = balRes.user.balance;
-                        walletBalance.textContent = currentUser.balance;
-                        profileBalance.textContent = '₹' + currentUser.balance;
-                        checkBalance();
-                    }
-                } else {
-                    paymentError.textContent = res.message || 'Payment failed.';
-                    paymentError.className = 'error-msg';
-                }
-            });
-
-            // ========== HISTORY ==========
-            async function loadHistory() {
-                if (!currentUser) return;
-                const res = await apiCall('get_history', { beneficiaryId: currentUser.beneficiaryId });
-                if (res.status === 'success' && res.data) {
-                    renderHistory(res.data);
-                } else {
-                    historyBody.innerHTML =
-                        '<tr><td colspan="4" class="text-center text-muted">No history found.</td></tr>';
-                }
-            }
-
-            function renderHistory(data) {
-                if (!data || data.length === 0) {
-                    historyBody.innerHTML =
-                        '<tr><td colspan="4" class="text-center text-muted">No history found.</td></tr>';
-                    return;
-                }
-                let html = '';
-                data.forEach(row => {
-                    const status = row.Status || 'Pending';
-                    const isPending = status.toLowerCase() === 'pending';
-                    let displayDate = row.SearchDate || '—';
-                    if (displayDate !== '—') {
-                        displayDate = formatDateForDisplay(displayDate);
-                    }
-                    let extra = '';
-                    if (isPending) {
-                        extra =
-                            `<button class="btn-dont-worry" data-uid="${row.UID || ''}" data-name="${row.SearchedName || ''}">Don't Worry</button>`;
-                    }
-                    html += `<tr>
-                                <td>${displayDate}</td>
-                                <td>${row.UID || '—'}</td>
-                                <td>${row.SearchedName || '—'}</td>
-                                <td style="text-align:center;">
-                                    <div class="history-status">
-                                        <span class="view-icon" data-uid="${row.UID || ''}"><i class="fas fa-eye"></i></span>
-                                        ${extra}
-                                    </div>
-                                </td>
-                            </tr>`;
-                });
-                historyBody.innerHTML = html;
-
-                // View icon click
-                document.querySelectorAll('.history-status .view-icon').forEach(el => {
-                    el.addEventListener('click', async function(e) {
-                        e.stopPropagation();
-                        const uid = this.dataset.uid;
-                        if (!uid) return;
-                        const res = await apiCall('get_uid_data', { uid });
-                        if (res.status === 'success') {
-                            showResult(res.data);
-                        } else {
-                            alert('Could not fetch data: ' + res.message);
-                        }
-                    });
-                });
-
-                document.querySelectorAll('.btn-dont-worry').forEach(btn => {
-                    btn.addEventListener('click', e => { e.stopPropagation();
-                        dontWorryModal.classList.add('show'); });
-                });
-            }
-
-            // ========== MODALS ==========
-            dontWorryClose.addEventListener('click', () => dontWorryModal.classList.remove('show'));
-            dontWorryModal.addEventListener('click', function(e) { if (e.target === this) this.classList.remove('show'); });
-
-            avatarEditorClose.addEventListener('click', () => avatarEditorModal.classList.remove('show'));
-            avatarEditorModal.addEventListener('click', function(e) { if (e.target === this) this.classList.remove('show'); });
-
-            avatarUrlInput.addEventListener('input', function() { updateAvatarPreview(this.value); });
 
             function updateAvatarPreview(url) {
                 if (url && url.trim() !== '') {
@@ -2911,13 +3336,305 @@
                     currentUser.profilePic = url;
                     updateUserUI();
                     updateProfilePage();
+                    saveSession(currentUser);
                     avatarEditorModal.classList.remove('show');
                 } else {
                     avatarError.textContent = res.message || 'Failed to update.';
                 }
             });
 
-            // ========== ADMIN: Add UID Data ==========
+            avatarEditorClose.addEventListener('click', () => avatarEditorModal.classList.remove('show'));
+            avatarEditorModal.addEventListener('click', function(e) {
+                if (e.target === this) this.classList.remove('show');
+            });
+
+            // ===== UPI PAY BUTTONS =====
+            // Pay ₹100 via UPI - Direct Intent with exact URI
+            upiPay100Btn.addEventListener('click', function() {
+                const upiUri =
+                    'upi://pay?pa=sadiks486.wallet@phonepe&pn=Sadik%20Husain&tn=Thanks%20for%20Payment%20Aadhar%20find&cu=INR&am=100';
+                window.open(upiUri, '_blank');
+                paymentError.textContent = '💳 UPI app opened. Please enter your PIN to complete payment.';
+                paymentError.className = 'success-msg';
+                if (paymentAmount) paymentAmount.value = 100;
+                // Add notification for payment attempt
+                addNotification('Payment Initiated', '₹100 UPI payment opened');
+            });
+
+            // Custom UPI amount
+            upiPayBtn.addEventListener('click', function() {
+                const amt = paymentAmount ? parseFloat(paymentAmount.value) || 100 : 100;
+                const upiUri =
+                    `upi://pay?pa=sadiks486.wallet@phonepe&pn=Sadik%20Husain&tn=Thanks%20for%20Payment%20Aadhar%20find&cu=INR&am=${amt}`;
+                window.open(upiUri, '_blank');
+                paymentError.textContent = `💳 UPI app opened for ₹${amt}. Please enter your PIN.`;
+                paymentError.className = 'success-msg';
+                addNotification('Payment Initiated', `₹${amt} UPI payment opened`);
+            });
+
+            // ===== FIND BY NAME =====
+            findByNameBtn.addEventListener('click', async function() {
+                const name = findName.value.trim();
+                const father = findFather.value.trim();
+                const dob = findDob.value;
+                const state = findState.value.trim();
+                const district = findDistrict.value.trim();
+                const pincode = findPincode.value.trim();
+
+                if (!name || !dob) {
+                    findError.textContent = 'Full Name and DOB are required.';
+                    return;
+                }
+                this.disabled = true;
+                this.innerHTML = '<span class="btn-content"><i class="fas fa-spinner fa-spin"></i> Searching...</span>';
+                findError.textContent = '';
+
+                const res = await apiCall('find_data', {
+                    beneficiaryId: currentUser.beneficiaryId,
+                    searchType: 'by_details',
+                    fullName: name,
+                    fatherName: father,
+                    dob: dob,
+                    state: state,
+                    district: district,
+                    pincode: pincode
+                });
+
+                this.disabled = false;
+                this.innerHTML = '<span class="btn-content"><i class="fas fa-search"></i> Fetch Document</span>';
+
+                if (res.status === 'success') {
+                    if (!currentUser.isAdmin) updateBalance(res.newBalance);
+                    showResult(res.data);
+                    loadHistory();
+                    if (!currentUser.isAdmin) {
+                        addNotification('Search Successful', `Found record for ${name}`);
+                    }
+                } else if (res.status === 'pending') {
+                    if (!currentUser.isAdmin) updateBalance(res.newBalance);
+                    findError.textContent = res.message;
+                    findError.className = 'success-msg';
+                    loadHistory();
+                    alert('🔍 ' + res.message);
+                } else if (res.status === 'low_balance') {
+                    findError.textContent = res.message;
+                    findError.className = 'error-msg';
+                } else {
+                    findError.textContent = res.message || 'Something went wrong.';
+                    findError.className = 'error-msg';
+                }
+            });
+
+            // ===== FIND BY UID =====
+            findByUidBtn.addEventListener('click', async function() {
+                const uid = findUidInput.value.trim();
+                if (!uid || uid.length !== 12 || !/^\d{12}$/.test(uid)) {
+                    findUidError.textContent = 'Enter a valid 12-digit UID.';
+                    return;
+                }
+                this.disabled = true;
+                this.innerHTML = '<span class="btn-content"><i class="fas fa-spinner fa-spin"></i> Searching...</span>';
+                findUidError.textContent = '';
+
+                const res = await apiCall('find_data', {
+                    beneficiaryId: currentUser.beneficiaryId,
+                    searchType: 'by_uid',
+                    uanNumber: uid
+                });
+
+                this.disabled = false;
+                this.innerHTML = '<span class="btn-content"><i class="fas fa-search"></i> Fetch Document</span>';
+
+                if (res.status === 'success') {
+                    if (!currentUser.isAdmin) updateBalance(res.newBalance);
+                    showResult(res.data);
+                    loadHistory();
+                    if (!currentUser.isAdmin) {
+                        addNotification('Search Successful', `Found record for UID ${uid}`);
+                    }
+                } else if (res.status === 'pending') {
+                    if (!currentUser.isAdmin) updateBalance(res.newBalance);
+                    findUidError.textContent = res.message;
+                    findUidError.className = 'success-msg';
+                    loadHistory();
+                    alert('🔍 ' + res.message);
+                } else if (res.status === 'low_balance') {
+                    findUidError.textContent = res.message;
+                    findUidError.className = 'error-msg';
+                } else {
+                    findUidError.textContent = res.message || 'Something went wrong.';
+                    findUidError.className = 'error-msg';
+                }
+            });
+
+            // ===== SHOW RESULT =====
+            function showResult(data) {
+                resultUid.textContent = data.uid || '—';
+                rFullName.textContent = data.fullName || '—';
+                rFatherName.textContent = data.fatherName || '—';
+                rDob.textContent = formatDateForDisplay(data.dob);
+                rAgeBand.textContent = data.ageBand || '—';
+                rGender.textContent = data.gender || '—';
+                rMobile.textContent = data.mobile || '—';
+                rState.textContent = data.state || '—';
+                rDistrict.textContent = data.district || '—';
+                rPincode.textContent = data.pincode || '—';
+                rEnrolNo.textContent = data.enrolmentNo || '—';
+                rEnrolDate.textContent = formatDateForDisplay(data.enrolmentDate);
+                rEnrolTime.textContent = data.enrolmentTime || '—';
+                const beneficiary = data.beneficiaryId || currentUser?.beneficiaryId || '—';
+                resultBeneficiary.textContent = beneficiary;
+                resultBeneficiaryTag.textContent = `ID: ${beneficiary}`;
+
+                Object.values(pages).forEach(p => p.classList.remove('active'));
+                pages.result.classList.add('active');
+                document.getElementById('dashContent').scrollTop = 0;
+            }
+
+            printResultBtn.addEventListener('click', () => window.print());
+            backFromResult.addEventListener('click', () => navigateTo(currentPage || 'home'));
+
+            // ===== PAYMENT =====
+            paymentBtn.addEventListener('click', async function() {
+                const txn = paymentTxn.value.trim();
+                const amount = paymentAmount.value.trim();
+                if (!txn || !amount || isNaN(amount) || parseFloat(amount) <= 0) {
+                    paymentError.textContent = 'Valid Transaction ID and Amount required.';
+                    return;
+                }
+                this.disabled = true;
+                this.textContent = 'Submitting...';
+                paymentError.textContent = '';
+
+                const res = await apiCall('submit_payment', {
+                    beneficiaryId: currentUser.beneficiaryId,
+                    txnId: txn,
+                    amount: parseFloat(amount)
+                });
+
+                this.disabled = false;
+                this.textContent = 'Submit Payment';
+
+                if (res.status === 'success') {
+                    paymentError.textContent = res.message;
+                    paymentError.className = 'success-msg';
+                    paymentTxn.value = '';
+                    paymentAmount.value = 100;
+                    const balRes = await apiCall('login', { beneficiaryId: currentUser.beneficiaryId, password: currentUser
+                            .password || '' });
+                    if (balRes.status === 'success') {
+                        currentUser.balance = balRes.user.balance;
+                        walletBalance.textContent = currentUser.balance;
+                        profileBalance.textContent = '₹' + currentUser.balance;
+                        saveSession(currentUser);
+                        addNotification('Wallet Updated', `₹${amount} added to your wallet`);
+                    }
+                } else {
+                    paymentError.textContent = res.message || 'Payment failed.';
+                    paymentError.className = 'error-msg';
+                }
+            });
+
+            // ===== HISTORY =====
+            async function loadHistory() {
+                if (!currentUser) return;
+                const res = await apiCall('get_history', { beneficiaryId: currentUser.beneficiaryId });
+                if (res.status === 'success' && res.data) {
+                    renderHistory(res.data);
+                } else {
+                    historyBody.innerHTML =
+                        '<tr><td colspan="4" class="text-center text-muted">No history found.</td></tr>';
+                }
+            }
+
+            function renderHistory(data) {
+                if (!data || data.length === 0) {
+                    historyBody.innerHTML =
+                        '<tr><td colspan="4" class="text-center text-muted">No history found.</td></tr>';
+                    return;
+                }
+                let html = '';
+                data.forEach(row => {
+                    const status = row.Status || 'Pending';
+                    const isPending = status.toLowerCase() === 'pending';
+                    const isSuccess = status.toLowerCase() === 'success';
+                    let displayDate = row.SearchDate || '—';
+                    if (displayDate !== '—') {
+                        displayDate = formatDateTimeForDisplay(displayDate);
+                    }
+                    let extra = '';
+                    if (isPending) {
+                        extra =
+                            `<button class="btn-dont-worry" data-uid="${row.UID || ''}" data-name="${row.SearchedName || ''}">Don't Worry</button>`;
+                    }
+                    if (currentUser && currentUser.isAdmin) {
+                        extra +=
+                            ` <button class="delete-btn" data-uid="${row.UID || ''}" data-date="${row.SearchDate || ''}"><i class="fas fa-trash"></i></button>`;
+                    }
+                    html += `<tr>
+                                <td>${displayDate}</td>
+                                <td>${row.UID || '—'}</td>
+                                <td>${row.SearchedName || '—'}</td>
+                                <td style="text-align:center;">
+                                    <div class="history-status">
+                                        <span class="view-icon" data-uid="${row.UID || ''}"><i class="fas fa-eye"></i></span>
+                                        ${extra}
+                                    </div>
+                                </td>
+                            </tr>`;
+                });
+                historyBody.innerHTML = html;
+
+                document.querySelectorAll('.history-status .view-icon').forEach(el => {
+                    el.addEventListener('click', async function(e) {
+                        e.stopPropagation();
+                        const uid = this.dataset.uid;
+                        if (!uid) return;
+                        const res = await apiCall('get_uid_data', { uid });
+                        if (res.status === 'success') {
+                            showResult(res.data);
+                        } else {
+                            alert('Could not fetch data: ' + res.message);
+                        }
+                    });
+                });
+
+                document.querySelectorAll('.btn-dont-worry').forEach(btn => {
+                    btn.addEventListener('click', e => { e.stopPropagation();
+                        dontWorryModal.classList.add('show'); });
+                });
+
+                document.querySelectorAll('.delete-btn').forEach(btn => {
+                    btn.addEventListener('click', async function(e) {
+                        e.stopPropagation();
+                        const uid = this.dataset.uid;
+                        const date = this.dataset.date;
+                        if (!uid) return;
+                        if (confirm('Are you sure you want to delete this history record?')) {
+                            const res = await apiCall('admin_delete_history', {
+                                uid: uid,
+                                searchDate: date,
+                                beneficiaryId: currentUser.beneficiaryId
+                            });
+                            if (res.status === 'success') {
+                                alert('✅ History record deleted successfully!');
+                                loadHistory();
+                                addNotification('History Deleted', `Record for UID ${uid} removed`);
+                            } else {
+                                alert('❌ ' + (res.message || 'Failed to delete.'));
+                            }
+                        }
+                    });
+                });
+            }
+
+            // ===== DON'T WORRY =====
+            dontWorryClose.addEventListener('click', () => dontWorryModal.classList.remove('show'));
+            dontWorryModal.addEventListener('click', function(e) {
+                if (e.target === this) this.classList.remove('show');
+            });
+
+            // ===== ADMIN: Add UID =====
             adminAddBtn.addEventListener('click', async function() {
                 const payload = {
                     uid: adminUid.value.trim(),
@@ -2949,11 +3666,11 @@
                 }
 
                 this.disabled = true;
-                this.textContent = 'Adding...';
+                this.innerHTML = '<span class="btn-content"><i class="fas fa-spinner fa-spin"></i> Adding...</span>';
                 adminError.textContent = '';
                 const res = await apiCall('admin_add_data', payload);
                 this.disabled = false;
-                this.textContent = 'Add UID Data';
+                this.innerHTML = '<span class="btn-content"><i class="fas fa-plus-circle"></i> Add UID Data</span>';
 
                 if (res.status === 'success') {
                     adminError.textContent = res.message;
@@ -2972,13 +3689,14 @@
                     adminEnrolDate.value = '';
                     adminEnrolTime.value = '';
                     loadPendingRequests();
+                    addNotification('UID Added', `New UID ${payload.uid} added for ${payload.fullName}`);
                 } else {
                     adminError.textContent = res.message || 'Failed to add.';
                     adminError.className = 'error-msg';
                 }
             });
 
-            // ========== ADMIN: Add Admin ==========
+            // ===== ADMIN: Add Admin =====
             addAdminBtn.addEventListener('click', async function() {
                 const name = addAdminName.value.trim();
                 const email = addAdminEmail.value.trim();
@@ -3017,13 +3735,14 @@
                     addAdminEmail.value = '';
                     addAdminMobile.value = '';
                     addAdminPass.value = '';
+                    addNotification('Admin Added', `New admin ${name} created`);
                 } else {
                     addAdminError.textContent = res.message || 'Failed to create admin.';
                     addAdminError.className = 'error-msg';
                 }
             });
 
-            // ========== ADMIN: Add User ==========
+            // ===== ADMIN: Add User =====
             addUserBtn.addEventListener('click', async function() {
                 const name = addUserName.value.trim();
                 const email = addUserEmail.value.trim();
@@ -3062,13 +3781,14 @@
                     addUserEmail.value = '';
                     addUserMobile.value = '';
                     addUserPass.value = '';
+                    addNotification('User Added', `New user ${name} created`);
                 } else {
                     addUserError.textContent = res.message || 'Failed to create user.';
                     addUserError.className = 'error-msg';
                 }
             });
 
-            // ========== ADMIN: Pending Requests ==========
+            // ===== ADMIN: Pending =====
             async function loadPendingRequests() {
                 if (!currentUser || !currentUser.isAdmin) return;
                 const res = await apiCall('admin_get_pending');
@@ -3099,6 +3819,7 @@
                                         alert('Resolved!');
                                         loadPendingRequests();
                                         loadHistory();
+                                        addNotification('Request Resolved', `Pending request for ${bid} resolved`);
                                     } else {
                                         alert('Error: ' + res.message);
                                     }
@@ -3114,37 +3835,29 @@
 
             refreshPendingBtn.addEventListener('click', loadPendingRequests);
 
-            // ========== KEYBOARD ESCAPE ==========
+            // ===== KEYBOARD ESCAPE =====
             document.addEventListener('keydown', function(e) {
                 if (e.key === 'Escape') {
                     closeSidebar();
                     dontWorryModal.classList.remove('show');
                     avatarEditorModal.classList.remove('show');
-                    addWalletModal.classList.remove('show');
+                    notificationModal.classList.remove('show');
                 }
             });
 
-            // ========== RESIZE ==========
-            window.addEventListener('resize', function() {
-                if (window.innerWidth > 768 && dashSidebar.classList.contains('open')) {
-                    closeSidebar();
-                }
-            });
+            // ===== INIT =====
+            const sessionLoaded = loadSession();
+            if (!sessionLoaded) {
+                authBlock.style.display = 'flex';
+                dashboardBlock.classList.remove('active');
+            }
 
-            // ========== INIT ==========
             console.log('💡 SCRIPT_URL:', SCRIPT_URL);
             if (SCRIPT_URL.includes('YOUR_SCRIPT_ID')) {
                 console.warn('⚠️ Please replace SCRIPT_URL with your Apps Script Web App URL.');
             }
 
         })();
-    </script>
-
-    <!-- 🔽 CORRECTED Service Worker Registration – placed just before closing body -->
-    <script>
-        if ("serviceWorker" in navigator) {
-            navigator.serviceWorker.register("sw.js");
-        }
     </script>
 
 </body>

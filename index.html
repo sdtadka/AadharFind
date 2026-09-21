@@ -1308,28 +1308,117 @@
             #secCreateAadhaar.active .aa-page-title,
             #secCreateAadhaar.active .aa-page-sub,
             #secCreateAadhaar.active .aa-form-card,
-            #secCreateAadhaar.active .aa-white-mode-btn,
-            #secCreateAadhaar.active .aa-print-actions {
-                display: none !important;
-            }
-            #secCreateAadhaar.active .aa-preview-section {
-                display: flex !important; margin: 0 !important; padding: 0 !important;
-            }
-            #secCreateAadhaar.active .aa-cards-wrapper {
-                display: flex !important;
-                flex-direction: row !important;
-                gap: 8mm !important;
-                justify-content: flex-start !important;
-                transform: none !important;
-            }
-            #secCreateAadhaar.active .pvc-card {
-                box-shadow: none !important;
-                border: 0.0px solid #ccc !important;
-                page-break-inside: avoid;
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
-            }
-            @page { size: A4 portrait; margin: 10mm; }
+/* ===== PRINT ===== */
+@media print {
+    html, body {
+        background: #ffffff !important;
+        background-image: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        width: 100% !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+    body::before { display: none !important; }
+    #dashboardBlock {
+        background: #ffffff !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        min-height: 0 !important;
+    }
+    .dash-content {
+        padding: 0 !important;
+        margin: 0 !important;
+        max-width: 100% !important;
+    }
+    .dash-header, .bottom-nav, .sidebar-overlay, .dash-sidebar,
+    .modal-overlay, .sidebar-item { display: none !important; }
+
+    .page-section { display: none !important; }
+    .page-section.active { display: block !important; }
+
+    /* ===== AADHAAR CREATOR — FRONT LEFT, BACK RIGHT ===== */
+    #secCreateAadhaar.active {
+        background: #ffffff !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    #secCreateAadhaar.active .aa-page-title,
+    #secCreateAadhaar.active .aa-page-sub,
+    #secCreateAadhaar.active .aa-form-card,
+    #secCreateAadhaar.active .aa-white-mode-btn,
+    #secCreateAadhaar.active .aa-print-actions {
+        display: none !important;
+    }
+    #secCreateAadhaar.active .aa-preview-section {
+        display: block !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        gap: 0 !important;
+        background: #ffffff !important;
+    }
+    #secCreateAadhaar.active .aa-cards-wrapper {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        align-items: flex-start !important;
+        justify-content: flex-start !important;
+        gap: 6mm !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
+        transform: none !important;
+        page-break-inside: avoid !important;
+    }
+    #secCreateAadhaar.active .pvc-card {
+        box-shadow: none !important;
+        border: none !important;
+        transform: none !important;
+        flex: 0 0 auto !important;
+        page-break-inside: avoid !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    /* ===== RESULT (Aadhaar detail page) ===== */
+    #secResult.active {
+        background: #ffffff !important;
+        position: absolute;
+        left: 0; top: 0;
+        width: 100%;
+        padding: 10mm;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+    #secResult.active .result-card {
+        box-shadow: none !important;
+        border: 1px solid #ddd;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+    #secResult.active .result-card .row {
+        font-size: 12pt;
+        padding: 8px 0;
+        border-bottom: 1px solid #e0e0e0;
+    }
+    #secResult.active .result-card .row .label {
+        font-size: 11pt;
+        color: #555;
+        max-width: none;
+    }
+    #secResult.active .result-card .row .value {
+        font-size: 12pt;
+        color: #000;
+        font-weight: 700;
+    }
+    #secResult.active .result-card .section-title {
+        font-size: 11pt;
+        margin-top: 12px;
+    }
+    #secResult.active .result-card .print-btn,
+    #secResult.active .btn-secondary { display: none !important; }
+
+    @page { size: A4 portrait; margin: 8mm; }
         }
     </style>
 </head>

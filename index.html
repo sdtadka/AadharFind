@@ -11,7 +11,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <style>
-        /* ===== CSS VARIABLES ===== */
         :root {
             --saffron: #FF9933;
             --saffron-dark: #E07B1A;
@@ -36,101 +35,52 @@
             --app-pad: 16px;
             --bottom-nav-h: 78px;
         }
-
-        /* ===== RESET / BASE ===== */
         *, *::before, *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+            margin: 0; padding: 0; box-sizing: border-box;
             -webkit-tap-highlight-color: transparent;
         }
         html {
             -webkit-text-size-adjust: 100%;
             text-size-adjust: 100%;
-            overflow-x: hidden;
-            width: 100%;
+            overflow-x: hidden; width: 100%;
         }
         body {
             font-family: var(--font);
             background: var(--bg-cream);
-            min-height: 100vh;
-            min-height: 100dvh;
+            min-height: 100vh; min-height: 100dvh;
             color: var(--text-dark);
-            overflow-x: hidden;
-            position: relative;
-            width: 100%;
-            max-width: 100vw;
+            overflow-x: hidden; position: relative;
+            width: 100%; max-width: 100vw;
             -webkit-font-smoothing: antialiased;
         }
-
-        button {
-            cursor: pointer;
-            font-family: var(--font);
-            border: none;
-            outline: none;
-            background: none;
-            touch-action: manipulation;
-        }
-        input, select, textarea {
-            font-family: var(--font);
-            outline: none;
-            border: none;
-            font-size: 16px; /* prevents iOS zoom on focus */
-        }
+        button { cursor: pointer; font-family: var(--font); border: none; outline: none; background: none; touch-action: manipulation; }
+        input, select, textarea { font-family: var(--font); outline: none; border: none; font-size: 16px; }
         .hidden { display: none !important; }
 
-        /* ===== BUTTONS ===== */
         .btn-primary {
             background: linear-gradient(135deg, var(--saffron), var(--saffron-dark));
-            color: #fff;
-            padding: 13px 24px;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 0.95rem;
-            transition: var(--transition);
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            width: 100%;
-            border: none;
-            box-shadow: 0 4px 16px rgba(255, 153, 51, 0.3);
+            color: #fff; padding: 13px 24px; border-radius: 50px;
+            font-weight: 700; font-size: 0.95rem; transition: var(--transition);
+            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+            width: 100%; border: none; box-shadow: 0 4px 16px rgba(255, 153, 51, 0.3);
         }
-        .btn-primary:hover, .btn-primary:active {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 28px rgba(255, 153, 51, 0.4);
-        }
+        .btn-primary:active { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(255, 153, 51, 0.4); }
         .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; transform: none !important; box-shadow: none !important; }
 
         .btn-tricolor {
-            position: relative;
-            padding: 14px 24px;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 0.95rem;
-            color: #fff;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            border: none;
-            overflow: hidden;
-            width: 100%;
-            transition: var(--transition);
+            position: relative; padding: 14px 24px; border-radius: 50px;
+            font-weight: 700; font-size: 0.95rem; color: #fff;
+            display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+            border: none; overflow: hidden; width: 100%; transition: var(--transition);
             background: linear-gradient(135deg, var(--saffron), var(--saffron-dark));
             box-shadow: 0 4px 20px rgba(255, 153, 51, 0.35);
         }
         .btn-tricolor::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: 50px;
-            background: linear-gradient(90deg,
-                #FF9933 0%, #FFB347 20%, #FFFFFF 40%, #A8D5A2 60%, #138808 80%, #FF9933 100%);
+            content: ''; position: absolute; inset: 0; border-radius: 50px;
+            background: linear-gradient(90deg, #FF9933 0%, #FFB347 20%, #FFFFFF 40%, #A8D5A2 60%, #138808 80%, #FF9933 100%);
             background-size: 300% 100%;
             animation: tricolorShimmer 3s ease-in-out infinite;
-            opacity: 0;
-            transition: opacity 0.5s ease;
+            opacity: 0; transition: opacity 0.5s ease;
         }
         .btn-tricolor:hover::before { opacity: 1; }
         .btn-tricolor:active { transform: scale(0.97); }
@@ -139,89 +89,51 @@
 
         .btn-secondary {
             background: linear-gradient(135deg, var(--navy), #1a3170);
-            color: #fff;
-            padding: 11px 22px;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: var(--transition);
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            border: none;
-            box-shadow: 0 4px 12px rgba(30, 58, 138, 0.3);
+            color: #fff; padding: 11px 22px; border-radius: 50px;
+            font-weight: 600; font-size: 0.9rem; transition: var(--transition);
+            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+            border: none; box-shadow: 0 4px 12px rgba(30, 58, 138, 0.3);
         }
         .btn-secondary:active { transform: scale(0.97); }
         .btn-success {
             background: linear-gradient(135deg, var(--green), #0d6e0a);
-            color: #fff;
-            padding: 11px 22px;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: var(--transition);
-            border: none;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
+            color: #fff; padding: 11px 22px; border-radius: 50px;
+            font-weight: 600; font-size: 0.9rem; transition: var(--transition);
+            border: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
             box-shadow: 0 4px 12px rgba(19, 136, 8, 0.3);
         }
         .btn-success:active { transform: scale(0.97); }
         .btn-sm { padding: 7px 14px; font-size: 0.78rem; width: auto; }
 
-        /* ===== AUTH SCREEN ===== */
         #authBlock {
-            min-height: 100vh;
-            min-height: 100dvh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 16px;
-            background: var(--bg-cream);
-            position: relative;
-            overflow-y: auto;
-            z-index: 1;
+            min-height: 100vh; min-height: 100dvh;
+            display: flex; align-items: center; justify-content: center;
+            padding: 16px; background: var(--bg-cream);
+            position: relative; overflow-y: auto; z-index: 1;
         }
         #authBlock::before {
-            content: '';
-            position: fixed;
-            top: 0; left: 0; right: 0;
-            height: 5px;
+            content: ''; position: fixed; top: 0; left: 0; right: 0; height: 5px;
             background: linear-gradient(90deg, #FF9933 0%, #FFB347 25%, #FFFFFF 50%, #A8D5A2 75%, #138808 100%);
             z-index: 2;
         }
         .auth-card {
-            background: #fff;
-            border-radius: var(--radius-lg);
-            padding: 26px 22px 24px;
-            max-width: 420px;
-            width: 100%;
+            background: #fff; border-radius: var(--radius-lg);
+            padding: 26px 22px 24px; max-width: 420px; width: 100%;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.10);
-            position: relative;
-            z-index: 2;
+            position: relative; z-index: 2;
             border: 1px solid rgba(255, 153, 51, 0.10);
         }
         .auth-card .logo-container { text-align: center; margin-bottom: 10px; }
         .auth-card .logo-container img { max-height: 55px; width: auto; display: inline-block; object-fit: contain; }
-        .auth-card .brand {
-            font-size: 1.35rem; font-weight: 800; text-align: center;
-            color: var(--navy); letter-spacing: -0.5px;
-        }
+        .auth-card .brand { font-size: 1.35rem; font-weight: 800; text-align: center; color: var(--navy); letter-spacing: -0.5px; }
         .auth-card .brand span { color: var(--saffron); }
         .auth-card .brand-sub {
             text-align: center; font-size: 0.65rem; color: var(--text-muted);
             letter-spacing: 2px; text-transform: uppercase; margin-top: -2px; margin-bottom: 10px;
         }
-        .auth-card .subtitle {
-            text-align: center; color: var(--text-muted); font-size: 0.85rem; margin-bottom: 18px;
-        }
+        .auth-card .subtitle { text-align: center; color: var(--text-muted); font-size: 0.85rem; margin-bottom: 18px; }
         .auth-card .form-group { margin-bottom: 12px; }
-        .auth-card .form-group label {
-            display: block; font-weight: 600; font-size: 0.78rem;
-            color: var(--text-dark); margin-bottom: 4px;
-        }
+        .auth-card .form-group label { display: block; font-weight: 600; font-size: 0.78rem; color: var(--text-dark); margin-bottom: 4px; }
         .auth-card .form-group .input-wrap {
             position: relative; display: flex; align-items: center;
             background: #f9fafb; border: 2px solid var(--border);
@@ -231,152 +143,77 @@
             border-color: var(--saffron); background: #fff;
             box-shadow: 0 0 0 4px rgba(255, 153, 51, 0.08);
         }
-        .auth-card .form-group .input-wrap .input-icon {
-            padding: 0 0 0 16px; color: var(--text-muted); font-size: 0.9rem;
-        }
+        .auth-card .form-group .input-wrap .input-icon { padding: 0 0 0 16px; color: var(--text-muted); font-size: 0.9rem; }
         .auth-card .form-group .input-wrap input {
-            width: 100%; padding: 14px 14px 14px 10px;
-            font-size: 16px; background: transparent; border: none;
-            outline: none; height: 100%;
+            width: 100%; padding: 14px 14px 14px 10px; font-size: 16px;
+            background: transparent; border: none; outline: none; height: 100%;
         }
-        .auth-card .form-group .input-wrap .password-toggle {
-            padding: 0 16px 0 6px; color: var(--text-muted);
-            cursor: pointer; font-size: 0.95rem;
-        }
-        .auth-card .error-msg {
-            color: #dc2626; font-size: 0.78rem; margin-top: 4px; min-height: 16px;
-        }
-        .auth-card .success-msg {
-            color: var(--green); font-size: 0.78rem; margin-top: 4px; min-height: 16px;
-        }
-        .auth-card .auth-toggle {
-            text-align: center; margin-top: 12px; font-size: 0.85rem; color: var(--text-muted);
-        }
-        .auth-card .auth-toggle a {
-            color: var(--saffron); font-weight: 600; cursor: pointer; transition: 0.2s;
-        }
-        .timer-text {
-            font-size: 0.8rem; color: var(--text-muted);
-            font-weight: 600; min-width: 42px; text-align: center;
-        }
+        .auth-card .form-group .input-wrap .password-toggle { padding: 0 16px 0 6px; color: var(--text-muted); cursor: pointer; font-size: 0.95rem; }
+        .auth-card .error-msg { color: #dc2626; font-size: 0.78rem; margin-top: 4px; min-height: 16px; }
+        .auth-card .success-msg { color: var(--green); font-size: 0.78rem; margin-top: 4px; min-height: 16px; }
+        .auth-card .auth-toggle { text-align: center; margin-top: 12px; font-size: 0.85rem; color: var(--text-muted); }
+        .auth-card .auth-toggle a { color: var(--saffron); font-weight: 600; cursor: pointer; transition: 0.2s; }
+        .timer-text { font-size: 0.8rem; color: var(--text-muted); font-weight: 600; min-width: 42px; text-align: center; }
 
-        /* ===== DASHBOARD ===== */
         #dashboardBlock {
-            display: none;
-            min-height: 100vh;
-            min-height: 100dvh;
-            background: var(--bg-cream);
-            position: relative;
-            z-index: 1;
+            display: none; min-height: 100vh; min-height: 100dvh;
+            background: var(--bg-cream); position: relative; z-index: 1;
             padding-bottom: calc(var(--bottom-nav-h) + 20px);
-            overflow-x: hidden;
-            width: 100%;
+            overflow-x: hidden; width: 100%;
         }
         #dashboardBlock.active { display: block; }
 
-        /* ===== HEADER (only logo now) ===== */
         .dash-header {
             background: linear-gradient(135deg, #FF9933 0%, #FF8C1A 30%, #E07B1A 60%, #CC6E14 100%);
-            padding: 8px 16px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: nowrap;
-            gap: 10px;
-            position: sticky;
-            top: 0;
-            z-index: 50;
+            padding: 8px 16px; display: flex; align-items: center; justify-content: space-between;
+            flex-wrap: nowrap; gap: 10px; position: sticky; top: 0; z-index: 50;
             box-shadow: 0 4px 20px rgba(255, 153, 51, 0.25);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-            min-height: 56px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12); min-height: 56px;
         }
         .dash-header .header-left {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            flex-shrink: 0;
-            cursor: pointer;
-            padding: 4px;
-            border-radius: 10px;
-            transition: background 0.2s;
+            display: flex; align-items: center; gap: 8px;
+            flex-shrink: 0; cursor: pointer; padding: 4px;
+            border-radius: 10px; transition: background 0.2s;
         }
         .dash-header .header-left:active { background: rgba(255,255,255,0.12); }
         .dash-header .header-left .header-logo {
-            height: 38px;
-            width: auto;
-            display: inline-block;
-            border-radius: 6px;
-            object-fit: contain;
+            height: 38px; width: auto; display: inline-block;
+            border-radius: 6px; object-fit: contain;
             filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
         }
-        .dash-header .header-right {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            flex-shrink: 0;
-        }
+        .dash-header .header-right { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
         .dash-header .header-right .notification-btn {
-            color: #fff;
-            font-size: 1.15rem;
-            padding: 8px;
-            border-radius: 50%;
-            transition: var(--transition);
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            color: #fff; font-size: 1.15rem; padding: 8px; border-radius: 50%;
+            transition: var(--transition); position: relative;
+            display: flex; align-items: center; justify-content: center;
         }
         .dash-header .header-right .notification-btn:active { background: rgba(255, 255, 255, 0.2); }
         .dash-header .header-right .notification-btn .badge-dot {
-            position: absolute;
-            top: 6px;
-            right: 6px;
-            width: 8px;
-            height: 8px;
-            background: #dc2626;
-            border-radius: 50%;
-            border: 2px solid #FF8C1A;
+            position: absolute; top: 6px; right: 6px; width: 8px; height: 8px;
+            background: #dc2626; border-radius: 50%; border: 2px solid #FF8C1A;
         }
         .dash-header .header-right .header-avatar {
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.25);
-            color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: var(--transition);
-            border: 2px solid rgba(255, 255, 255, 0.5);
-            overflow: hidden;
-            flex-shrink: 0;
-            backdrop-filter: blur(4px);
+            width: 38px; height: 38px; border-radius: 50%;
+            background: rgba(255, 255, 255, 0.25); color: #fff;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 0.9rem; cursor: pointer;
+            transition: var(--transition); border: 2px solid rgba(255, 255, 255, 0.5);
+            overflow: hidden; flex-shrink: 0; backdrop-filter: blur(4px);
         }
         .dash-header .header-right .header-avatar img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* ===== SIDEBAR ===== */
         .dash-sidebar {
-            position: fixed;
-            top: 0; left: 0;
-            width: 280px; max-width: 82vw; height: 100vh;
-            background: #fff;
-            z-index: 200;
+            position: fixed; top: 0; left: 0; width: 280px; max-width: 82vw;
+            height: 100vh; background: #fff; z-index: 200;
             transform: translateX(-100%);
             transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             box-shadow: 4px 0 40px rgba(0, 0, 0, 0.1);
-            padding: 20px 0;
-            overflow-y: auto;
+            padding: 20px 0; overflow-y: auto;
         }
         .dash-sidebar.open { transform: translateX(0); }
         .dash-sidebar .sidebar-header {
-            padding: 0 20px 16px;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+            padding: 0 20px 16px; border-bottom: 1px solid var(--border);
+            display: flex; align-items: center; justify-content: space-between;
         }
         .dash-sidebar .sidebar-header .sidebar-brand {
             display: flex; align-items: center; gap: 10px;
@@ -385,8 +222,8 @@
         .dash-sidebar .sidebar-header .sidebar-brand img { height: 28px; width: auto; }
         .dash-sidebar .sidebar-header .sidebar-brand span { color: var(--saffron); }
         .dash-sidebar .sidebar-header .sidebar-close {
-            font-size: 1.3rem; color: var(--text-muted); cursor: pointer;
-            padding: 4px 10px; border-radius: 8px;
+            font-size: 1.3rem; color: var(--text-muted);
+            cursor: pointer; padding: 4px 10px; border-radius: 8px;
         }
         .dash-sidebar .sidebar-item {
             display: flex; align-items: center; gap: 14px;
@@ -408,17 +245,11 @@
         }
         .sidebar-overlay.show { display: block; opacity: 1; }
 
-        /* ===== MAIN CONTENT ===== */
         .dash-content {
-            padding: 14px 14px 0;
-            max-width: 480px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-            width: 100%;
+            padding: 14px 14px 0; max-width: 480px;
+            margin: 0 auto; position: relative; z-index: 1; width: 100%;
         }
 
-        /* ===== PAGE SECTIONS ===== */
         .page-section { display: none; animation: fadeSlide 0.3s ease; }
         .page-section.active { display: block; }
         @keyframes fadeSlide {
@@ -426,28 +257,20 @@
             100% { opacity: 1; transform: translateY(0); }
         }
 
-        /* ===== WELCOME ===== */
         .welcome-section { margin-bottom: 16px; }
         .welcome-section .greeting {
             font-size: 1.35rem; font-weight: 700;
-            color: var(--text-dark); letter-spacing: -0.4px;
-            line-height: 1.25;
+            color: var(--text-dark); letter-spacing: -0.4px; line-height: 1.25;
         }
         .welcome-section .greeting span { color: var(--saffron); }
         .welcome-section .sub-greeting { font-size: 0.82rem; color: var(--text-muted); margin-top: 3px; }
 
-        /* ===== BALANCE CARD ===== */
         .balance-card {
             background: linear-gradient(135deg, #ffffff, #faf8f6);
-            border-radius: var(--radius-lg);
-            padding: 16px 18px;
-            box-shadow: var(--shadow);
-            margin-bottom: 20px;
+            border-radius: var(--radius-lg); padding: 16px 18px;
+            box-shadow: var(--shadow); margin-bottom: 20px;
             border: 1px solid rgba(255, 153, 51, 0.08);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
+            display: flex; align-items: center; justify-content: space-between; gap: 12px;
         }
         .balance-card .balance-left { min-width: 0; flex: 1; }
         .balance-card .balance-left .balance-label {
@@ -456,49 +279,32 @@
         }
         .balance-card .balance-left .balance-amount {
             font-size: 1.5rem; font-weight: 700;
-            color: var(--text-dark); letter-spacing: -0.5px;
-            margin-top: 2px;
+            color: var(--text-dark); letter-spacing: -0.5px; margin-top: 2px;
         }
         .balance-card .balance-left .balance-amount span { color: var(--saffron); }
         .balance-card .balance-action .btn-add {
             background: linear-gradient(135deg, var(--saffron), var(--saffron-dark));
             color: #fff; padding: 9px 18px; border-radius: 50px;
             font-weight: 700; font-size: 0.8rem; transition: var(--transition);
-            box-shadow: 0 2px 12px rgba(255, 153, 51, 0.25);
-            white-space: nowrap;
+            box-shadow: 0 2px 12px rgba(255, 153, 51, 0.25); white-space: nowrap;
         }
         .balance-card .balance-action .btn-add:active { transform: scale(0.96); }
 
-        /* ===== SECTION TITLES ===== */
         .section-title {
             font-size: 0.75rem; font-weight: 700; color: var(--text-muted);
             text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;
         }
 
-        /* ===== SERVICE GRID ===== */
-        .service-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-bottom: 22px;
-        }
+        .service-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 22px; }
         .service-card {
             background: #fff; border-radius: var(--radius);
-            padding: 16px 12px;
-            box-shadow: var(--shadow); transition: var(--transition);
-            border: 1px solid rgba(255, 153, 51, 0.04);
-            text-align: center; cursor: pointer;
-            position: relative; overflow: hidden;
-            min-height: 108px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            padding: 16px 12px; box-shadow: var(--shadow);
+            transition: var(--transition); border: 1px solid rgba(255, 153, 51, 0.04);
+            text-align: center; cursor: pointer; position: relative; overflow: hidden;
+            min-height: 108px; display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
         }
-        .service-card:active {
-            transform: scale(0.97);
-            box-shadow: var(--shadow-hover);
-        }
+        .service-card:active { transform: scale(0.97); box-shadow: var(--shadow-hover); }
         .service-card .service-icon {
             width: 44px; height: 44px; border-radius: 14px;
             display: flex; align-items: center; justify-content: center;
@@ -516,46 +322,31 @@
             font-size: 0.82rem; font-weight: 600; color: var(--text-dark);
             margin-bottom: 2px; line-height: 1.2;
         }
-        .service-card .service-desc {
-            font-size: 0.66rem; color: var(--text-muted); line-height: 1.25;
-        }
+        .service-card .service-desc { font-size: 0.66rem; color: var(--text-muted); line-height: 1.25; }
 
-        /* ===== QUICK ACTIONS ===== */
-        .quick-actions {
-            display: flex; gap: 10px; margin-bottom: 22px; flex-wrap: wrap;
-        }
+        .quick-actions { display: flex; gap: 10px; margin-bottom: 22px; flex-wrap: wrap; }
         .quick-actions .quick-btn {
-            flex: 1; min-width: 0;
-            padding: 11px 10px; background: #fff;
-            border-radius: 50px; box-shadow: var(--shadow);
+            flex: 1; min-width: 0; padding: 11px 10px;
+            background: #fff; border-radius: 50px; box-shadow: var(--shadow);
             border: 1px solid rgba(255, 153, 51, 0.06);
             display: flex; align-items: center; justify-content: center;
             gap: 6px; font-size: 0.75rem; font-weight: 600;
             color: var(--text-dark); transition: var(--transition);
             cursor: pointer; white-space: nowrap;
         }
-        .quick-actions .quick-btn:active {
-            transform: scale(0.96);
-            box-shadow: var(--shadow-hover);
-        }
+        .quick-actions .quick-btn:active { transform: scale(0.96); box-shadow: var(--shadow-hover); }
         .quick-actions .quick-btn i { color: var(--saffron); font-size: 0.85rem; }
 
-        /* ===== BOTTOM NAV ===== */
         .bottom-nav {
-            position: fixed;
-            bottom: max(12px, env(safe-area-inset-bottom));
+            position: fixed; bottom: max(12px, env(safe-area-inset-bottom));
             left: 50%; transform: translateX(-50%);
-            width: calc(100% - 24px);
-            max-width: 440px;
-            background: rgba(255, 255, 255, 0.97);
-            border-radius: 22px;
+            width: calc(100% - 24px); max-width: 440px;
+            background: rgba(255, 255, 255, 0.97); border-radius: 22px;
             box-shadow: 0 8px 40px rgba(0, 0, 0, 0.14);
             display: flex; align-items: center; justify-content: space-around;
-            padding: 8px 8px;
-            z-index: 100;
+            padding: 8px 8px; z-index: 100;
             border: 1px solid rgba(255, 255, 255, 0.5);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
+            backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
         }
         .bottom-nav .nav-item {
             display: flex; flex-direction: column; align-items: center; gap: 2px;
@@ -563,9 +354,7 @@
             transition: var(--transition); cursor: pointer;
             position: relative; flex: 1; min-width: 0;
         }
-        .bottom-nav .nav-item i {
-            font-size: 1.15rem; color: var(--text-muted); transition: var(--transition);
-        }
+        .bottom-nav .nav-item i { font-size: 1.15rem; color: var(--text-muted); transition: var(--transition); }
         .bottom-nav .nav-item .nav-label {
             font-size: 0.58rem; font-weight: 500;
             color: var(--text-muted); transition: var(--transition);
@@ -573,41 +362,29 @@
         .bottom-nav .nav-item.active i {
             color: var(--saffron);
             background: linear-gradient(135deg, var(--saffron), var(--saffron-dark));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            background-clip: text;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
         }
-        .bottom-nav .nav-item.active .nav-label {
-            color: var(--saffron-dark); font-weight: 700;
-        }
+        .bottom-nav .nav-item.active .nav-label { color: var(--saffron-dark); font-weight: 700; }
         .bottom-nav .nav-item.active::before {
-            content: ''; position: absolute; top: -2px;
-            left: 50%; transform: translateX(-50%);
-            width: 20px; height: 3px;
+            content: ''; position: absolute; top: -2px; left: 50%;
+            transform: translateX(-50%); width: 20px; height: 3px;
             background: linear-gradient(90deg, var(--saffron), var(--saffron-dark));
             border-radius: 4px;
         }
 
-        /* ===== CARDS ===== */
         .card {
             background: #fff; border-radius: var(--radius);
             padding: 16px 16px; box-shadow: var(--shadow);
-            transition: 0.25s;
-            border: 1px solid rgba(255, 153, 51, 0.04);
-            width: 100%;
+            transition: 0.25s; border: 1px solid rgba(255, 153, 51, 0.04); width: 100%;
         }
-        .card .card-title {
-            font-weight: 700; font-size: 0.95rem;
-            margin-bottom: 12px; color: var(--navy);
-        }
+        .card .card-title { font-weight: 700; font-size: 0.95rem; margin-bottom: 12px; color: var(--navy); }
 
-        /* ===== FLOATING INPUT ===== */
         .floating-group { position: relative; margin-bottom: 14px; width: 100%; }
         .floating-group .floating-input {
-            width: 100%; padding: 16px 16px 8px;
-            font-size: 16px; border: 2px solid var(--border);
-            border-radius: 14px; background: #f9fafb;
-            transition: var(--transition); color: var(--text-dark);
-            font-weight: 500; height: 54px; outline: none;
+            width: 100%; padding: 16px 16px 8px; font-size: 16px;
+            border: 2px solid var(--border); border-radius: 14px;
+            background: #f9fafb; transition: var(--transition);
+            color: var(--text-dark); font-weight: 500; height: 54px; outline: none;
         }
         .floating-group .floating-input:focus {
             border-color: var(--saffron); background: #fff;
@@ -616,11 +393,10 @@
         .floating-group .floating-input::placeholder { color: transparent; }
         .floating-group .floating-label {
             position: absolute; left: 16px; top: 50%;
-            transform: translateY(-50%);
-            font-size: 0.9rem; color: var(--text-muted);
-            pointer-events: none; transition: var(--transition);
-            background: transparent; font-weight: 500;
-            padding: 0 4px;
+            transform: translateY(-50%); font-size: 0.9rem;
+            color: var(--text-muted); pointer-events: none;
+            transition: var(--transition); background: transparent;
+            font-weight: 500; padding: 0 4px;
         }
         .floating-group .floating-input:focus + .floating-label,
         .floating-group .floating-input:not(:placeholder-shown) + .floating-label {
@@ -638,19 +414,13 @@
         }
         .floating-group select.floating-input option { color: var(--text-dark); background: #fff; }
 
-        /* ===== ADD WALLET ===== */
         .add-wallet-container { padding: 4px 0; }
-        .add-wallet-container .qr-wrapper {
-            text-align: center; padding: 16px 0 14px;
-        }
+        .add-wallet-container .qr-wrapper { text-align: center; padding: 16px 0 14px; }
         .add-wallet-container .qr-wrapper .qr-code {
             display: inline-block; padding: 10px; background: #fff;
-            border-radius: var(--radius); box-shadow: var(--shadow);
-            position: relative;
+            border-radius: var(--radius); box-shadow: var(--shadow); position: relative;
         }
-        .add-wallet-container .qr-wrapper .qr-code img {
-            max-width: 160px; width: 100%; border-radius: 8px; display: block;
-        }
+        .add-wallet-container .qr-wrapper .qr-code img { max-width: 160px; width: 100%; border-radius: 8px; display: block; }
         .add-wallet-container .qr-wrapper .qr-code .qr-ripple {
             position: absolute; inset: -8px; border-radius: var(--radius);
             border: 2px solid rgba(255, 153, 51, 0.2);
@@ -673,8 +443,7 @@
             background: linear-gradient(135deg, #1a8cff, #0066cc); color: #fff;
             padding: 13px 20px; border-radius: 50px; font-weight: 700;
             font-size: 0.9rem; width: 100%; transition: var(--transition);
-            box-shadow: 0 4px 16px rgba(26, 140, 255, 0.3);
-            border: none; cursor: pointer;
+            box-shadow: 0 4px 16px rgba(26, 140, 255, 0.3); border: none; cursor: pointer;
         }
         .add-wallet-container .pay-btn-upi:active { transform: scale(0.97); }
         .add-wallet-container .pay-btn-upi-100 {
@@ -687,30 +456,23 @@
         }
         .add-wallet-container .pay-btn-upi-100:active { transform: scale(0.97); }
 
-        /* ===== HISTORY ===== */
         .history-full .history-table-wrap {
             overflow-x: auto; width: 100%;
-            -webkit-overflow-scrolling: touch;
-            border-radius: var(--radius);
+            -webkit-overflow-scrolling: touch; border-radius: var(--radius);
         }
         .history-full table.history-table {
             width: 100%; border-collapse: collapse;
             font-size: 0.72rem; background: #fff;
-            border-radius: var(--radius);
-            overflow: hidden; box-shadow: var(--shadow);
-            min-width: 320px;
+            border-radius: var(--radius); overflow: hidden;
+            box-shadow: var(--shadow); min-width: 320px;
         }
         .history-full table.history-table thead { background: var(--navy); color: #fff; }
-        .history-full table.history-table th {
-            padding: 9px 8px; text-align: left; font-weight: 600; font-size: 0.66rem;
-        }
+        .history-full table.history-table th { padding: 9px 8px; text-align: left; font-weight: 600; font-size: 0.66rem; }
         .history-full table.history-table td {
             padding: 9px 8px; border-bottom: 1px solid var(--border);
             vertical-align: middle; font-size: 0.7rem;
         }
-        .history-full .history-status {
-            display: flex; flex-direction: column; align-items: center; gap: 3px;
-        }
+        .history-full .history-status { display: flex; flex-direction: column; align-items: center; gap: 3px; }
         .history-full .history-status .view-icon {
             cursor: pointer; color: var(--navy); font-size: 0.95rem;
             padding: 5px 8px; border-radius: 8px;
@@ -727,7 +489,6 @@
             font-weight: 700; cursor: pointer;
         }
 
-        /* ===== RESULT CARD (FIXED DOB LAYOUT) ===== */
         #secResult .result-card {
             background: linear-gradient(145deg, #fef8f0 0%, #fdf0e0 25%, #f8e8d0 50%, #f0e0c8 75%, #e8f5e8 100%);
             border-radius: var(--radius); overflow: hidden;
@@ -743,24 +504,20 @@
             backdrop-filter: blur(2px);
         }
         #secResult .result-card .result-header { text-align: center; margin-bottom: 14px; }
-        #secResult .result-card .result-header .result-logo {
-            height: 38px; width: auto; display: inline-block; margin-bottom: 6px;
-        }
+        #secResult .result-card .result-header .result-logo { height: 38px; width: auto; display: inline-block; margin-bottom: 6px; }
         #secResult .result-card .result-header .uid-row {
             display: flex; align-items: center; justify-content: center;
             gap: 6px; flex-wrap: wrap;
         }
         #secResult .result-card .result-header .uid-number {
-            font-size: clamp(18px, 5.5vw, 24px);
-            font-weight: 700; color: var(--text-dark);
-            letter-spacing: 1.5px; word-break: break-all;
+            font-size: clamp(18px, 5.5vw, 24px); font-weight: 700;
+            color: var(--text-dark); letter-spacing: 1.5px; word-break: break-all;
         }
         #secResult .result-card .result-header .blue-tick {
             display: inline-flex; align-items: center; justify-content: center;
             background: #1a8cff; color: #fff; border-radius: 50%;
             width: 20px; height: 20px; font-size: 11px;
-            box-shadow: 0 2px 8px rgba(26, 140, 255, 0.3);
-            flex-shrink: 0;
+            box-shadow: 0 2px 8px rgba(26, 140, 255, 0.3); flex-shrink: 0;
         }
         #secResult .result-card .result-header .status-badge {
             margin-top: 4px; font-size: 0.82rem; font-weight: 600; color: var(--green);
@@ -773,31 +530,20 @@
             margin-top: 14px; margin-bottom: 8px;
         }
         #secResult .result-card .section-title:first-of-type { margin-top: 0; }
-
-        /* Fixed DOB display - label always visible, value wraps gracefully */
         #secResult .result-card .row {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            padding: 8px 0;
-            border-bottom: 1px solid #f1f3f5;
-            font-size: 0.82rem;
-            gap: 12px;
-            line-height: 1.4;
+            display: flex; justify-content: space-between; align-items: flex-start;
+            padding: 8px 0; border-bottom: 1px solid #f1f3f5;
+            font-size: 0.82rem; gap: 12px; line-height: 1.4;
         }
         #secResult .result-card .row:last-child { border-bottom: none; }
         #secResult .result-card .row .label {
             color: var(--text-muted); font-weight: 500;
-            flex: 0 0 auto;
-            max-width: 45%;
+            flex: 0 0 auto; max-width: 45%;
         }
         #secResult .result-card .row .value {
-            font-weight: 600; color: var(--text-dark);
-            text-align: right;
-            flex: 1 1 auto;
-            min-width: 0;
-            word-break: break-word;
-            overflow-wrap: anywhere;
+            font-weight: 600; color: var(--text-dark); text-align: right;
+            flex: 1 1 auto; min-width: 0;
+            word-break: break-word; overflow-wrap: anywhere;
         }
         #secResult .result-card .result-footer {
             margin-top: 14px; padding-top: 12px;
@@ -816,18 +562,16 @@
             color: #fff; padding: 10px 20px; border-radius: 50px;
             font-size: 0.85rem; font-weight: 700;
             display: inline-flex; align-items: center; gap: 8px;
-            transition: 0.3s;
-            box-shadow: 0 4px 16px rgba(30, 58, 138, 0.3);
+            transition: 0.3s; box-shadow: 0 4px 16px rgba(30, 58, 138, 0.3);
             border: none; cursor: pointer;
         }
         #secResult .result-card .result-footer .print-btn:active { transform: scale(0.97); }
 
-        /* ===== MODALS ===== */
         .modal-overlay {
             position: fixed; inset: 0; background: rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
-            z-index: 999; display: none;
-            align-items: center; justify-content: center; padding: 16px;
+            z-index: 999; display: none; align-items: center;
+            justify-content: center; padding: 16px;
         }
         .modal-overlay.show { display: flex; }
         .modal-box {
@@ -839,9 +583,8 @@
         }
         .modal-box .modal-close {
             position: absolute; top: 12px; right: 14px;
-            font-size: 1.4rem; cursor: pointer;
-            color: var(--text-muted); transition: 0.25s;
-            line-height: 1; padding: 2px 8px; border-radius: 8px;
+            font-size: 1.4rem; cursor: pointer; color: var(--text-muted);
+            transition: 0.25s; line-height: 1; padding: 2px 8px; border-radius: 8px;
         }
         .modal-box .modal-icon { font-size: 2rem; text-align: center; margin-bottom: 6px; }
         .modal-box h3 { font-size: 1.1rem; font-weight: 700; text-align: center; margin-bottom: 6px; }
@@ -851,81 +594,51 @@
             display: flex; gap: 12px; align-items: flex-start;
         }
         .modal-box .notification-item:last-child { border-bottom: none; }
-        .modal-box .notification-item .noti-icon {
-            color: var(--saffron); font-size: 1rem; margin-top: 2px; flex-shrink: 0;
-        }
+        .modal-box .notification-item .noti-icon { color: var(--saffron); font-size: 1rem; margin-top: 2px; flex-shrink: 0; }
         .modal-box .notification-item .noti-content { min-width: 0; flex: 1; }
-        .modal-box .notification-item .noti-content .noti-title {
-            font-weight: 600; font-size: 0.85rem; color: var(--text-dark);
-        }
-        .modal-box .notification-item .noti-content .noti-desc {
-            font-size: 0.75rem; color: var(--text-muted); word-break: break-word;
-        }
-        .modal-box .notification-item .noti-content .noti-time {
-            font-size: 0.62rem; color: var(--text-muted); margin-top: 2px;
-        }
+        .modal-box .notification-item .noti-content .noti-title { font-weight: 600; font-size: 0.85rem; color: var(--text-dark); }
+        .modal-box .notification-item .noti-content .noti-desc { font-size: 0.75rem; color: var(--text-muted); word-break: break-word; }
+        .modal-box .notification-item .noti-content .noti-time { font-size: 0.62rem; color: var(--text-muted); margin-top: 2px; }
         @keyframes slideUp {
             0% { opacity: 0; transform: translateY(20px); }
             100% { opacity: 1; transform: translateY(0); }
         }
 
-        /* ===== PROFILE ===== */
         .profile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
         .profile-grid .profile-item {
             padding: 10px 12px; background: #f9fafb;
-            border-radius: 10px; border: 1px solid var(--border);
-            min-width: 0;
+            border-radius: 10px; border: 1px solid var(--border); min-width: 0;
         }
-        .profile-grid .profile-item .label {
-            font-size: 0.65rem; color: var(--text-muted);
-            text-transform: uppercase; letter-spacing: 0.5px;
-        }
+        .profile-grid .profile-item .label { font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
         .profile-grid .profile-item .value {
-            font-weight: 600; font-size: 0.88rem;
-            color: var(--text-dark); margin-top: 3px;
-            word-break: break-word; overflow-wrap: anywhere;
+            font-weight: 600; font-size: 0.88rem; color: var(--text-dark);
+            margin-top: 3px; word-break: break-word; overflow-wrap: anywhere;
         }
         .profile-logout-btn {
-            margin-top: 12px; width: 100%; padding: 12px;
-            border-radius: 12px; background: #fee2e2; color: #dc2626;
-            font-weight: 600; font-size: 0.88rem;
+            margin-top: 12px; width: 100%; padding: 12px; border-radius: 12px;
+            background: #fee2e2; color: #dc2626; font-weight: 600; font-size: 0.88rem;
             display: flex; align-items: center; justify-content: center; gap: 8px;
             transition: 0.25s; border: 1.5px solid #fecaca;
         }
         .profile-logout-btn:active { transform: scale(0.97); }
 
-        /* ===== ADMIN ===== */
         .admin-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
         .admin-grid .floating-group { margin-bottom: 0; }
         .admin-pending-table {
-            margin-top: 14px; max-height: 300px; overflow-y: auto;
-            -webkit-overflow-scrolling: touch;
+            margin-top: 14px; max-height: 300px;
+            overflow-y: auto; -webkit-overflow-scrolling: touch;
         }
-        .admin-pending-table table {
-            width: 100%; border-collapse: collapse; font-size: 0.75rem;
-        }
-        .admin-pending-table th {
-            background: var(--navy); color: #fff;
-            padding: 7px 8px; text-align: left; font-size: 0.66rem;
-        }
-        .admin-pending-table td {
-            padding: 7px 8px; border-bottom: 1px solid var(--border);
-            font-size: 0.72rem; word-break: break-word;
-        }
-        .admin-user-mgmt {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px;
-        }
-        .admin-user-mgmt .mgmt-card {
-            background: #f9fafb; border-radius: 12px;
-            padding: 14px; border: 1px solid var(--border);
-        }
+        .admin-pending-table table { width: 100%; border-collapse: collapse; font-size: 0.75rem; }
+        .admin-pending-table th { background: var(--navy); color: #fff; padding: 7px 8px; text-align: left; font-size: 0.66rem; }
+        .admin-pending-table td { padding: 7px 8px; border-bottom: 1px solid var(--border); font-size: 0.72rem; word-break: break-word; }
+        .admin-user-mgmt { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+        .admin-user-mgmt .mgmt-card { background: #f9fafb; border-radius: 12px; padding: 14px; border: 1px solid var(--border); }
         .admin-user-mgmt .mgmt-card .mgmt-title {
             font-weight: 700; font-size: 0.85rem; color: var(--navy);
             margin-bottom: 10px; display: flex; align-items: center; gap: 6px;
         }
         .admin-user-mgmt .mgmt-card .mgmt-title i { color: var(--saffron); }
 
-        /* ===== AVATAR EDITOR ===== */
         .avatar-preview {
             width: 76px; height: 76px; border-radius: 50%;
             background: var(--saffron); color: #fff;
@@ -936,29 +649,19 @@
         }
         .avatar-preview img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* ============================================================
-           AADHAAR CREATOR (embedded)
-           ============================================================ */
-        #secCreateAadhaar .aa-page-title {
-            font-size: 1.15rem; font-weight: 700;
-            color: var(--navy); margin-bottom: 4px;
-        }
-        #secCreateAadhaar .aa-page-sub {
-            font-size: 0.8rem; color: var(--text-muted); margin-bottom: 14px;
-        }
+        #secCreateAadhaar .aa-page-title { font-size: 1.15rem; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+        #secCreateAadhaar .aa-page-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 14px; }
         #secCreateAadhaar .aa-white-mode-btn {
             display: block; margin: 0 auto 14px auto;
             background: #0b4636; color: #fff; border: none;
             padding: 8px 20px; font-size: 12px; font-weight: 600;
-            border-radius: 20px; cursor: pointer;
-            font-family: inherit; transition: background 0.2s;
+            border-radius: 20px; cursor: pointer; font-family: inherit; transition: background 0.2s;
         }
         #secCreateAadhaar .aa-white-mode-btn.active { background: #d21f1f; }
         #secCreateAadhaar .aa-form-card {
             background: #fff; border-radius: var(--radius);
             padding: 16px 14px; box-shadow: var(--shadow);
-            border: 1px solid rgba(255, 153, 51, 0.04);
-            margin-bottom: 14px;
+            border: 1px solid rgba(255, 153, 51, 0.04); margin-bottom: 14px;
         }
         #secCreateAadhaar .aa-form-group { margin-bottom: 12px; }
         #secCreateAadhaar .aa-form-group label {
@@ -983,12 +686,8 @@
             box-shadow: 0 0 0 3px rgba(255, 153, 51, 0.08);
         }
         #secCreateAadhaar .aa-form-group textarea { resize: vertical; min-height: 50px; }
-        #secCreateAadhaar .aa-checkbox-group {
-            display: flex; align-items: center; margin-bottom: 12px; gap: 8px;
-        }
-        #secCreateAadhaar .aa-checkbox-group input[type="checkbox"] {
-            width: 18px; height: 18px; cursor: pointer; accent-color: #27ae60;
-        }
+        #secCreateAadhaar .aa-checkbox-group { display: flex; align-items: center; margin-bottom: 12px; gap: 8px; }
+        #secCreateAadhaar .aa-checkbox-group input[type="checkbox"] { width: 18px; height: 18px; cursor: pointer; accent-color: #27ae60; }
         #secCreateAadhaar .aa-checkbox-group label {
             margin-bottom: 0; cursor: pointer; font-weight: 600;
             color: var(--text-dark); font-size: 0.85rem;
@@ -999,13 +698,11 @@
         }
         #secCreateAadhaar .aa-cards-wrapper {
             display: flex; flex-wrap: wrap;
-            gap: 16px; justify-content: center;
-            width: 100%;
+            gap: 16px; justify-content: center; width: 100%;
         }
-        /* PVC CARD — scaled to fit small screens */
+
         #secCreateAadhaar .pvc-card {
-            position: relative;
-            width: 85.6mm; height: 54mm;
+            position: relative; width: 85.6mm; height: 54mm;
             max-width: 85.6mm; max-height: 54mm;
             background: linear-gradient(to bottom,
                 rgba(255, 153, 55, 0.85) 0%,
@@ -1015,34 +712,28 @@
                 #ffffff;
             border-radius: 0mm; overflow: hidden;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.19);
-            border: 0px solid #d0d0d0;
-            flex-shrink: 0;
+            border: 0px solid #d0d0d0; flex-shrink: 0;
         }
         #secCreateAadhaar .front-card::before {
-            content: "";
-            position: absolute; top: -16mm; left: -16mm;
+            content: ""; position: absolute; top: -16mm; left: -16mm;
             width: 49mm; height: 49mm;
             background-image: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEje6HRypEmHCmKuWI6-N_53Wsz3VqGJoso6EArOI1-rpzGjSc6-PKXeowL9YLcNtR6RagJQhE3b8Za54rWbN8Colbu7-w8-HUKTIbckGj3Dq1covt4msq2cO8xPqH9SY60nXXLQI9STezNDs2frecSeGzPNBlLj6uKNwLLK3T6bMIXRuqEfFdHT0yzgNGQ/s3264/1000317582.png');
             background-size: contain; background-repeat: no-repeat; background-position: top left;
             opacity: 0.20; pointer-events: none; z-index: 0;
         }
         #secCreateAadhaar .front-card::after {
-            content: "";
-            position: absolute; bottom: -9mm; right: -7mm;
+            content: ""; position: absolute; bottom: -9mm; right: -7mm;
             width: 49mm; height: 49mm;
             background-image: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEje6HRypEmHCmKuWI6-N_53Wsz3VqGJoso6EArOI1-rpzGjSc6-PKXeowL9YLcNtR6RagJQhE3b8Za54rWbN8Colbu7-w8-HUKTIbckGj3Dq1covt4msq2cO8xPqH9SY60nXXLQI9STezNDs2frecSeGzPNBlLj6uKNwLLK3T6bMIXRuqEfFdHT0yzgNGQ/s3264/1000317582.png');
             background-size: contain; background-repeat: no-repeat; background-position: bottom right;
             opacity: 0.15; pointer-events: none; z-index: 0;
         }
         #secCreateAadhaar .front-card > * { position: relative; z-index: 1; }
-        #secCreateAadhaar .front-card {
-            padding: 2mm 3mm; display: flex; flex-direction: column;
-        }
+        #secCreateAadhaar .front-card { padding: 2mm 3mm; display: flex; flex-direction: column; }
         #secCreateAadhaar .ghost-photo-box {
             position: absolute; top: 16mm; right: 6mm; width: 10mm;
-            text-align: center; z-index: 0;
-            display: flex; flex-direction: column;
-            align-items: center; opacity: 1.65;
+            text-align: center; z-index: 0; display: flex;
+            flex-direction: column; align-items: center; opacity: 1.65;
         }
         #secCreateAadhaar .ghost-photo-box img {
             width: 6mm; height: 8mm; object-fit: cover;
@@ -1052,17 +743,11 @@
             font-size: 2.1pt; font-weight: 600; margin-top: 0.5mm;
             color: #000; font-family: 'Inter', Arial, sans-serif;
         }
-        #secCreateAadhaar .front-top-logos {
-            display: flex; justify-content: space-between;
-            align-items: center; height: 10mm;
-        }
+        #secCreateAadhaar .front-top-logos { display: flex; justify-content: space-between; align-items: center; height: 10mm; }
         #secCreateAadhaar .front-top-logos .moe-top { height: 8mm; max-width: 24mm; object-fit: contain; }
         #secCreateAadhaar .front-top-logos .tiranga-center { height: 16mm; max-width: 48mm; object-fit: contain; }
         #secCreateAadhaar .front-top-logos .apaar-top { height: 11mm; max-width: 33mm; object-fit: contain; }
-        #secCreateAadhaar .front-title {
-            text-align: center; font-size: 6.5pt; font-weight: 700;
-            color: #000; margin: 1mm 0;
-        }
+        #secCreateAadhaar .front-title { text-align: center; font-size: 6.5pt; font-weight: 700; color: #000; margin: 1mm 0; }
         #secCreateAadhaar .front-main-row {
             display: flex; align-items: flex-start;
             gap: 2mm; margin-top: 1mm; height: 21mm;
@@ -1089,17 +774,12 @@
             font-weight: 600; display: block; color: #000;
         }
         #secCreateAadhaar .front-details .name-en {
-            font-weight: 600; display: block;
-            margin-bottom: 0.2mm; color: #000;
+            font-weight: 600; display: block; margin-bottom: 0.2mm; color: #000;
         }
-        #secCreateAadhaar .front-details .detail-item {
-            display: flex; align-items: baseline; font-weight: 600;
-        }
+        #secCreateAadhaar .front-details .detail-item { display: flex; align-items: baseline; font-weight: 600; }
         #secCreateAadhaar .front-details .label { color: #000; margin-right: 0.5mm; }
         #secCreateAadhaar .front-details .val { color: #000; }
-        #secCreateAadhaar .front-bottom-section {
-            position: absolute; bottom: 2mm; left: 3mm; right: 3mm;
-        }
+        #secCreateAadhaar .front-bottom-section { position: absolute; bottom: 2mm; left: 3mm; right: 3mm; }
         #secCreateAadhaar .front-id-number {
             text-align: center; font-size: 10pt; font-weight: 700;
             letter-spacing: 0.5px; color: #000;
@@ -1112,20 +792,17 @@
         }
         #secCreateAadhaar .front-bottom-logo {
             display: block; height: 8mm; width: auto; max-width: 50mm;
-            margin: 0 auto; margin-top: 0; margin-bottom: -2.5mm;
-            object-fit: contain;
+            margin: 0 auto; margin-top: 0; margin-bottom: -2.5mm; object-fit: contain;
         }
         #secCreateAadhaar .back-card::before {
-            content: "";
-            position: absolute; top: -16mm; right: -16mm;
+            content: ""; position: absolute; top: -16mm; right: -16mm;
             width: 49mm; height: 49mm;
             background-image: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEje6HRypEmHCmKuWI6-N_53Wsz3VqGJoso6EArOI1-rpzGjSc6-PKXeowL9YLcNtR6RagJQhE3b8Za54rWbN8Colbu7-w8-HUKTIbckGj3Dq1covt4msq2cO8xPqH9SY60nXXLQI9STezNDs2frecSeGzPNBlLj6uKNwLLK3T6bMIXRuqEfFdHT0yzgNGQ/s3264/1000317582.png');
             background-size: contain; background-repeat: no-repeat; background-position: top left;
             opacity: 0.15; pointer-events: none; z-index: 0;
         }
         #secCreateAadhaar .back-card::after {
-            content: "";
-            position: absolute; bottom: -7mm; right: 42mm; left: -6mm;
+            content: ""; position: absolute; bottom: -7mm; right: 42mm; left: -6mm;
             width: 49mm; height: 49mm;
             background-image: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEje6HRypEmHCmKuWI6-N_53Wsz3VqGJoso6EArOI1-rpzGjSc6-PKXeowL9YLcNtR6RagJQhE3b8Za54rWbN8Colbu7-w8-HUKTIbckGj3Dq1covt4msq2cO8xPqH9SY60nXXLQI9STezNDs2frecSeGzPNBlLj6uKNwLLK3T6bMIXRuqEfFdHT0yzgNGQ/s3264/1000317582.png');
             background-size: contain; background-repeat: no-repeat; background-position: bottom right;
@@ -1136,10 +813,7 @@
             padding: 2mm 3mm; display: flex;
             flex-direction: column; justify-content: space-between;
         }
-        #secCreateAadhaar .back-top-logos {
-            display: flex; justify-content: space-between;
-            align-items: center; height: 9mm;
-        }
+        #secCreateAadhaar .back-top-logos { display: flex; justify-content: space-between; align-items: center; height: 9mm; }
         #secCreateAadhaar .back-top-logos img { height: 8mm; max-width: 24mm; object-fit: contain; }
         #secCreateAadhaar .back-top-logos .tiranga-center { height: 16mm; max-width: 48mm; }
         #secCreateAadhaar .back-main-row {
@@ -1149,14 +823,13 @@
         #secCreateAadhaar .back-date-vertical {
             writing-mode: vertical-rl; transform: rotate(180deg);
             font-size: 4.2pt; font-weight: 900; color: #333;
-            white-space: nowrap; height: 25mm;
-            display: flex; align-items: center; justify-content: center;
+            white-space: nowrap; height: 25mm; display: flex;
+            align-items: center; justify-content: center;
         }
         #secCreateAadhaar .back-details { flex: 1; font-size: 6.5pt; line-height: 2.5mm; }
         #secCreateAadhaar .back-details .lbl {
             font-weight: 500; color: #000; display: block;
-            margin-top: 1.5mm;
-            font-family: 'Noto Sans Devanagari', sans-serif;
+            margin-top: 1.5mm; font-family: 'Noto Sans Devanagari', sans-serif;
         }
         #secCreateAadhaar .back-details .lbl:first-child { margin-top: 0; }
         #secCreateAadhaar .back-details .val {
@@ -1185,9 +858,7 @@
             padding-top: 0.1mm; margin: 0 auto 0mm auto; width: 45mm;
             font-family: 'Inter', Arial, sans-serif; display: none;
         }
-        #secCreateAadhaar .back-red-line {
-            width: 110%; height: 0.4mm; margin-left: -10pt; background: #d21f1f;
-        }
+        #secCreateAadhaar .back-red-line { width: 110%; height: 0.4mm; margin-left: -10pt; background: #d21f1f; }
         #secCreateAadhaar .back-contact-row {
             display: flex; justify-content: space-between; align-items: center;
             font-size: 5.5pt; font-weight: 600; color: #111;
@@ -1214,7 +885,6 @@
         #secCreateAadhaar .pvc-card.white-mode::after { display: none !important; }
         #secCreateAadhaar .pvc-card.white-mode .ghost-photo-box { display: none !important; }
 
-        /* ===== RESPONSIVE — SMALL PHONES ===== */
         @media (max-width: 420px) {
             :root { --app-pad: 12px; }
             .dash-content { padding: 12px 12px 0; }
@@ -1255,178 +925,170 @@
             }
         }
 
-        /* ===== PRINT ===== */
+        /* ============================================================
+           🖨️ ULTRA-STRICT PRINT — ONLY PVC CARDS, WHITE BACKGROUND
+           ============================================================ */
         @media print {
-            body {
-                background: #fff !important;
+            /* Force white background on EVERYTHING */
+            html, body {
+                background: #ffffff !important;
+                background-color: #ffffff !important;
+                background-image: none !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                width: 100% !important;
+                height: auto !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+            body::before { display: none !important; content: none !important; }
+
+            /* Hide EVERYTHING by default */
+            body > * {
+                display: none !important;
+                background: #ffffff !important;
+                box-shadow: none !important;
+            }
+
+            /* Step 1: Show only dashboard block */
+            body > #dashboardBlock {
+                display: block !important;
+                background: #ffffff !important;
                 padding: 0 !important;
                 margin: 0 !important;
+                min-height: 0 !important;
+                box-shadow: none !important;
+            }
+
+            /* Step 2: Hide everything inside dashboard by default */
+            #dashboardBlock > * {
+                display: none !important;
+                box-shadow: none !important;
+            }
+
+            /* Step 3: Show only the main content area */
+            #dashboardBlock > main.dash-content {
+                display: block !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                max-width: 100% !important;
+                width: 100% !important;
+                background: #ffffff !important;
+                box-shadow: none !important;
+            }
+
+            /* Step 4: Hide all page sections by default */
+            .dash-content > .page-section {
+                display: none !important;
+                box-shadow: none !important;
+                background: #ffffff !important;
+            }
+
+            /* Step 5: Show only the active page section */
+            .dash-content > .page-section.active {
+                display: block !important;
+                background: #ffffff !important;
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+
+            /* ========== CREATE AADHAAR PRINT ========== */
+            /* Hide everything inside createAadhaar except the preview section */
+            #secCreateAadhaar.active > *:not(.aa-preview-section) {
+                display: none !important;
+            }
+            /* Hide everything inside preview except the cards wrapper */
+            #secCreateAadhaar.active .aa-preview-section > *:not(.aa-cards-wrapper) {
+                display: none !important;
+            }
+            #secCreateAadhaar.active .aa-preview-section {
+                display: block !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                background: #ffffff !important;
+                box-shadow: none !important;
+            }
+
+            /* Show cards wrapper as horizontal flex, no scaling */
+            #secCreateAadhaar.active .aa-cards-wrapper {
+                display: flex !important;
+                flex-direction: row !important;
+                flex-wrap: nowrap !important;
+                align-items: flex-start !important;
+                justify-content: flex-start !important;
+                gap: 8mm !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                width: 100% !important;
+                transform: none !important;
+                background: #ffffff !important;
+                box-shadow: none !important;
+                page-break-inside: avoid !important;
+            }
+            #secCreateAadhaar.active .pvc-card {
+                flex: 0 0 auto !important;
+                transform: none !important;
+                box-shadow: none !important;
+                border: none !important;
+                page-break-inside: avoid !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
             }
-            .dash-header, .bottom-nav, .sidebar-overlay, .dash-sidebar,
-            .modal-overlay { display: none !important; }
-
-            .page-section { display: none !important; }
-            .page-section.active { display: block !important; }
-
-            /* Result printing — show DOB clearly */
-            #secResult.active {
-                position: absolute; left: 0; top: 0; width: 100%;
-                padding: 10mm; background: #fff;
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
+            /* Ensure internal card elements print with colors */
+            #secCreateAadhaar.active .pvc-card * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
             }
+
+            /* ========== RESULT PAGE PRINT ========== */
             #secResult.active .result-card {
-                box-shadow: none !important; border: 1px solid #ddd;
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
+                box-shadow: none !important;
+                border: 1px solid #ddd !important;
+                max-width: 100% !important;
+                background: #ffffff !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            #secResult.active .result-card .card-body {
+                background: #ffffff !important;
             }
             #secResult.active .result-card .row {
-                font-size: 12pt;
-                padding: 8px 0;
-                border-bottom: 1px solid #e0e0e0;
+                font-size: 12pt !important;
+                padding: 8px 0 !important;
+                border-bottom: 1px solid #e0e0e0 !important;
             }
             #secResult.active .result-card .row .label {
-                font-size: 11pt;
-                color: #555;
-                max-width: none;
+                font-size: 11pt !important;
+                color: #555 !important;
+                max-width: none !important;
             }
             #secResult.active .result-card .row .value {
-                font-size: 12pt;
-                color: #000;
-                font-weight: 700;
+                font-size: 12pt !important;
+                color: #000 !important;
+                font-weight: 700 !important;
             }
             #secResult.active .result-card .section-title {
-                font-size: 11pt;
-                margin-top: 12px;
+                font-size: 11pt !important;
+                margin-top: 12px !important;
             }
             #secResult.active .result-card .print-btn,
-            #secResult.active .btn-secondary { display: none !important; }
+            #secResult.active .btn-secondary,
+            #secResult.active .result-footer .print-btn {
+                display: none !important;
+            }
 
-            /* Aadhaar creator printing */
-            #secCreateAadhaar.active .aa-page-title,
-            #secCreateAadhaar.active .aa-page-sub,
-            #secCreateAadhaar.active .aa-form-card,
-/* ===== PRINT ===== */
-@media print {
-    html, body {
-        background: #ffffff !important;
-        background-image: none !important;
-        padding: 0 !important;
-        margin: 0 !important;
-        width: 100% !important;
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
-    }
-    body::before { display: none !important; }
-    #dashboardBlock {
-        background: #ffffff !important;
-        padding: 0 !important;
-        margin: 0 !important;
-        min-height: 0 !important;
-    }
-    .dash-content {
-        padding: 0 !important;
-        margin: 0 !important;
-        max-width: 100% !important;
-    }
-    .dash-header, .bottom-nav, .sidebar-overlay, .dash-sidebar,
-    .modal-overlay, .sidebar-item { display: none !important; }
-
-    .page-section { display: none !important; }
-    .page-section.active { display: block !important; }
-
-    /* ===== AADHAAR CREATOR — FRONT LEFT, BACK RIGHT ===== */
-    #secCreateAadhaar.active {
-        background: #ffffff !important;
-        padding: 0 !important;
-        margin: 0 !important;
-    }
-    #secCreateAadhaar.active .aa-page-title,
-    #secCreateAadhaar.active .aa-page-sub,
-    #secCreateAadhaar.active .aa-form-card,
-    #secCreateAadhaar.active .aa-white-mode-btn,
-    #secCreateAadhaar.active .aa-print-actions {
-        display: none !important;
-    }
-    #secCreateAadhaar.active .aa-preview-section {
-        display: block !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        gap: 0 !important;
-        background: #ffffff !important;
-    }
-    #secCreateAadhaar.active .aa-cards-wrapper {
-        display: flex !important;
-        flex-direction: row !important;
-        flex-wrap: nowrap !important;
-        align-items: flex-start !important;
-        justify-content: flex-start !important;
-        gap: 6mm !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        width: 100% !important;
-        transform: none !important;
-        page-break-inside: avoid !important;
-    }
-    #secCreateAadhaar.active .pvc-card {
-        box-shadow: none !important;
-        border: none !important;
-        transform: none !important;
-        flex: 0 0 auto !important;
-        page-break-inside: avoid !important;
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
-    }
-
-    /* ===== RESULT (Aadhaar detail page) ===== */
-    #secResult.active {
-        background: #ffffff !important;
-        position: absolute;
-        left: 0; top: 0;
-        width: 100%;
-        padding: 10mm;
-        -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
-    }
-    #secResult.active .result-card {
-        box-shadow: none !important;
-        border: 1px solid #ddd;
-        -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
-    }
-    #secResult.active .result-card .row {
-        font-size: 12pt;
-        padding: 8px 0;
-        border-bottom: 1px solid #e0e0e0;
-    }
-    #secResult.active .result-card .row .label {
-        font-size: 11pt;
-        color: #555;
-        max-width: none;
-    }
-    #secResult.active .result-card .row .value {
-        font-size: 12pt;
-        color: #000;
-        font-weight: 700;
-    }
-    #secResult.active .result-card .section-title {
-        font-size: 11pt;
-        margin-top: 12px;
-    }
-    #secResult.active .result-card .print-btn,
-    #secResult.active .btn-secondary { display: none !important; }
-
-    @page { size: A4 portrait; margin: 8mm; }
+            /* Page setup */
+            @page {
+                size: A4 portrait;
+                margin: 8mm;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- ============================================================
-    AUTH CONTAINER
-    ============================================================ -->
+    <!-- AUTH -->
     <div id="authBlock">
         <div class="auth-card" id="authCard">
             <div class="logo-container">
@@ -1436,7 +1098,6 @@
             <div class="brand-sub">UIDAI • Verified Identity</div>
             <div class="subtitle" id="authSubtitle">Login to your account</div>
 
-            <!-- LOGIN -->
             <div id="loginForm">
                 <div class="form-group">
                     <label>Beneficiary ID</label>
@@ -1461,7 +1122,6 @@
                 </div>
             </div>
 
-            <!-- SIGNUP -->
             <div id="signupForm" class="hidden">
                 <div class="form-group">
                     <label>Full Name</label>
@@ -1504,7 +1164,6 @@
                 </div>
             </div>
 
-            <!-- FORGOT -->
             <div id="forgotForm" class="hidden">
                 <div class="form-group">
                     <label>Email</label>
@@ -1535,11 +1194,8 @@
         </div>
     </div>
 
-    <!-- ============================================================
-    DASHBOARD
-    ============================================================ -->
+    <!-- DASHBOARD -->
     <div id="dashboardBlock">
-        <!-- HEADER - ONLY LOGO NOW -->
         <header class="dash-header">
             <div class="header-left" id="headerLeftClick">
                 <img src="https://blogger.googleusercontent.com/img/a/AVvXsEhdHBrmzwSoARIy-GQ0vUBft7WOKi2uIi6D3paX01w2DAb47vH5jxenn9Wzoh-INA5wW0Qcu_yV9AbjZDgWNmcdw9hUSO0mrmF9niQgGML0ESlDxWBdO8vqVkGAo6J_wfJ8KWU6jHWJH3dULZ5zCc6fhw9KTivIoK2UEBBqKPDdUuegEUs3YkeVET9ah6vk" alt="Aadhaar Find" class="header-logo" />
@@ -1556,7 +1212,6 @@
             </div>
         </header>
 
-        <!-- SIDEBAR -->
         <div class="sidebar-overlay" id="sidebarOverlay"></div>
         <nav class="dash-sidebar" id="dashSidebar">
             <div class="sidebar-header">
@@ -1576,10 +1231,7 @@
             <div class="sidebar-item" id="sidebarLogout"><i class="fas fa-sign-out-alt"></i> Logout</div>
         </nav>
 
-        <!-- MAIN CONTENT -->
         <main class="dash-content" id="dashContent">
-
-            <!-- ===== HOME ===== -->
             <section class="page-section active" id="secHome">
                 <div class="welcome-section">
                     <div class="greeting">Welcome Back, <span id="userNameDisplay">User</span>!</div>
@@ -1607,7 +1259,6 @@
                 </div>
             </section>
 
-            <!-- ===== SEARCH ===== -->
             <section class="page-section" id="secSearch">
                 <h2 style="font-size:1.15rem;font-weight:700;color:var(--navy);margin-bottom:4px;">Search</h2>
                 <p class="text-muted" style="margin-bottom:14px;font-size:0.82rem;">Find your UID or beneficiary details</p>
@@ -1657,7 +1308,6 @@
                 </div>
             </section>
 
-            <!-- ===== HISTORY ===== -->
             <section class="page-section" id="secHistory">
                 <h2 style="font-size:1.15rem;font-weight:700;color:var(--navy);margin-bottom:4px;">Search History</h2>
                 <p class="text-muted" style="margin-bottom:14px;font-size:0.82rem;">View all your past searches</p>
@@ -1680,7 +1330,6 @@
                 </div>
             </section>
 
-            <!-- ===== ADD WALLET ===== -->
             <section class="page-section" id="secAddWallet">
                 <h2 style="font-size:1.15rem;font-weight:700;color:var(--navy);margin-bottom:4px;">Add Wallet</h2>
                 <p class="text-muted" style="margin-bottom:14px;font-size:0.82rem;">Add money to your wallet via UPI</p>
@@ -1717,7 +1366,6 @@
                 </div>
             </section>
 
-            <!-- ===== PROFILE ===== -->
             <section class="page-section" id="secProfile">
                 <h2 style="font-size:1.15rem;font-weight:700;color:var(--navy);margin-bottom:4px;">My Profile</h2>
                 <p class="text-muted" style="margin-bottom:14px;font-size:0.82rem;">Your personal information and account details</p>
@@ -1751,7 +1399,6 @@
                 </div>
             </section>
 
-            <!-- ===== ADMIN ===== -->
             <section class="page-section" id="secAdminPanel">
                 <h2 style="font-size:1.15rem;font-weight:700;color:var(--navy);margin-bottom:4px;">Admin Panel</h2>
                 <p class="text-muted" style="margin-bottom:14px;font-size:0.82rem;">Add new UID records, manage services & pending requests</p>
@@ -1903,7 +1550,6 @@
                 </div>
             </section>
 
-            <!-- ===== CREATE AADHAAR (EMBEDDED) ===== -->
             <section class="page-section" id="secCreateAadhaar">
                 <h2 class="aa-page-title">Create Aadhaar Card</h2>
                 <p class="aa-page-sub">Fill in the details below and generate your Aadhaar card</p>
@@ -1976,7 +1622,6 @@
 
                 <div class="aa-preview-section" id="previewSection">
                     <div class="aa-cards-wrapper">
-                        <!-- FRONT -->
                         <div class="pvc-card front-card">
                             <div class="ghost-photo-box">
                                 <img id="ghostPhoto" src="" alt="Ghost Image">
@@ -2011,7 +1656,6 @@
                                 <img class="front-bottom-logo" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiq_5ppMstLVgOX9RzAaIGD4tT6uzbRBqHIRr-E2BJfptBuTkyyxWnP8oRgcy8YE7e2u3fQcUDPrgBlwzu3YwH3cK9jgqtWw7MevW3JEZbnx7hrF_6JEGMi8OGNHGDikpJh2om5cJtlD-XBK6giFe_238Mp3qHhBc2wvIzsnlWe_APboWHVUrVBWhhQqW8/s2408/1000317562.png" alt="Mera Aadhaar Mera Pehchan">
                             </div>
                         </div>
-                        <!-- BACK -->
                         <div class="pvc-card back-card">
                             <div class="back-top-logos">
                                 <img class="moe-top" src="https://myaadhaar.uidai.gov.in/static/media/uidai_english_logo.37b7e790fc0b23da21bc9df098a66467.svg" alt="MoE">
@@ -2062,7 +1706,6 @@
                 </div>
             </section>
 
-            <!-- ===== RESULT ===== -->
             <section class="page-section" id="secResult">
                 <div class="result-card">
                     <div class="tricolor-bar"></div>
@@ -2105,10 +1748,8 @@
                     <button class="btn-secondary btn-sm" id="backFromResult" style="width:auto;"><i class="fas fa-arrow-left"></i> Back</button>
                 </div>
             </section>
-
         </main>
 
-        <!-- BOTTOM NAV -->
         <nav class="bottom-nav" id="bottomNav">
             <div class="nav-item active" data-page="home"><i class="fas fa-home"></i><span class="nav-label">Home</span></div>
             <div class="nav-item" data-page="search"><i class="fas fa-search"></i><span class="nav-label">Search</span></div>
@@ -2118,9 +1759,7 @@
         </nav>
     </div>
 
-    <!-- ============================================================
-    MODALS
-    ============================================================ -->
+    <!-- MODALS -->
     <div class="modal-overlay" id="dontWorryModal">
         <div class="modal-box">
             <span class="modal-close" id="dontWorryClose">&times;</span>
@@ -2159,9 +1798,7 @@
         </div>
     </div>
 
-    <!-- ============================================================
-    MAIN DASHBOARD SCRIPT
-    ============================================================ -->
+    <!-- MAIN DASHBOARD SCRIPT -->
     <script>
         (function() {
             'use strict';
@@ -2174,8 +1811,6 @@
             let forgotTimerInterval = null;
             let signupOtpVerified = false;
             let forgotOtpVerified = false;
-
-            // ===== SERVICE CARDS =====
             let serviceCards = [];
 
             function loadServiceCards() {
@@ -2300,7 +1935,6 @@
                 setTimeout(() => { errEl.textContent = ''; errEl.className = 'error-msg'; }, 3000);
             });
 
-            // ===== SESSION =====
             function loadSession() {
                 const savedUser = localStorage.getItem('aadhaarUser');
                 if (savedUser) {
@@ -2321,7 +1955,6 @@
 
             const $ = id => document.getElementById(id);
 
-            // AUTH DOM
             const authBlock = $('authBlock');
             const dashboardBlock = $('dashboardBlock');
             const loginForm = $('loginForm');
@@ -2352,7 +1985,6 @@
             const forgotOtpStatus = $('forgotOtpStatus');
             const forgotTimer = $('forgotTimer');
 
-            // DASHBOARD DOM
             const walletBalance = $('walletBalance');
             const walletClick = $('walletClick');
             const headerAvatarInitial = $('headerAvatarInitial');
@@ -2476,11 +2108,8 @@
             function showAuthError(el, msg) { el.textContent = msg; el.className = 'error-msg'; }
             function showAuthSuccess(el, msg) { el.textContent = msg; el.className = 'success-msg'; }
 
-            // ===== ROBUST DOB FORMATTER =====
             function formatDateForDisplay(dateStr) {
                 if (dateStr === null || dateStr === undefined || dateStr === '' || dateStr === '—') return '—';
-
-                // If already a formatted date string like dd/mm/yyyy or dd-mm-yyyy, return as is
                 if (typeof dateStr === 'string') {
                     const trimmed = dateStr.trim();
                     const simpleMatch = trimmed.match(/^(\d{1,2})[\/\-\.](\d{1,2})[\/\-\.](\d{2,4})$/);
@@ -2489,14 +2118,12 @@
                         if (y.length === 2) y = '20' + y;
                         return String(d).padStart(2, '0') + '/' + String(m).padStart(2, '0') + '/' + y;
                     }
-                    // yyyy-mm-dd
                     const isoMatch = trimmed.match(/^(\d{4})[\/\-\.](\d{1,2})[\/\-\.](\d{1,2})/);
                     if (isoMatch) {
                         let [, y, m, d] = isoMatch;
                         return String(d).padStart(2, '0') + '/' + String(m).padStart(2, '0') + '/' + y;
                     }
                 }
-
                 try {
                     const d = new Date(dateStr);
                     if (isNaN(d.getTime())) return String(dateStr);
@@ -2551,9 +2178,7 @@
 
             function loadNotifications() {
                 const saved = localStorage.getItem('aadhaarNotifications');
-                if (saved) {
-                    try { return JSON.parse(saved); } catch (e) { return []; }
-                }
+                if (saved) { try { return JSON.parse(saved); } catch (e) { return []; } }
                 return [];
             }
             function saveNotifications(notifications) {
@@ -3034,7 +2659,6 @@
                 resultUid.textContent = data.uid || '—';
                 rFullName.textContent = data.fullName || '—';
                 rFatherName.textContent = data.fatherName || '—';
-                // DOB — properly formatted for screen and print
                 rDob.textContent = formatDateForDisplay(data.dob);
                 rAgeBand.textContent = data.ageBand || '—';
                 rGender.textContent = data.gender || '—';
@@ -3297,9 +2921,7 @@
         })();
     </script>
 
-    <!-- ============================================================
-    AADHAAR CREATOR SCRIPT (Global — for inline handlers)
-    ============================================================ -->
+    <!-- AADHAAR CREATOR SCRIPT -->
     <script>
         var hasPhoto = false;
         var hasQR = false;

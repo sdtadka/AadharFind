@@ -9,6 +9,7 @@
     <link rel="apple-touch-icon" href="icon-192.png" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <style>
         /* ===== CSS VARIABLES ===== */
         :root {
@@ -63,62 +64,12 @@
             outline: none;
             background: none;
         }
-        input,
-        select {
+        input, select, textarea {
             font-family: var(--font);
             outline: none;
             border: none;
         }
-        .hidden {
-            display: none !important;
-        }
-        .flex-center {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .flex-between {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .gap-8 {
-            gap: 8px;
-        }
-        .gap-12 {
-            gap: 12px;
-        }
-        .gap-16 {
-            gap: 16px;
-        }
-        .text-center {
-            text-align: center;
-        }
-        .text-muted {
-            color: var(--text-muted);
-            font-size: 0.85rem;
-        }
-        .w-full {
-            width: 100%;
-        }
-        .mt-8 {
-            margin-top: 8px;
-        }
-        .mt-12 {
-            margin-top: 12px;
-        }
-        .mt-16 {
-            margin-top: 16px;
-        }
-        .mt-20 {
-            margin-top: 20px;
-        }
-        .mb-12 {
-            margin-bottom: 12px;
-        }
-        .mb-16 {
-            margin-bottom: 16px;
-        }
+        .hidden { display: none !important; }
 
         /* ===== BUTTONS ===== */
         .btn-primary {
@@ -142,10 +93,7 @@
             box-shadow: 0 8px 28px rgba(255, 153, 51, 0.4);
         }
         .btn-primary:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none !important;
-            box-shadow: none !important;
+            opacity: 0.6; cursor: not-allowed; transform: none !important; box-shadow: none !important;
         }
 
         .btn-tricolor {
@@ -172,42 +120,17 @@
             inset: 0;
             border-radius: 50px;
             background: linear-gradient(90deg,
-                    #FF9933 0%,
-                    #FFB347 20%,
-                    #FFFFFF 40%,
-                    #A8D5A2 60%,
-                    #138808 80%,
-                    #FF9933 100%);
+                #FF9933 0%, #FFB347 20%, #FFFFFF 40%, #A8D5A2 60%, #138808 80%, #FF9933 100%);
             background-size: 300% 100%;
             animation: tricolorShimmer 3s ease-in-out infinite;
             opacity: 0;
             transition: opacity 0.5s ease;
         }
-        .btn-tricolor:hover::before {
-            opacity: 1;
-        }
-        .btn-tricolor:hover {
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 8px 32px rgba(255, 153, 51, 0.5);
-        }
-        .btn-tricolor:active {
-            transform: scale(0.96);
-        }
-        .btn-tricolor .btn-content {
-            position: relative;
-            z-index: 2;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        @keyframes tricolorShimmer {
-            0% {
-                background-position: 0% 0%;
-            }
-            100% {
-                background-position: 300% 0%;
-            }
-        }
+        .btn-tricolor:hover::before { opacity: 1; }
+        .btn-tricolor:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 8px 32px rgba(255, 153, 51, 0.5); }
+        .btn-tricolor:active { transform: scale(0.96); }
+        .btn-tricolor .btn-content { position: relative; z-index: 2; display: flex; align-items: center; gap: 10px; }
+        @keyframes tricolorShimmer { 0% { background-position: 0% 0%; } 100% { background-position: 300% 0%; } }
 
         .btn-secondary {
             background: linear-gradient(135deg, var(--navy), #1a3170);
@@ -223,10 +146,7 @@
             border: none;
             box-shadow: 0 4px 12px rgba(30, 58, 138, 0.3);
         }
-        .btn-secondary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(30, 58, 138, 0.4);
-        }
+        .btn-secondary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(30, 58, 138, 0.4); }
         .btn-success {
             background: linear-gradient(135deg, var(--green), #0d6e0a);
             color: #fff;
@@ -238,127 +158,8 @@
             border: none;
             box-shadow: 0 4px 12px rgba(19, 136, 8, 0.3);
         }
-        .btn-success:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(19, 136, 8, 0.4);
-        }
-        .btn-sm {
-            padding: 6px 16px;
-            font-size: 0.8rem;
-            min-width: auto;
-        }
-
-        /* ===== FLOATING LABEL INPUT ===== */
-        .floating-group {
-            position: relative;
-            margin-bottom: 18px;
-            width: 100%;
-        }
-        .floating-group .floating-input {
-            width: 100%;
-            padding: 16px 20px;
-            font-size: 0.95rem;
-            border: 2px solid var(--border);
-            border-radius: var(--radius-input);
-            background: #f9fafb;
-            transition: var(--transition);
-            color: var(--text-dark);
-            font-weight: 500;
-            height: 58px;
-            outline: none;
-        }
-        .floating-group .floating-input:focus {
-            border-color: var(--saffron);
-            background: #fff;
-            box-shadow: 0 0 0 4px rgba(255, 153, 51, 0.08);
-        }
-        .floating-group .floating-input:focus+.floating-label,
-        .floating-group .floating-input:not(:placeholder-shown)+.floating-label {
-            top: 6px;
-            font-size: 0.7rem;
-            color: var(--saffron-dark);
-            font-weight: 600;
-            transform: translateY(0);
-            background: transparent;
-            padding: 0 6px;
-        }
-        .floating-group .floating-input:focus+.floating-label {
-            color: var(--saffron-dark);
-        }
-        .floating-group .floating-input:hover {
-            border-color: var(--saffron-light);
-            background: #fff;
-        }
-        .floating-group .floating-input::placeholder {
-            color: transparent;
-        }
-        .floating-group .floating-label {
-            position: absolute;
-            left: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 0.95rem;
-            color: var(--text-muted);
-            pointer-events: none;
-            transition: var(--transition);
-            background: transparent;
-            font-weight: 500;
-            padding: 0 4px;
-        }
-        .floating-group .floating-input:focus+.floating-label,
-        .floating-group .floating-input:not(:placeholder-shown)+.floating-label {
-            top: 6px;
-            font-size: 0.65rem;
-            color: var(--saffron-dark);
-            font-weight: 700;
-            transform: translateY(0);
-            background: #fff;
-            padding: 0 8px;
-            border-radius: 8px;
-            letter-spacing: 0.3px;
-        }
-        .floating-group .floating-input:focus {
-            border-color: var(--saffron);
-            background: #fff;
-            box-shadow: 0 0 0 4px rgba(255, 153, 51, 0.08);
-        }
-        .floating-group .floating-input:not(:placeholder-shown) {
-            background: #fff;
-        }
-        .floating-group .floating-input:not(:placeholder-shown) {
-            border-color: var(--saffron-light);
-        }
-        .floating-group .floating-input:focus+.floating-label {
-            color: var(--saffron-dark);
-        }
-        .floating-group select.floating-input {
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23475569' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 16px center;
-            padding-right: 40px;
-            cursor: pointer;
-        }
-        .floating-group select.floating-input:focus {
-            border-color: var(--saffron);
-            background-color: #fff;
-            box-shadow: 0 0 0 4px rgba(255, 153, 51, 0.08);
-        }
-        .floating-group select.floating-input:focus+.floating-label,
-        .floating-group select.floating-input:not(:placeholder-shown)+.floating-label {
-            top: 6px;
-            font-size: 0.65rem;
-            color: var(--saffron-dark);
-            font-weight: 700;
-            transform: translateY(0);
-            background: #fff;
-            padding: 0 8px;
-            border-radius: 8px;
-        }
-        .floating-group select.floating-input option {
-            color: var(--text-dark);
-            background: #fff;
-        }
+        .btn-success:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(19, 136, 8, 0.4); }
+        .btn-sm { padding: 6px 16px; font-size: 0.8rem; min-width: auto; }
 
         /* ===== AUTH SCREEN ===== */
         #authBlock {
@@ -375,9 +176,7 @@
         #authBlock::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
+            top: 0; left: 0; right: 0;
             height: 6px;
             background: linear-gradient(90deg, #FF9933 0%, #FFB347 25%, #FFFFFF 50%, #A8D5A2 75%, #138808 100%);
             z-index: 2;
@@ -393,1392 +192,935 @@
             z-index: 2;
             border: 1px solid rgba(255, 153, 51, 0.10);
         }
-        .auth-card .logo-container {
-            text-align: center;
-            margin-bottom: 12px;
-        }
-        .auth-card .logo-container img {
-            max-height: 50px;
-            width: auto;
-            display: inline-block;
-            object-fit: contain;
-        }
+        .auth-card .logo-container { text-align: center; margin-bottom: 12px; }
+        .auth-card .logo-container img { max-height: 50px; width: auto; display: inline-block; object-fit: contain; }
         .auth-card .brand {
-            font-size: 1.4rem;
-            font-weight: 800;
-            text-align: center;
-            color: var(--navy);
-            letter-spacing: -0.5px;
+            font-size: 1.4rem; font-weight: 800; text-align: center; color: var(--navy); letter-spacing: -0.5px;
         }
-        .auth-card .brand span {
-            color: var(--saffron);
-        }
+        .auth-card .brand span { color: var(--saffron); }
         .auth-card .brand-sub {
-            text-align: center;
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-top: -2px;
-            margin-bottom: 10px;
+            text-align: center; font-size: 0.7rem; color: var(--text-muted);
+            letter-spacing: 2px; text-transform: uppercase; margin-top: -2px; margin-bottom: 10px;
         }
-        .auth-card .subtitle {
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            margin-bottom: 20px;
-        }
-        .auth-card .form-group {
-            margin-bottom: 14px;
-        }
+        .auth-card .subtitle { text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px; }
+        .auth-card .form-group { margin-bottom: 14px; }
         .auth-card .form-group label {
-            display: block;
-            font-weight: 600;
-            font-size: 0.82rem;
-            color: var(--text-dark);
-            margin-bottom: 4px;
+            display: block; font-weight: 600; font-size: 0.82rem; color: var(--text-dark); margin-bottom: 4px;
         }
         .auth-card .form-group .input-wrap {
-            position: relative;
-            display: flex;
-            align-items: center;
-            background: #f9fafb;
-            border: 2px solid var(--border);
-            border-radius: var(--radius-input);
-            transition: var(--transition);
-            height: 58px;
+            position: relative; display: flex; align-items: center;
+            background: #f9fafb; border: 2px solid var(--border);
+            border-radius: var(--radius-input); transition: var(--transition); height: 58px;
         }
         .auth-card .form-group .input-wrap:focus-within {
-            border-color: var(--saffron);
-            background: #fff;
-            box-shadow: 0 0 0 4px rgba(255, 153, 51, 0.08);
+            border-color: var(--saffron); background: #fff; box-shadow: 0 0 0 4px rgba(255, 153, 51, 0.08);
         }
         .auth-card .form-group .input-wrap .input-icon {
-            padding: 0 0 0 18px;
-            color: var(--text-muted);
-            font-size: 0.95rem;
+            padding: 0 0 0 18px; color: var(--text-muted); font-size: 0.95rem;
         }
         .auth-card .form-group .input-wrap input {
-            width: 100%;
-            padding: 16px 18px 16px 12px;
-            font-size: 0.95rem;
-            background: transparent;
-            border: none;
-            outline: none;
-            height: 100%;
+            width: 100%; padding: 16px 18px 16px 12px; font-size: 0.95rem;
+            background: transparent; border: none; outline: none; height: 100%;
         }
         .auth-card .form-group .input-wrap .password-toggle {
-            padding: 0 18px 0 6px;
-            color: var(--text-muted);
-            cursor: pointer;
-            font-size: 0.95rem;
+            padding: 0 18px 0 6px; color: var(--text-muted); cursor: pointer; font-size: 0.95rem;
         }
-        .auth-card .form-group .input-wrap .password-toggle:hover {
-            color: var(--text-dark);
-        }
-        .auth-card .error-msg {
-            color: #dc2626;
-            font-size: 0.82rem;
-            margin-top: 4px;
-            min-height: 18px;
-        }
-        .auth-card .success-msg {
-            color: var(--green);
-            font-size: 0.82rem;
-            margin-top: 4px;
-            min-height: 18px;
-        }
+        .auth-card .form-group .input-wrap .password-toggle:hover { color: var(--text-dark); }
+        .auth-card .error-msg { color: #dc2626; font-size: 0.82rem; margin-top: 4px; min-height: 18px; }
+        .auth-card .success-msg { color: var(--green); font-size: 0.82rem; margin-top: 4px; min-height: 18px; }
         .auth-card .auth-toggle {
-            text-align: center;
-            margin-top: 14px;
-            font-size: 0.9rem;
-            color: var(--text-muted);
+            text-align: center; margin-top: 14px; font-size: 0.9rem; color: var(--text-muted);
         }
-        .auth-card .auth-toggle a {
-            color: var(--saffron);
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        .auth-card .auth-toggle a:hover {
-            text-decoration: underline;
-        }
-        .timer-text {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            font-weight: 600;
-            min-width: 50px;
-            text-align: center;
-        }
+        .auth-card .auth-toggle a { color: var(--saffron); font-weight: 600; cursor: pointer; transition: 0.2s; }
+        .auth-card .auth-toggle a:hover { text-decoration: underline; }
+        .timer-text { font-size: 0.85rem; color: var(--text-muted); font-weight: 600; min-width: 50px; text-align: center; }
 
         /* ===== DASHBOARD ===== */
         #dashboardBlock {
-            display: none;
-            min-height: 100vh;
-            background: var(--bg-cream);
-            position: relative;
-            z-index: 1;
-            padding-bottom: 90px;
+            display: none; min-height: 100vh; background: var(--bg-cream);
+            position: relative; z-index: 1; padding-bottom: 90px;
         }
-        #dashboardBlock.active {
-            display: block;
-        }
+        #dashboardBlock.active { display: block; }
 
-        /* ===== HEADER ===== */
+        /* HEADER */
         .dash-header {
             background: linear-gradient(135deg, #FF9933 0%, #FF8C1A 25%, #E07B1A 50%, #CC6E14 75%, #B85E0E 100%);
-            padding: 12px 20px 10px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: nowrap;
-            gap: 10px;
-            position: sticky;
-            top: 0;
-            z-index: 50;
+            padding: 12px 20px 10px; display: flex; align-items: center; justify-content: space-between;
+            flex-wrap: nowrap; gap: 10px; position: sticky; top: 0; z-index: 50;
             box-shadow: 0 4px 24px rgba(255, 153, 51, 0.25);
-            border-bottom: 2px solid rgba(255, 255, 255, 0.12);
-            min-height: 62px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.12); min-height: 62px;
         }
         .dash-header .header-left {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            flex-shrink: 0;
-            cursor: pointer;
+            display: flex; align-items: center; gap: 8px; flex-shrink: 0; cursor: pointer;
         }
         .dash-header .header-left .header-logo {
-            height: 32px;
-            width: auto;
-            display: inline-block;
-            border-radius: 4px;
+            height: 32px; width: auto; display: inline-block; border-radius: 4px;
             filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
         }
-        .dash-header .header-left .brand-text {
-            display: flex;
-            flex-direction: column;
-            line-height: 1.2;
-        }
+        .dash-header .header-left .brand-text { display: flex; flex-direction: column; line-height: 1.2; }
         .dash-header .header-left .brand-text .brand-name {
-            font-size: 1rem;
-            font-weight: 800;
-            color: #fff;
-            letter-spacing: -0.3px;
+            font-size: 1rem; font-weight: 800; color: #fff; letter-spacing: -0.3px;
             text-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
         }
         .dash-header .header-left .brand-text .brand-sub {
-            font-size: 0.55rem;
-            font-weight: 500;
-            color: rgba(255, 255, 255, 0.8);
-            letter-spacing: 1px;
-            text-transform: uppercase;
+            font-size: 0.55rem; font-weight: 500; color: rgba(255, 255, 255, 0.8);
+            letter-spacing: 1px; text-transform: uppercase;
         }
-        .dash-header .header-right {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex-shrink: 0;
-        }
+        .dash-header .header-right { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
         .dash-header .header-right .notification-btn {
-            color: #fff;
-            font-size: 1.2rem;
-            padding: 4px 6px;
-            border-radius: 50%;
-            transition: var(--transition);
-            position: relative;
+            color: #fff; font-size: 1.2rem; padding: 4px 6px; border-radius: 50%;
+            transition: var(--transition); position: relative;
         }
-        .dash-header .header-right .notification-btn:hover {
-            background: rgba(255, 255, 255, 0.15);
-        }
+        .dash-header .header-right .notification-btn:hover { background: rgba(255, 255, 255, 0.15); }
         .dash-header .header-right .notification-btn .badge-dot {
-            position: absolute;
-            top: 2px;
-            right: 2px;
-            width: 8px;
-            height: 8px;
-            background: #dc2626;
-            border-radius: 50%;
-            border: 2px solid #FF8C1A;
+            position: absolute; top: 2px; right: 2px; width: 8px; height: 8px;
+            background: #dc2626; border-radius: 50%; border: 2px solid #FF8C1A;
         }
         .dash-header .header-right .header-avatar {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.2);
-            color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: var(--transition);
-            border: 2px solid rgba(255, 255, 255, 0.4);
-            overflow: hidden;
-            flex-shrink: 0;
+            width: 36px; height: 36px; border-radius: 50%; background: rgba(255, 255, 255, 0.2);
+            color: #fff; display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 0.9rem; cursor: pointer; transition: var(--transition);
+            border: 2px solid rgba(255, 255, 255, 0.4); overflow: hidden; flex-shrink: 0;
             backdrop-filter: blur(4px);
         }
-        .dash-header .header-right .header-avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .dash-header .header-right .header-avatar:hover {
-            border-color: #fff;
-            transform: scale(1.05);
-        }
+        .dash-header .header-right .header-avatar img { width: 100%; height: 100%; object-fit: cover; }
+        .dash-header .header-right .header-avatar:hover { border-color: #fff; transform: scale(1.05); }
 
-        /* ===== SIDEBAR ===== */
+        /* SIDEBAR */
         .dash-sidebar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 280px;
-            height: 100vh;
-            background: #fff;
-            z-index: 200;
-            transform: translateX(-100%);
+            position: fixed; top: 0; left: 0; width: 280px; height: 100vh; background: #fff;
+            z-index: 200; transform: translateX(-100%);
             transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            box-shadow: 4px 0 40px rgba(0, 0, 0, 0.1);
-            padding: 20px 0;
-            overflow-y: auto;
+            box-shadow: 4px 0 40px rgba(0, 0, 0, 0.1); padding: 20px 0; overflow-y: auto;
         }
-        .dash-sidebar.open {
-            transform: translateX(0);
-        }
+        .dash-sidebar.open { transform: translateX(0); }
         .dash-sidebar .sidebar-header {
-            padding: 0 20px 16px;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+            padding: 0 20px 16px; border-bottom: 1px solid var(--border);
+            display: flex; align-items: center; justify-content: space-between;
         }
         .dash-sidebar .sidebar-header .sidebar-brand {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: 700;
-            font-size: 1rem;
-            color: var(--navy);
+            display: flex; align-items: center; gap: 10px; font-weight: 700;
+            font-size: 1rem; color: var(--navy);
         }
-        .dash-sidebar .sidebar-header .sidebar-brand img {
-            height: 30px;
-            width: auto;
-        }
-        .dash-sidebar .sidebar-header .sidebar-brand span {
-            color: var(--saffron);
-        }
+        .dash-sidebar .sidebar-header .sidebar-brand img { height: 30px; width: auto; }
+        .dash-sidebar .sidebar-header .sidebar-brand span { color: var(--saffron); }
         .dash-sidebar .sidebar-header .sidebar-close {
-            font-size: 1.4rem;
-            color: var(--text-muted);
-            cursor: pointer;
-            padding: 4px 8px;
-            border-radius: 8px;
-            transition: 0.25s;
+            font-size: 1.4rem; color: var(--text-muted); cursor: pointer;
+            padding: 4px 8px; border-radius: 8px; transition: 0.25s;
         }
-        .dash-sidebar .sidebar-header .sidebar-close:hover {
-            color: #dc2626;
-            background: rgba(220, 38, 38, 0.08);
-        }
+        .dash-sidebar .sidebar-header .sidebar-close:hover { color: #dc2626; background: rgba(220, 38, 38, 0.08); }
         .dash-sidebar .sidebar-item {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            padding: 12px 20px;
-            color: var(--text-muted);
-            font-weight: 500;
-            font-size: 0.9rem;
-            transition: 0.2s;
-            cursor: pointer;
-            border-left: 3px solid transparent;
+            display: flex; align-items: center; gap: 14px; padding: 12px 20px;
+            color: var(--text-muted); font-weight: 500; font-size: 0.9rem;
+            transition: 0.2s; cursor: pointer; border-left: 3px solid transparent;
         }
-        .dash-sidebar .sidebar-item:hover {
-            background: #f1f5f9;
-            color: var(--text-dark);
-        }
+        .dash-sidebar .sidebar-item:hover { background: #f1f5f9; color: var(--text-dark); }
         .dash-sidebar .sidebar-item.active {
-            color: var(--saffron);
-            background: #fef3ed;
-            border-left-color: var(--saffron);
-            font-weight: 600;
+            color: var(--saffron); background: #fef3ed; border-left-color: var(--saffron); font-weight: 600;
         }
-        .dash-sidebar .sidebar-item i {
-            width: 22px;
-            text-align: center;
-            font-size: 1rem;
-        }
-        .dash-sidebar .sidebar-divider {
-            height: 1px;
-            background: var(--border);
-            margin: 8px 16px;
-        }
+        .dash-sidebar .sidebar-item i { width: 22px; text-align: center; font-size: 1rem; }
+        .dash-sidebar .sidebar-divider { height: 1px; background: var(--border); margin: 8px 16px; }
         .sidebar-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.35);
-            z-index: 150;
-            display: none;
-            opacity: 0;
-            transition: opacity 0.3s ease;
+            position: fixed; inset: 0; background: rgba(0, 0, 0, 0.35); z-index: 150;
+            display: none; opacity: 0; transition: opacity 0.3s ease;
         }
-        .sidebar-overlay.show {
-            display: block;
-            opacity: 1;
-        }
+        .sidebar-overlay.show { display: block; opacity: 1; }
 
-        /* ===== MAIN CONTENT ===== */
+        /* MAIN CONTENT */
         .dash-content {
-            padding: 16px 20px 0;
-            max-width: 480px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
+            padding: 16px 20px 0; max-width: 480px; margin: 0 auto; position: relative; z-index: 1;
         }
 
-        /* ===== PAGE SECTIONS ===== */
-        .page-section {
-            display: none;
-            animation: fadeSlide 0.35s ease;
-        }
-        .page-section.active {
-            display: block;
-        }
+        /* PAGE SECTIONS */
+        .page-section { display: none; animation: fadeSlide 0.35s ease; }
+        .page-section.active { display: block; }
         @keyframes fadeSlide {
-            0% {
-                opacity: 0;
-                transform: translateY(16px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            0% { opacity: 0; transform: translateY(16px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
 
-        /* ===== WELCOME ===== */
-        .welcome-section {
-            margin-bottom: 20px;
-        }
+        /* WELCOME */
+        .welcome-section { margin-bottom: 20px; }
         .welcome-section .greeting {
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: var(--text-dark);
-            letter-spacing: -0.5px;
+            font-size: 1.6rem; font-weight: 700; color: var(--text-dark); letter-spacing: -0.5px;
         }
-        .welcome-section .greeting span {
-            color: var(--saffron);
-        }
-        .welcome-section .sub-greeting {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            margin-top: 2px;
-        }
+        .welcome-section .greeting span { color: var(--saffron); }
+        .welcome-section .sub-greeting { font-size: 0.9rem; color: var(--text-muted); margin-top: 2px; }
 
-        /* ===== BALANCE CARD ===== */
+        /* BALANCE CARD */
         .balance-card {
             background: linear-gradient(135deg, #ffffff, #faf8f6);
-            border-radius: var(--radius-lg);
-            padding: 18px 22px;
-            box-shadow: var(--shadow);
-            margin-bottom: 24px;
-            border: 1px solid rgba(255, 153, 51, 0.08);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+            border-radius: var(--radius-lg); padding: 18px 22px; box-shadow: var(--shadow);
+            margin-bottom: 24px; border: 1px solid rgba(255, 153, 51, 0.08);
+            display: flex; align-items: center; justify-content: space-between;
         }
         .balance-card .balance-left .balance-label {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            font-weight: 600;
+            font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;
+            letter-spacing: 0.5px; font-weight: 600;
         }
         .balance-card .balance-left .balance-amount {
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: var(--text-dark);
-            letter-spacing: -0.5px;
+            font-size: 1.6rem; font-weight: 700; color: var(--text-dark); letter-spacing: -0.5px;
         }
-        .balance-card .balance-left .balance-amount span {
-            color: var(--saffron);
-        }
+        .balance-card .balance-left .balance-amount span { color: var(--saffron); }
         .balance-card .balance-action .btn-add {
             background: linear-gradient(135deg, var(--saffron), var(--saffron-dark));
-            color: #fff;
-            padding: 8px 20px;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 0.8rem;
-            transition: var(--transition);
+            color: #fff; padding: 8px 20px; border-radius: 50px; font-weight: 700;
+            font-size: 0.8rem; transition: var(--transition);
             box-shadow: 0 2px 12px rgba(255, 153, 51, 0.25);
         }
         .balance-card .balance-action .btn-add:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 153, 51, 0.35);
+            transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255, 153, 51, 0.35);
         }
 
-        /* ===== SERVICE GRID ===== */
+        /* SERVICE GRID */
         .section-title {
-            font-size: 0.8rem;
-            font-weight: 700;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 14px;
+            font-size: 0.8rem; font-weight: 700; color: var(--text-muted);
+            text-transform: uppercase; letter-spacing: 1px; margin-bottom: 14px;
         }
-        .service-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 14px;
-            margin-bottom: 28px;
-        }
+        .service-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 28px; }
         .service-card {
-            background: #fff;
-            border-radius: var(--radius);
-            padding: 20px 16px;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            border: 1px solid rgba(255, 153, 51, 0.04);
-            text-align: center;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
+            background: #fff; border-radius: var(--radius); padding: 20px 16px;
+            box-shadow: var(--shadow); transition: var(--transition);
+            border: 1px solid rgba(255, 153, 51, 0.04); text-align: center;
+            cursor: pointer; position: relative; overflow: hidden;
         }
         .service-card::after {
-            content: '';
-            position: absolute;
-            inset: 0;
+            content: ''; position: absolute; inset: 0;
             background: linear-gradient(135deg, rgba(255, 153, 51, 0.03), transparent);
-            pointer-events: none;
-            border-radius: var(--radius);
+            pointer-events: none; border-radius: var(--radius);
         }
         .service-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-hover);
+            transform: translateY(-4px); box-shadow: var(--shadow-hover);
             border-color: rgba(255, 153, 51, 0.15);
         }
         .service-card .service-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 10px;
-            font-size: 1.3rem;
-            transition: var(--transition);
+            width: 48px; height: 48px; border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 10px; font-size: 1.3rem; transition: var(--transition);
         }
-        .service-card .service-icon.orange {
-            background: rgba(255, 153, 51, 0.12);
-            color: var(--saffron-dark);
-        }
-        .service-card .service-icon.blue {
-            background: rgba(26, 140, 255, 0.10);
-            color: var(--blue);
-        }
-        .service-card .service-icon.green {
-            background: rgba(19, 136, 8, 0.10);
-            color: var(--green);
-        }
-        .service-card .service-icon.navy {
-            background: rgba(30, 58, 138, 0.10);
-            color: var(--navy);
-        }
-        .service-card .service-icon.purple {
-            background: rgba(120, 80, 200, 0.10);
-            color: #7850c8;
-        }
-        .service-card .service-icon.teal {
-            background: rgba(0, 150, 150, 0.10);
-            color: #009696;
-        }
-        .service-card .service-icon.red {
-            background: rgba(220, 38, 38, 0.10);
-            color: #dc2626;
-        }
-        .service-card .service-icon.indigo {
-            background: rgba(75, 0, 130, 0.10);
-            color: #4b0082;
-        }
+        .service-card .service-icon.orange { background: rgba(255, 153, 51, 0.12); color: var(--saffron-dark); }
+        .service-card .service-icon.blue { background: rgba(26, 140, 255, 0.10); color: var(--blue); }
+        .service-card .service-icon.green { background: rgba(19, 136, 8, 0.10); color: var(--green); }
+        .service-card .service-icon.navy { background: rgba(30, 58, 138, 0.10); color: var(--navy); }
+        .service-card .service-icon.purple { background: rgba(120, 80, 200, 0.10); color: #7850c8; }
+        .service-card .service-icon.teal { background: rgba(0, 150, 150, 0.10); color: #009696; }
+        .service-card .service-icon.red { background: rgba(220, 38, 38, 0.10); color: #dc2626; }
+        .service-card .service-icon.indigo { background: rgba(75, 0, 130, 0.10); color: #4b0082; }
         .service-card .service-name {
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--text-dark);
-            margin-bottom: 2px;
+            font-size: 0.85rem; font-weight: 600; color: var(--text-dark); margin-bottom: 2px;
         }
-        .service-card .service-desc {
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            line-height: 1.3;
-        }
+        .service-card .service-desc { font-size: 0.7rem; color: var(--text-muted); line-height: 1.3; }
 
-        /* ===== QUICK ACTIONS ===== */
-        .quick-actions {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 28px;
-            flex-wrap: wrap;
-        }
+        /* QUICK ACTIONS */
+        .quick-actions { display: flex; gap: 12px; margin-bottom: 28px; flex-wrap: wrap; }
         .quick-actions .quick-btn {
-            flex: 1;
-            min-width: 80px;
-            padding: 10px 16px;
-            background: #fff;
-            border-radius: 50px;
-            box-shadow: var(--shadow);
+            flex: 1; min-width: 80px; padding: 10px 16px; background: #fff;
+            border-radius: 50px; box-shadow: var(--shadow);
             border: 1px solid rgba(255, 153, 51, 0.06);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: var(--text-dark);
-            transition: var(--transition);
-            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            gap: 8px; font-size: 0.8rem; font-weight: 600; color: var(--text-dark);
+            transition: var(--transition); cursor: pointer;
         }
         .quick-actions .quick-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-hover);
+            transform: translateY(-2px); box-shadow: var(--shadow-hover);
             border-color: rgba(255, 153, 51, 0.15);
         }
-        .quick-actions .quick-btn i {
-            color: var(--saffron);
-            font-size: 0.9rem;
-        }
+        .quick-actions .quick-btn i { color: var(--saffron); font-size: 0.9rem; }
 
-        /* ===== BOTTOM NAV ===== */
+        /* BOTTOM NAV */
         .bottom-nav {
-            position: fixed;
-            bottom: 16px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: calc(100% - 32px);
-            max-width: 420px;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
+            position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%);
+            width: calc(100% - 32px); max-width: 420px;
+            background: rgba(255, 255, 255, 0.95); border-radius: 20px;
             box-shadow: 0 8px 40px rgba(0, 0, 0, 0.12);
-            display: flex;
-            align-items: center;
-            justify-content: space-around;
-            padding: 8px 12px;
-            z-index: 100;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(12px);
+            display: flex; align-items: center; justify-content: space-around;
+            padding: 8px 12px; z-index: 100;
+            border: 1px solid rgba(255, 255, 255, 0.3); backdrop-filter: blur(12px);
         }
         .bottom-nav .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 2px;
-            padding: 6px 12px;
-            border-radius: 12px;
-            transition: var(--transition);
-            cursor: pointer;
-            position: relative;
-            min-width: 50px;
+            display: flex; flex-direction: column; align-items: center; gap: 2px;
+            padding: 6px 12px; border-radius: 12px; transition: var(--transition);
+            cursor: pointer; position: relative; min-width: 50px;
         }
-        .bottom-nav .nav-item i {
-            font-size: 1.2rem;
-            color: var(--text-muted);
-            transition: var(--transition);
-        }
+        .bottom-nav .nav-item i { font-size: 1.2rem; color: var(--text-muted); transition: var(--transition); }
         .bottom-nav .nav-item .nav-label {
-            font-size: 0.55rem;
-            font-weight: 500;
-            color: var(--text-muted);
-            transition: var(--transition);
+            font-size: 0.55rem; font-weight: 500; color: var(--text-muted); transition: var(--transition);
         }
         .bottom-nav .nav-item.active i {
             color: var(--saffron);
             background: linear-gradient(135deg, var(--saffron), var(--saffron-dark));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
         }
-        .bottom-nav .nav-item.active .nav-label {
-            color: var(--saffron-dark);
-            font-weight: 700;
-        }
+        .bottom-nav .nav-item.active .nav-label { color: var(--saffron-dark); font-weight: 700; }
         .bottom-nav .nav-item.active::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 20px;
-            height: 3px;
-            background: linear-gradient(90deg, var(--saffron), var(--saffron-dark));
-            border-radius: 4px;
+            content: ''; position: absolute; top: -2px; left: 50%; transform: translateX(-50%);
+            width: 20px; height: 3px;
+            background: linear-gradient(90deg, var(--saffron), var(--saffron-dark)); border-radius: 4px;
         }
 
-        /* ===== CARDS ===== */
+        /* CARDS */
         .card {
-            background: #fff;
-            border-radius: var(--radius);
-            padding: 20px 22px;
-            box-shadow: var(--shadow);
-            transition: 0.25s;
-            border: 1px solid rgba(255, 153, 51, 0.04);
+            background: #fff; border-radius: var(--radius); padding: 20px 22px;
+            box-shadow: var(--shadow); transition: 0.25s; border: 1px solid rgba(255, 153, 51, 0.04);
         }
-        .card .card-title {
-            font-weight: 700;
-            font-size: 1rem;
-            margin-bottom: 14px;
-            color: var(--navy);
-        }
+        .card .card-title { font-weight: 700; font-size: 1rem; margin-bottom: 14px; color: var(--navy); }
 
-        /* ===== ADD WALLET ===== */
-        .add-wallet-container {
-            padding: 4px 0;
+        /* FLOATING INPUT */
+        .floating-group { position: relative; margin-bottom: 18px; width: 100%; }
+        .floating-group .floating-input {
+            width: 100%; padding: 16px 20px; font-size: 0.95rem;
+            border: 2px solid var(--border); border-radius: var(--radius-input);
+            background: #f9fafb; transition: var(--transition); color: var(--text-dark);
+            font-weight: 500; height: 58px; outline: none;
         }
-        .add-wallet-container .qr-wrapper {
-            text-align: center;
-            padding: 20px 0 16px;
-            position: relative;
+        .floating-group .floating-input:focus {
+            border-color: var(--saffron); background: #fff;
+            box-shadow: 0 0 0 4px rgba(255, 153, 51, 0.08);
         }
+        .floating-group .floating-input::placeholder { color: transparent; }
+        .floating-group .floating-label {
+            position: absolute; left: 20px; top: 50%; transform: translateY(-50%);
+            font-size: 0.95rem; color: var(--text-muted); pointer-events: none;
+            transition: var(--transition); background: transparent; font-weight: 500; padding: 0 4px;
+        }
+        .floating-group .floating-input:focus + .floating-label,
+        .floating-group .floating-input:not(:placeholder-shown) + .floating-label {
+            top: 6px; font-size: 0.65rem; color: var(--saffron-dark); font-weight: 700;
+            transform: translateY(0); background: #fff; padding: 0 8px;
+            border-radius: 8px; letter-spacing: 0.3px;
+        }
+        .floating-group select.floating-input {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23475569' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat; background-position: right 16px center;
+            padding-right: 40px; cursor: pointer;
+        }
+        .floating-group select.floating-input option { color: var(--text-dark); background: #fff; }
+
+        /* ADD WALLET */
+        .add-wallet-container { padding: 4px 0; }
+        .add-wallet-container .qr-wrapper { text-align: center; padding: 20px 0 16px; position: relative; }
         .add-wallet-container .qr-wrapper .qr-code {
-            display: inline-block;
-            padding: 12px;
-            background: #fff;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            position: relative;
-            animation: qrPulse 2.5s ease-in-out infinite;
+            display: inline-block; padding: 12px; background: #fff;
+            border-radius: var(--radius); box-shadow: var(--shadow);
+            position: relative; animation: qrPulse 2.5s ease-in-out infinite;
         }
         @keyframes qrPulse {
-            0%,
-            100% {
-                box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-            }
-            50% {
-                box-shadow: 0 8px 40px rgba(255, 153, 51, 0.2), 0 0 60px rgba(255, 153, 51, 0.08);
-            }
+            0%, 100% { box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08); }
+            50% { box-shadow: 0 8px 40px rgba(255, 153, 51, 0.2), 0 0 60px rgba(255, 153, 51, 0.08); }
         }
-        .add-wallet-container .qr-wrapper .qr-code img {
-            max-width: 180px;
-            border-radius: 8px;
-            display: block;
-        }
+        .add-wallet-container .qr-wrapper .qr-code img { max-width: 180px; border-radius: 8px; display: block; }
         .add-wallet-container .qr-wrapper .qr-code .qr-ripple {
-            position: absolute;
-            inset: -8px;
-            border-radius: var(--radius);
+            position: absolute; inset: -8px; border-radius: var(--radius);
             border: 2px solid rgba(255, 153, 51, 0.2);
-            animation: qrRipple 2s ease-out infinite;
-            pointer-events: none;
+            animation: qrRipple 2s ease-out infinite; pointer-events: none;
         }
         @keyframes qrRipple {
-            0% {
-                transform: scale(1);
-                opacity: 1;
-            }
-            100% {
-                transform: scale(1.08);
-                opacity: 0;
-            }
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(1.08); opacity: 0; }
         }
         .add-wallet-container .upi-id-display {
-            text-align: center;
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--navy);
-            margin: 6px 0 16px;
-            background: rgba(255, 153, 51, 0.06);
-            padding: 8px 16px;
-            border-radius: 50px;
-            display: inline-block;
-            width: auto;
+            text-align: center; font-size: 1rem; font-weight: 600; color: var(--navy);
+            margin: 6px 0 16px; background: rgba(255, 153, 51, 0.06);
+            padding: 8px 16px; border-radius: 50px; display: inline-block; width: auto;
         }
-        .add-wallet-container .upi-id-display i {
-            color: var(--saffron);
-            margin-right: 6px;
-        }
+        .add-wallet-container .upi-id-display i { color: var(--saffron); margin-right: 6px; }
         .add-wallet-container .pay-btn-upi {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            background: linear-gradient(135deg, #1a8cff, #0066cc);
-            color: #fff;
-            padding: 14px 28px;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 1rem;
-            width: 100%;
-            transition: var(--transition);
-            box-shadow: 0 4px 16px rgba(26, 140, 255, 0.3);
-            border: none;
-            cursor: pointer;
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            background: linear-gradient(135deg, #1a8cff, #0066cc); color: #fff;
+            padding: 14px 28px; border-radius: 50px; font-weight: 700; font-size: 1rem;
+            width: 100%; transition: var(--transition);
+            box-shadow: 0 4px 16px rgba(26, 140, 255, 0.3); border: none; cursor: pointer;
         }
-        .add-wallet-container .pay-btn-upi:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 28px rgba(26, 140, 255, 0.4);
-        }
-        .add-wallet-container .pay-btn-upi i {
-            font-size: 1.2rem;
-        }
+        .add-wallet-container .pay-btn-upi:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(26, 140, 255, 0.4); }
+        .add-wallet-container .pay-btn-upi i { font-size: 1.2rem; }
         .add-wallet-container .pay-btn-upi-100 {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            background: linear-gradient(135deg, var(--green), #0d6e0a);
-            color: #fff;
-            padding: 14px 28px;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 1rem;
-            width: 100%;
-            transition: var(--transition);
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            background: linear-gradient(135deg, var(--green), #0d6e0a); color: #fff;
+            padding: 14px 28px; border-radius: 50px; font-weight: 700; font-size: 1rem;
+            width: 100%; transition: var(--transition);
             box-shadow: 0 4px 16px rgba(19, 136, 8, 0.3);
-            border: none;
-            cursor: pointer;
-            margin-bottom: 12px;
+            border: none; cursor: pointer; margin-bottom: 12px;
         }
-        .add-wallet-container .pay-btn-upi-100:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 28px rgba(19, 136, 8, 0.4);
-        }
-        .add-wallet-container .pay-btn-upi-100 i {
-            font-size: 1.2rem;
-        }
+        .add-wallet-container .pay-btn-upi-100:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(19, 136, 8, 0.4); }
+        .add-wallet-container .pay-btn-upi-100 i { font-size: 1.2rem; }
 
-        /* ===== HISTORY ===== */
-        .history-full .history-table-wrap {
-            overflow-x: auto;
-            width: 100%;
-        }
+        /* HISTORY */
+        .history-full .history-table-wrap { overflow-x: auto; width: 100%; }
         .history-full table.history-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.78rem;
-            background: #fff;
-            border-radius: var(--radius);
-            overflow: hidden;
-            box-shadow: var(--shadow);
+            width: 100%; border-collapse: collapse; font-size: 0.78rem;
+            background: #fff; border-radius: var(--radius);
+            overflow: hidden; box-shadow: var(--shadow);
         }
-        .history-full table.history-table thead {
-            background: var(--navy);
-            color: #fff;
-        }
+        .history-full table.history-table thead { background: var(--navy); color: #fff; }
         .history-full table.history-table th {
-            padding: 10px 12px;
-            text-align: left;
-            font-weight: 600;
-            font-size: 0.7rem;
+            padding: 10px 12px; text-align: left; font-weight: 600; font-size: 0.7rem;
         }
         .history-full table.history-table td {
-            padding: 10px 12px;
-            border-bottom: 1px solid var(--border);
-            vertical-align: middle;
-            font-size: 0.75rem;
+            padding: 10px 12px; border-bottom: 1px solid var(--border);
+            vertical-align: middle; font-size: 0.75rem;
         }
-        .history-full table.history-table tr:hover td {
-            background: #f8fafc;
-        }
+        .history-full table.history-table tr:hover td { background: #f8fafc; }
         .history-full .history-status {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 2px;
+            display: flex; flex-direction: column; align-items: center; gap: 2px;
         }
         .history-full .history-status .view-icon {
-            cursor: pointer;
-            color: var(--navy);
-            font-size: 1rem;
-            transition: 0.25s;
-            padding: 4px 8px;
-            border-radius: 8px;
-            background: rgba(30, 58, 138, 0.06);
+            cursor: pointer; color: var(--navy); font-size: 1rem; transition: 0.25s;
+            padding: 4px 8px; border-radius: 8px; background: rgba(30, 58, 138, 0.06);
         }
         .history-full .history-status .view-icon:hover {
-            background: rgba(30, 58, 138, 0.15);
-            transform: scale(1.1);
+            background: rgba(30, 58, 138, 0.15); transform: scale(1.1);
         }
         .history-full .history-status .btn-dont-worry {
-            background: #f97316;
-            color: #fff;
-            border: none;
-            padding: 2px 8px;
-            border-radius: 50px;
-            font-size: 0.55rem;
-            font-weight: 700;
-            cursor: pointer;
-            margin-top: 2px;
+            background: #f97316; color: #fff; border: none;
+            padding: 2px 8px; border-radius: 50px; font-size: 0.55rem;
+            font-weight: 700; cursor: pointer; margin-top: 2px;
         }
-        .history-full .history-status .btn-dont-worry:hover {
-            transform: scale(1.05);
-        }
+        .history-full .history-status .btn-dont-worry:hover { transform: scale(1.05); }
         .history-full .history-status .delete-btn {
-            background: #dc2626;
-            color: #fff;
-            border: none;
-            padding: 2px 8px;
-            border-radius: 50px;
-            font-size: 0.55rem;
-            font-weight: 700;
-            cursor: pointer;
-            margin-top: 2px;
+            background: #dc2626; color: #fff; border: none;
+            padding: 2px 8px; border-radius: 50px; font-size: 0.55rem;
+            font-weight: 700; cursor: pointer; margin-top: 2px;
         }
-        .history-full .history-status .delete-btn:hover {
-            transform: scale(1.05);
-        }
+        .history-full .history-status .delete-btn:hover { transform: scale(1.05); }
 
-        /* ===== RESULT CARD ===== */
+        /* RESULT CARD */
         #secResult .result-card {
             background: linear-gradient(145deg, #fef8f0 0%, #fdf0e0 25%, #f8e8d0 50%, #f0e0c8 75%, #e8f5e8 100%);
-            border-radius: var(--radius);
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            max-width: 720px;
-            margin: 0 auto;
-            border: 1px solid rgba(255, 153, 51, 0.12);
-            position: relative;
+            border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow);
+            max-width: 720px; margin: 0 auto;
+            border: 1px solid rgba(255, 153, 51, 0.12); position: relative;
         }
         #secResult .result-card .tricolor-bar {
             height: 6px;
             background: linear-gradient(90deg, #FF9933 0%, #FFB347 25%, #FFFFFF 50%, #A8D5A2 75%, #138808 100%);
         }
         #secResult .result-card .card-body {
-            padding: 22px 28px;
-            background: rgba(255, 255, 255, 0.70);
-            backdrop-filter: blur(2px);
+            padding: 22px 28px; background: rgba(255, 255, 255, 0.70); backdrop-filter: blur(2px);
         }
-        #secResult .result-card .result-header {
-            text-align: center;
-            margin-bottom: 16px;
-        }
+        #secResult .result-card .result-header { text-align: center; margin-bottom: 16px; }
         #secResult .result-card .result-header .result-logo {
-            height: 40px;
-            width: auto;
-            display: inline-block;
-            margin-bottom: 4px;
+            height: 40px; width: auto; display: inline-block; margin-bottom: 4px;
         }
         #secResult .result-card .result-header .uid-row {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            flex-wrap: wrap;
+            display: flex; align-items: center; justify-content: center; gap: 6px; flex-wrap: wrap;
         }
         #secResult .result-card .result-header .uid-number {
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--text-dark);
-            letter-spacing: 2px;
+            font-size: 24px; font-weight: 700; color: var(--text-dark); letter-spacing: 2px;
         }
         #secResult .result-card .result-header .blue-tick {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            background: #1a8cff;
-            color: #fff;
-            border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            font-size: 11px;
-            box-shadow: 0 2px 8px rgba(26, 140, 255, 0.3);
-            flex-shrink: 0;
-            margin-left: 2px;
+            display: inline-flex; align-items: center; justify-content: center;
+            background: #1a8cff; color: #fff; border-radius: 50%;
+            width: 20px; height: 20px; font-size: 11px;
+            box-shadow: 0 2px 8px rgba(26, 140, 255, 0.3); flex-shrink: 0; margin-left: 2px;
         }
         #secResult .result-card .result-header .status-badge {
-            margin-top: 4px;
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--green);
+            margin-top: 4px; font-size: 14px; font-weight: 600; color: var(--green);
         }
         #secResult .result-card .section-title {
-            padding: 7px 0;
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 700;
-            color: var(--navy);
-            border-bottom: 2px solid var(--border);
-            margin-top: 14px;
-            margin-bottom: 8px;
+            padding: 7px 0; font-size: 12px; text-transform: uppercase; letter-spacing: 1px;
+            font-weight: 700; color: var(--navy); border-bottom: 2px solid var(--border);
+            margin-top: 14px; margin-bottom: 8px;
         }
-        #secResult .result-card .section-title:first-of-type {
-            margin-top: 0;
-        }
+        #secResult .result-card .section-title:first-of-type { margin-top: 0; }
         #secResult .result-card .row {
-            display: flex;
-            justify-content: space-between;
-            padding: 7px 0;
-            border-bottom: 1px solid #f1f3f5;
-            font-size: 13px;
+            display: flex; justify-content: space-between; padding: 7px 0;
+            border-bottom: 1px solid #f1f3f5; font-size: 13px;
         }
-        #secResult .result-card .row:last-child {
-            border-bottom: none;
-        }
-        #secResult .result-card .row .label {
-            color: var(--text-muted);
-            font-weight: 500;
-        }
-        #secResult .result-card .row .value {
-            font-weight: 600;
-            color: var(--text-dark);
-            text-align: right;
-        }
+        #secResult .result-card .row:last-child { border-bottom: none; }
+        #secResult .result-card .row .label { color: var(--text-muted); font-weight: 500; }
+        #secResult .result-card .row .value { font-weight: 600; color: var(--text-dark); text-align: right; }
         #secResult .result-card .result-footer {
-            margin-top: 14px;
-            padding-top: 12px;
-            border-top: 2px dashed var(--border);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 10px;
+            margin-top: 14px; padding-top: 12px; border-top: 2px dashed var(--border);
+            display: flex; align-items: center; justify-content: space-between;
+            flex-wrap: wrap; gap: 10px;
         }
         #secResult .result-card .result-footer .beneficiary-tag {
-            background: var(--navy);
-            color: #fff;
-            padding: 4px 14px;
-            border-radius: 50px;
-            font-size: 0.7rem;
-            font-weight: 600;
+            background: var(--navy); color: #fff; padding: 4px 14px;
+            border-radius: 50px; font-size: 0.7rem; font-weight: 600;
         }
         #secResult .result-card .result-footer .print-btn {
             background: linear-gradient(135deg, var(--navy), #1a3170);
-            color: #fff;
-            padding: 10px 24px;
-            border-radius: 50px;
-            font-size: 0.9rem;
-            font-weight: 700;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            transition: 0.3s;
-            box-shadow: 0 4px 16px rgba(30, 58, 138, 0.3);
+            color: #fff; padding: 10px 24px; border-radius: 50px;
+            font-size: 0.9rem; font-weight: 700;
+            display: inline-flex; align-items: center; gap: 10px;
+            transition: 0.3s; box-shadow: 0 4px 16px rgba(30, 58, 138, 0.3);
         }
         #secResult .result-card .result-footer .print-btn:hover {
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 8px 28px rgba(30, 58, 138, 0.4);
+            transform: translateY(-3px) scale(1.02); box-shadow: 0 8px 28px rgba(30, 58, 138, 0.4);
         }
 
-        /* ===== MODALS ===== */
+        /* MODALS */
         .modal-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(6px);
-            z-index: 999;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
+            position: fixed; inset: 0; background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(6px); z-index: 999; display: none;
+            align-items: center; justify-content: center; padding: 20px;
         }
-        .modal-overlay.show {
-            display: flex;
-        }
+        .modal-overlay.show { display: flex; }
         .modal-box {
-            background: #fff;
-            border-radius: 24px;
-            padding: 28px 32px;
-            max-width: 460px;
-            width: 100%;
+            background: #fff; border-radius: 24px; padding: 28px 32px;
+            max-width: 460px; width: 100%;
             box-shadow: 0 30px 80px rgba(0, 0, 0, 0.2);
-            position: relative;
-            animation: slideUp 0.3s ease;
+            position: relative; animation: slideUp 0.3s ease;
         }
         .modal-box .modal-close {
-            position: absolute;
-            top: 12px;
-            right: 16px;
-            font-size: 1.3rem;
-            cursor: pointer;
-            color: var(--text-muted);
-            transition: 0.25s;
+            position: absolute; top: 12px; right: 16px; font-size: 1.3rem;
+            cursor: pointer; color: var(--text-muted); transition: 0.25s;
         }
-        .modal-box .modal-close:hover {
-            color: #dc2626;
-            transform: rotate(90deg);
-        }
-        .modal-box .modal-icon {
-            font-size: 2.2rem;
-            text-align: center;
-            margin-bottom: 6px;
-        }
-        .modal-box h3 {
-            font-size: 1.2rem;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 6px;
-        }
-        .modal-box p {
-            color: var(--text-muted);
-            text-align: center;
-            line-height: 1.6;
-            font-size: 0.9rem;
-        }
+        .modal-box .modal-close:hover { color: #dc2626; transform: rotate(90deg); }
+        .modal-box .modal-icon { font-size: 2.2rem; text-align: center; margin-bottom: 6px; }
+        .modal-box h3 { font-size: 1.2rem; font-weight: 700; text-align: center; margin-bottom: 6px; }
+        .modal-box p { color: var(--text-muted); text-align: center; line-height: 1.6; font-size: 0.9rem; }
         .modal-box .notification-item {
-            padding: 10px 0;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            gap: 12px;
-            align-items: flex-start;
+            padding: 10px 0; border-bottom: 1px solid var(--border);
+            display: flex; gap: 12px; align-items: flex-start;
         }
-        .modal-box .notification-item:last-child {
-            border-bottom: none;
-        }
+        .modal-box .notification-item:last-child { border-bottom: none; }
         .modal-box .notification-item .noti-icon {
-            color: var(--saffron);
-            font-size: 1.1rem;
-            margin-top: 2px;
-            flex-shrink: 0;
+            color: var(--saffron); font-size: 1.1rem; margin-top: 2px; flex-shrink: 0;
         }
         .modal-box .notification-item .noti-content .noti-title {
-            font-weight: 600;
-            font-size: 0.9rem;
-            color: var(--text-dark);
+            font-weight: 600; font-size: 0.9rem; color: var(--text-dark);
         }
         .modal-box .notification-item .noti-content .noti-desc {
-            font-size: 0.8rem;
-            color: var(--text-muted);
+            font-size: 0.8rem; color: var(--text-muted);
         }
         .modal-box .notification-item .noti-content .noti-time {
-            font-size: 0.65rem;
-            color: var(--text-muted);
-            margin-top: 2px;
+            font-size: 0.65rem; color: var(--text-muted); margin-top: 2px;
         }
         @keyframes slideUp {
-            0% {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
 
-        /* ===== PROFILE ===== */
-        .profile-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-        }
+        /* PROFILE */
+        .profile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
         .profile-grid .profile-item {
-            padding: 10px 14px;
-            background: #f9fafb;
-            border-radius: 10px;
-            border: 1px solid var(--border);
+            padding: 10px 14px; background: #f9fafb;
+            border-radius: 10px; border: 1px solid var(--border);
         }
         .profile-grid .profile-item .label {
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            font-size: 0.7rem; color: var(--text-muted);
+            text-transform: uppercase; letter-spacing: 0.5px;
         }
         .profile-grid .profile-item .value {
-            font-weight: 600;
-            font-size: 1rem;
-            color: var(--text-dark);
-            margin-top: 2px;
-            word-break: break-all;
+            font-weight: 600; font-size: 1rem; color: var(--text-dark);
+            margin-top: 2px; word-break: break-all;
         }
         .profile-grid .profile-item .value .password-toggle-icon {
-            cursor: pointer;
-            margin-left: 8px;
-            color: var(--text-muted);
+            cursor: pointer; margin-left: 8px; color: var(--text-muted);
         }
         .profile-logout-btn {
-            margin-top: 12px;
-            width: 100%;
-            padding: 10px;
-            border-radius: 10px;
-            background: #fee2e2;
-            color: #dc2626;
-            font-weight: 600;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            transition: 0.25s;
-            border: 1.5px solid #fecaca;
+            margin-top: 12px; width: 100%; padding: 10px; border-radius: 10px;
+            background: #fee2e2; color: #dc2626; font-weight: 600; font-size: 0.9rem;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            transition: 0.25s; border: 1.5px solid #fecaca;
         }
         .profile-logout-btn:hover {
-            background: #fecaca;
-            transform: translateY(-2px);
+            background: #fecaca; transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(220, 38, 38, 0.15);
         }
 
-        /* ===== ADMIN ===== */
-        .admin-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 14px;
-        }
-        .admin-grid .floating-group {
-            margin-bottom: 0;
-        }
-        .admin-pending-table {
-            margin-top: 16px;
-            max-height: 280px;
-            overflow-y: auto;
-        }
-        .admin-pending-table table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.78rem;
-        }
+        /* ADMIN */
+        .admin-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+        .admin-grid .floating-group { margin-bottom: 0; }
+        .admin-pending-table { margin-top: 16px; max-height: 280px; overflow-y: auto; }
+        .admin-pending-table table { width: 100%; border-collapse: collapse; font-size: 0.78rem; }
         .admin-pending-table th {
-            background: var(--navy);
-            color: #fff;
-            padding: 6px 10px;
-            text-align: left;
-            font-size: 0.7rem;
+            background: var(--navy); color: #fff; padding: 6px 10px;
+            text-align: left; font-size: 0.7rem;
         }
         .admin-pending-table td {
-            padding: 6px 10px;
-            border-bottom: 1px solid var(--border);
-            font-size: 0.75rem;
+            padding: 6px 10px; border-bottom: 1px solid var(--border); font-size: 0.75rem;
         }
         .admin-user-mgmt {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-            margin-top: 12px;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 12px;
         }
         .admin-user-mgmt .mgmt-card {
-            background: #f9fafb;
-            border-radius: 12px;
-            padding: 16px;
-            border: 1px solid var(--border);
+            background: #f9fafb; border-radius: 12px; padding: 16px; border: 1px solid var(--border);
         }
         .admin-user-mgmt .mgmt-card .mgmt-title {
-            font-weight: 700;
-            font-size: 0.9rem;
-            color: var(--navy);
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            font-weight: 700; font-size: 0.9rem; color: var(--navy);
+            margin-bottom: 10px; display: flex; align-items: center; gap: 8px;
         }
-        .admin-user-mgmt .mgmt-card .mgmt-title i {
-            color: var(--saffron);
-        }
+        .admin-user-mgmt .mgmt-card .mgmt-title i { color: var(--saffron); }
 
-        /* ===== AVATAR EDITOR ===== */
+        /* AVATAR EDITOR */
         .avatar-preview {
-            width: 76px;
-            height: 76px;
-            border-radius: 50%;
-            background: var(--saffron);
-            color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.2rem;
-            font-weight: 700;
-            margin: 0 auto 14px;
-            overflow: hidden;
-            border: 3px solid var(--navy);
+            width: 76px; height: 76px; border-radius: 50%; background: var(--saffron);
+            color: #fff; display: flex; align-items: center; justify-content: center;
+            font-size: 2.2rem; font-weight: 700; margin: 0 auto 14px;
+            overflow: hidden; border: 3px solid var(--navy);
         }
-        .avatar-preview img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        .avatar-preview img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* ============================================================
+           AADHAAR CREATOR (embedded in dashboard)
+           ============================================================ */
+        #secCreateAadhaar .aa-page-title {
+            font-size: 1.2rem; font-weight: 700; color: var(--navy); margin-bottom: 4px;
+        }
+        #secCreateAadhaar .aa-page-sub {
+            font-size: 0.85rem; color: var(--text-muted); margin-bottom: 16px;
+        }
+        #secCreateAadhaar .aa-white-mode-btn {
+            display: block; margin: 0 auto 16px auto;
+            background: #0b4636; color: #fff; border: none;
+            padding: 8px 20px; font-size: 12px; font-weight: 600;
+            border-radius: 20px; cursor: pointer; font-family: inherit; transition: background 0.2s;
+        }
+        #secCreateAadhaar .aa-white-mode-btn:hover { background: #0e5a46; }
+        #secCreateAadhaar .aa-white-mode-btn.active { background: #d21f1f; }
+
+        #secCreateAadhaar .aa-form-card {
+            background: #fff; border-radius: var(--radius); padding: 20px 18px;
+            box-shadow: var(--shadow); border: 1px solid rgba(255, 153, 51, 0.04);
+            margin-bottom: 16px;
+        }
+        #secCreateAadhaar .aa-form-group { margin-bottom: 14px; }
+        #secCreateAadhaar .aa-form-group label {
+            display: block; margin-bottom: 5px; font-weight: 600;
+            color: var(--text-dark); font-size: 0.8rem;
+        }
+        #secCreateAadhaar .aa-form-group input[type="text"],
+        #secCreateAadhaar .aa-form-group input[type="date"],
+        #secCreateAadhaar .aa-form-group select,
+        #secCreateAadhaar .aa-form-group input[type="file"],
+        #secCreateAadhaar .aa-form-group textarea {
+            width: 100%; padding: 10px 12px;
+            border: 1.5px solid var(--border); border-radius: 10px;
+            font-size: 0.88rem; font-family: inherit;
+            background: #f9fafb; color: var(--text-dark);
+            outline: none; transition: 0.2s;
+        }
+        #secCreateAadhaar .aa-form-group input:focus,
+        #secCreateAadhaar .aa-form-group select:focus,
+        #secCreateAadhaar .aa-form-group textarea:focus {
+            border-color: var(--saffron); background: #fff;
+            box-shadow: 0 0 0 3px rgba(255, 153, 51, 0.08);
+        }
+        #secCreateAadhaar .aa-form-group textarea { resize: vertical; min-height: 50px; }
+        #secCreateAadhaar .aa-checkbox-group {
+            display: flex; align-items: center; margin-bottom: 14px; gap: 8px;
+        }
+        #secCreateAadhaar .aa-checkbox-group input[type="checkbox"] {
+            width: 18px; height: 18px; cursor: pointer; accent-color: #27ae60;
+        }
+        #secCreateAadhaar .aa-checkbox-group label {
+            margin-bottom: 0; cursor: pointer; font-weight: 600;
+            color: var(--text-dark); font-size: 0.85rem;
         }
 
-        /* ===== RESPONSIVE ===== */
+        #secCreateAadhaar .aa-preview-section {
+            margin-top: 8px; display: flex; flex-direction: column;
+            align-items: center; gap: 20px;
+        }
+        #secCreateAadhaar .aa-cards-wrapper {
+            display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;
+        }
+
+        /* PVC CARD */
+        #secCreateAadhaar .pvc-card {
+            position: relative; width: 85.6mm; height: 54mm;
+            max-width: 85.6mm; max-height: 54mm;
+            background: linear-gradient(to bottom,
+                rgba(255, 153, 55, 0.85) 0%,
+                rgba(465, 265, 465, 1.09) 58%,
+                rgba(465, 265, 465, 1.09) -58%,
+                rgba(10, 156, 7, 0.95) 100%),
+                #ffffff;
+            border-radius: 0mm; overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.19);
+            border: 0px solid #d0d0d0;
+        }
+        #secCreateAadhaar .front-card::before {
+            content: "";
+            position: absolute; top: -16mm; left: -16mm;
+            width: 49mm; height: 49mm;
+            background-image: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEje6HRypEmHCmKuWI6-N_53Wsz3VqGJoso6EArOI1-rpzGjSc6-PKXeowL9YLcNtR6RagJQhE3b8Za54rWbN8Colbu7-w8-HUKTIbckGj3Dq1covt4msq2cO8xPqH9SY60nXXLQI9STezNDs2frecSeGzPNBlLj6uKNwLLK3T6bMIXRuqEfFdHT0yzgNGQ/s3264/1000317582.png');
+            background-size: contain; background-repeat: no-repeat; background-position: top left;
+            opacity: 0.20; pointer-events: none; z-index: 0;
+        }
+        #secCreateAadhaar .front-card::after {
+            content: "";
+            position: absolute; bottom: -9mm; right: -7mm;
+            width: 49mm; height: 49mm;
+            background-image: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEje6HRypEmHCmKuWI6-N_53Wsz3VqGJoso6EArOI1-rpzGjSc6-PKXeowL9YLcNtR6RagJQhE3b8Za54rWbN8Colbu7-w8-HUKTIbckGj3Dq1covt4msq2cO8xPqH9SY60nXXLQI9STezNDs2frecSeGzPNBlLj6uKNwLLK3T6bMIXRuqEfFdHT0yzgNGQ/s3264/1000317582.png');
+            background-size: contain; background-repeat: no-repeat; background-position: bottom right;
+            opacity: 0.15; pointer-events: none; z-index: 0;
+        }
+        #secCreateAadhaar .front-card > * { position: relative; z-index: 1; }
+        #secCreateAadhaar .front-card {
+            padding: 2mm 3mm; display: flex; flex-direction: column;
+        }
+        #secCreateAadhaar .ghost-photo-box {
+            position: absolute; top: 16mm; right: 6mm; width: 10mm;
+            text-align: center; z-index: 0; display: flex; flex-direction: column;
+            align-items: center; opacity: 1.65;
+        }
+        #secCreateAadhaar .ghost-photo-box img {
+            width: 6mm; height: 8mm; object-fit: cover;
+            filter: grayscale(100%); border-radius: 0.5mm; display: none;
+        }
+        #secCreateAadhaar .ghost-aadhaar-no {
+            font-size: 2.1pt; font-weight: 600; margin-top: 0.5mm;
+            color: #000; font-family: 'Inter', Arial, sans-serif;
+        }
+        #secCreateAadhaar .front-top-logos {
+            display: flex; justify-content: space-between; align-items: center; height: 10mm;
+        }
+        #secCreateAadhaar .front-top-logos .moe-top { height: 8mm; max-width: 24mm; object-fit: contain; }
+        #secCreateAadhaar .front-top-logos .tiranga-center { height: 16mm; max-width: 48mm; object-fit: contain; }
+        #secCreateAadhaar .front-top-logos .apaar-top { height: 11mm; max-width: 33mm; object-fit: contain; }
+        #secCreateAadhaar .front-title {
+            text-align: center; font-size: 6.5pt; font-weight: 700; color: #000; margin: 1mm 0;
+        }
+        #secCreateAadhaar .front-main-row {
+            display: flex; align-items: flex-start; gap: 2mm; margin-top: 1mm; height: 21mm;
+        }
+        #secCreateAadhaar .front-date-vertical {
+            writing-mode: vertical-rl; transform: rotate(180deg);
+            font-size: 4.2pt; font-weight: 900; color: #333;
+            white-space: nowrap; display: flex; align-items: center; justify-content: center;
+        }
+        #secCreateAadhaar .user-photo-box {
+            width: 15mm; height: 18mm; border: 0px solid #888;
+            border-radius: 0.5mm; overflow: hidden; background: #f0f0f0; flex-shrink: 0;
+        }
+        #secCreateAadhaar .user-photo-box img { width: 100%; height: 100%; object-fit: cover; }
+        #secCreateAadhaar .front-details {
+            flex: 1; display: flex; flex-direction: column; justify-content: flex-start;
+            font-size: 6pt; line-height: 1.3; font-family: 'Inter', Arial, sans-serif;
+        }
+        #secCreateAadhaar .front-details .name-hi {
+            font-family: 'Noto Sans Devanagari', sans-serif;
+            font-weight: 600; display: block; color: #000;
+        }
+        #secCreateAadhaar .front-details .name-en {
+            font-weight: 600; display: block; margin-bottom: 0.2mm; color: #000;
+        }
+        #secCreateAadhaar .front-details .detail-item {
+            display: flex; align-items: baseline; font-weight: 600;
+        }
+        #secCreateAadhaar .front-details .label { color: #000; margin-right: 0.5mm; }
+        #secCreateAadhaar .front-details .val { color: #000; }
+        #secCreateAadhaar .front-bottom-section {
+            position: absolute; bottom: 2mm; left: 3mm; right: 3mm;
+        }
+        #secCreateAadhaar .front-id-number {
+            text-align: center; font-size: 10pt; font-weight: 700;
+            letter-spacing: 0.5px; color: #000; margin-bottom: -0.5mm;
+            margin-left: -2px; margin-top: -10pt;
+            font-family: 'Inter', Arial, sans-serif;
+        }
+        #secCreateAadhaar .front-red-line {
+            width: 110%; height: 0.4mm; margin-left: -10pt;
+            margin-bottom: -1.9mm; background: #d21f1f;
+        }
+        #secCreateAadhaar .front-bottom-logo {
+            display: block; height: 8mm; width: auto; max-width: 50mm;
+            margin: 0 auto; margin-top: 0; margin-bottom: -2.5mm; object-fit: contain;
+        }
+        #secCreateAadhaar .back-card::before {
+            content: "";
+            position: absolute; top: -16mm; right: -16mm;
+            width: 49mm; height: 49mm;
+            background-image: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEje6HRypEmHCmKuWI6-N_53Wsz3VqGJoso6EArOI1-rpzGjSc6-PKXeowL9YLcNtR6RagJQhE3b8Za54rWbN8Colbu7-w8-HUKTIbckGj3Dq1covt4msq2cO8xPqH9SY60nXXLQI9STezNDs2frecSeGzPNBlLj6uKNwLLK3T6bMIXRuqEfFdHT0yzgNGQ/s3264/1000317582.png');
+            background-size: contain; background-repeat: no-repeat; background-position: top left;
+            opacity: 0.15; pointer-events: none; z-index: 0;
+        }
+        #secCreateAadhaar .back-card::after {
+            content: "";
+            position: absolute; bottom: -7mm; right: 42mm; left: -6mm;
+            width: 49mm; height: 49mm;
+            background-image: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEje6HRypEmHCmKuWI6-N_53Wsz3VqGJoso6EArOI1-rpzGjSc6-PKXeowL9YLcNtR6RagJQhE3b8Za54rWbN8Colbu7-w8-HUKTIbckGj3Dq1covt4msq2cO8xPqH9SY60nXXLQI9STezNDs2frecSeGzPNBlLj6uKNwLLK3T6bMIXRuqEfFdHT0yzgNGQ/s3264/1000317582.png');
+            background-size: contain; background-repeat: no-repeat; background-position: bottom right;
+            opacity: 0.20; pointer-events: none; z-index: 0;
+        }
+        #secCreateAadhaar .back-card > * { position: relative; z-index: 1; }
+        #secCreateAadhaar .back-card {
+            padding: 2mm 3mm; display: flex; flex-direction: column; justify-content: space-between;
+        }
+        #secCreateAadhaar .back-top-logos {
+            display: flex; justify-content: space-between; align-items: center; height: 9mm;
+        }
+        #secCreateAadhaar .back-top-logos img {
+            height: 8mm; max-width: 24mm; object-fit: contain;
+        }
+        #secCreateAadhaar .back-top-logos .tiranga-center { height: 16mm; max-width: 48mm; }
+        #secCreateAadhaar .back-main-row {
+            display: flex; justify-content: space-between; align-items: flex-start;
+            gap: 2mm; margin-top: 4mm; flex: 1;
+        }
+        #secCreateAadhaar .back-date-vertical {
+            writing-mode: vertical-rl; transform: rotate(180deg);
+            font-size: 4.2pt; font-weight: 900; color: #333;
+            white-space: nowrap; height: 25mm; display: flex;
+            align-items: center; justify-content: center;
+        }
+        #secCreateAadhaar .back-details { flex: 1; font-size: 6.5pt; line-height: 2.5mm; }
+        #secCreateAadhaar .back-details .lbl {
+            font-weight: 500; color: #000; display: block;
+            margin-top: 1.5mm; font-family: 'Noto Sans Devanagari', sans-serif;
+        }
+        #secCreateAadhaar .back-details .lbl:first-child { margin-top: 0; }
+        #secCreateAadhaar .back-details .val {
+            color: #111; font-weight: 500; display: block;
+            font-family: 'Inter', Arial, sans-serif;
+        }
+        #secCreateAadhaar .back-qr-box {
+            width: 24mm; height: 24mm; background: #fff; flex-shrink: 0;
+            display: flex; align-items: center; justify-content: center; border: none;
+        }
+        #secCreateAadhaar .back-qr-box img,
+        #secCreateAadhaar .back-qr-box canvas {
+            width: 100% !important; height: 100% !important;
+            display: block; object-fit: contain;
+        }
+        #secCreateAadhaar .back-bottom-section { width: 100%; margin-top: auto; }
+        #secCreateAadhaar .back-id-number {
+            text-align: center; font-size: 10pt; font-weight: 700;
+            letter-spacing: 0.5px; color: #000; margin-bottom: 0mm;
+            font-family: 'Inter', Arial, sans-serif;
+        }
+        #secCreateAadhaar .back-vid-row {
+            text-align: center; font-size: 6.2pt; font-weight: 600; color: #000;
+            border-top: 0.4px dotted #666; padding-top: 0.1mm;
+            margin: 0 auto 0mm auto; width: 45mm;
+            font-family: 'Inter', Arial, sans-serif; display: none;
+        }
+        #secCreateAadhaar .back-red-line {
+            width: 110%; height: 0.4mm; margin-left: -10pt; background: #d21f1f;
+        }
+        #secCreateAadhaar .back-contact-row {
+            display: flex; justify-content: space-between; align-items: center;
+            font-size: 5.5pt; font-weight: 600; color: #111;
+            margin-top: 1mm; padding: 0 1mm; font-family: 'Inter', Arial, sans-serif;
+        }
+        #secCreateAadhaar .back-contact-row svg {
+            width: 9px; height: 9px; vertical-align: middle;
+            margin-right: 0.8mm; fill: currentColor;
+        }
+        #secCreateAadhaar .aa-print-actions { text-align: center; margin-top: 10px; }
+        #secCreateAadhaar .aa-print-btn {
+            background: #27ae60; color: white; border: none;
+            padding: 12px 28px; font-size: 15px; font-weight: bold;
+            border-radius: 8px; cursor: pointer;
+            box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);
+        }
+        #secCreateAadhaar .aa-print-btn:disabled {
+            background: #95a5a6; cursor: not-allowed; box-shadow: none; opacity: 0.7;
+        }
+        /* White mode */
+        #secCreateAadhaar .pvc-card.white-mode { background: #ffffff !important; }
+        #secCreateAadhaar .pvc-card.white-mode::before,
+        #secCreateAadhaar .pvc-card.white-mode::after { display: none !important; }
+        #secCreateAadhaar .pvc-card.white-mode .ghost-photo-box { display: none !important; }
+
+        /* RESPONSIVE */
         @media (max-width: 480px) {
-            .dash-header {
-                padding: 10px 14px 8px;
-                min-height: 56px;
+            .dash-header { padding: 10px 14px 8px; min-height: 56px; }
+            .dash-header .header-left .header-logo { height: 26px; }
+            .dash-header .header-left .brand-text .brand-name { font-size: 0.85rem; }
+            .dash-header .header-left .brand-text .brand-sub { font-size: 0.48rem; }
+            .dash-header .header-right .header-avatar { width: 30px; height: 30px; font-size: 0.75rem; }
+            .dash-content { padding: 12px 14px 0; }
+            .welcome-section .greeting { font-size: 1.3rem; }
+            .balance-card .balance-left .balance-amount { font-size: 1.3rem; }
+            .service-grid { gap: 10px; }
+            .service-card { padding: 16px 12px; }
+            .service-card .service-icon { width: 40px; height: 40px; font-size: 1.1rem; }
+            .service-card .service-name { font-size: 0.8rem; }
+            .quick-actions .quick-btn { font-size: 0.7rem; padding: 8px 12px; }
+            .bottom-nav { padding: 6px 8px; bottom: 12px; width: calc(100% - 20px); }
+            .bottom-nav .nav-item { padding: 4px 8px; min-width: 40px; }
+            .bottom-nav .nav-item i { font-size: 1rem; }
+            .bottom-nav .nav-item .nav-label { font-size: 0.5rem; }
+            .auth-card { padding: 24px 18px; }
+            .auth-card .logo-container img { max-height: 40px; }
+            .auth-card .brand { font-size: 1.2rem; }
+            .floating-group .floating-input { height: 52px; padding: 14px 16px; font-size: 0.88rem; }
+            .floating-group .floating-label { font-size: 0.88rem; left: 16px; }
+            .floating-group .floating-input:focus + .floating-label,
+            .floating-group .floating-input:not(:placeholder-shown) + .floating-label {
+                font-size: 0.6rem; top: 4px;
             }
-            .dash-header .header-left .header-logo {
-                height: 26px;
-            }
-            .dash-header .header-left .brand-text .brand-name {
-                font-size: 0.85rem;
-            }
-            .dash-header .header-left .brand-text .brand-sub {
-                font-size: 0.48rem;
-            }
-            .dash-header .header-right .header-avatar {
-                width: 30px;
-                height: 30px;
-                font-size: 0.75rem;
-            }
-            .dash-content {
-                padding: 12px 14px 0;
-            }
-            .welcome-section .greeting {
-                font-size: 1.3rem;
-            }
-            .balance-card .balance-left .balance-amount {
-                font-size: 1.3rem;
-            }
-            .service-grid {
-                gap: 10px;
-            }
-            .service-card {
-                padding: 16px 12px;
-            }
-            .service-card .service-icon {
-                width: 40px;
-                height: 40px;
-                font-size: 1.1rem;
-            }
-            .service-card .service-name {
-                font-size: 0.8rem;
-            }
-            .quick-actions .quick-btn {
-                font-size: 0.7rem;
-                padding: 8px 12px;
-            }
-            .bottom-nav {
-                padding: 6px 8px;
-                bottom: 12px;
-                width: calc(100% - 20px);
-            }
-            .bottom-nav .nav-item {
-                padding: 4px 8px;
-                min-width: 40px;
-            }
-            .bottom-nav .nav-item i {
-                font-size: 1rem;
-            }
-            .bottom-nav .nav-item .nav-label {
-                font-size: 0.5rem;
-            }
-            .auth-card {
-                padding: 24px 18px;
-            }
-            .auth-card .logo-container img {
-                max-height: 40px;
-            }
-            .auth-card .brand {
-                font-size: 1.2rem;
-            }
-            .floating-group .floating-input {
-                height: 52px;
-                padding: 14px 16px;
-                font-size: 0.88rem;
-            }
-            .floating-group .floating-label {
-                font-size: 0.88rem;
-                left: 16px;
-            }
-            .floating-group .floating-input:focus+.floating-label,
-            .floating-group .floating-input:not(:placeholder-shown)+.floating-label {
-                font-size: 0.6rem;
-                top: 4px;
-            }
-            .add-wallet-container .qr-wrapper .qr-code img {
-                max-width: 140px;
-            }
-            .admin-grid {
-                grid-template-columns: 1fr;
-            }
-            .admin-user-mgmt {
-                grid-template-columns: 1fr;
-            }
-            .profile-grid {
-                grid-template-columns: 1fr;
-            }
-            .card {
-                padding: 16px 14px;
-            }
-            #secResult .result-card .card-body {
-                padding: 16px 14px;
-            }
-            #secResult .result-card .result-header .uid-number {
-                font-size: 20px;
-            }
-            .history-full table.history-table {
-                font-size: 0.7rem;
-            }
+            .add-wallet-container .qr-wrapper .qr-code img { max-width: 140px; }
+            .admin-grid { grid-template-columns: 1fr; }
+            .admin-user-mgmt { grid-template-columns: 1fr; }
+            .profile-grid { grid-template-columns: 1fr; }
+            .card { padding: 16px 14px; }
+            #secResult .result-card .card-body { padding: 16px 14px; }
+            #secResult .result-card .result-header .uid-number { font-size: 20px; }
+            .history-full table.history-table { font-size: 0.7rem; }
             .history-full table.history-table th,
-            .history-full table.history-table td {
-                padding: 6px 8px;
-            }
-            .btn-tricolor {
-                padding: 12px 20px;
-                font-size: 0.85rem;
-                min-width: 130px;
-            }
-            .add-wallet-container .pay-btn-upi-100 {
-                font-size: 0.85rem;
-                padding: 12px 20px;
-            }
+            .history-full table.history-table td { padding: 6px 8px; }
+            .btn-tricolor { padding: 12px 20px; font-size: 0.85rem; min-width: 130px; }
+            .add-wallet-container .pay-btn-upi-100 { font-size: 0.85rem; padding: 12px 20px; }
+            #secCreateAadhaar .aa-cards-wrapper { transform: scale(0.95); transform-origin: top center; }
         }
-
         @media (max-width: 360px) {
-            .service-grid {
-                gap: 8px;
-            }
-            .service-card {
-                padding: 12px 8px;
-            }
-            .service-card .service-icon {
-                width: 34px;
-                height: 34px;
-                font-size: 0.9rem;
-            }
-            .service-card .service-name {
-                font-size: 0.7rem;
-            }
-            .quick-actions .quick-btn {
-                font-size: 0.65rem;
-                padding: 6px 10px;
-                gap: 4px;
-            }
-            .dash-header .header-left .brand-text .brand-name {
-                font-size: 0.75rem;
-            }
-            .dash-header .header-left .brand-text .brand-sub {
-                font-size: 0.4rem;
+            .service-grid { gap: 8px; }
+            .service-card { padding: 12px 8px; }
+            .service-card .service-icon { width: 34px; height: 34px; font-size: 0.9rem; }
+            .service-card .service-name { font-size: 0.7rem; }
+            .quick-actions .quick-btn { font-size: 0.65rem; padding: 6px 10px; gap: 4px; }
+            .dash-header .header-left .brand-text .brand-name { font-size: 0.75rem; }
+            .dash-header .header-left .brand-text .brand-sub { font-size: 0.4rem; }
+            #secCreateAadhaar .aa-cards-wrapper {
+                transform: scale(0.85); transform-origin: top center; margin-bottom: -40px;
             }
         }
 
         /* ===== PRINT ===== */
         @media print {
-            body * {
-                visibility: hidden;
+            body {
+                background: #fff !important; padding: 0 !important; margin: 0 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
             }
-            #secResult,
-            #secResult * {
-                visibility: visible;
+            .dash-header, .bottom-nav, .sidebar-overlay, .dash-sidebar,
+            .modal-overlay, .sidebar-item { display: none !important; }
+
+            .page-section { display: none !important; }
+            .page-section.active { display: block !important; }
+
+            /* Result printing */
+            #secResult.active {
+                position: absolute; left: 0; top: 0; width: 100%;
+                padding: 20px; background: #fff;
+                -webkit-print-color-adjust: exact; print-color-adjust: exact;
             }
-            #secResult {
-                position: absolute;
-                left: 0;
-                top: 0;
-                width: 100%;
-                padding: 20px;
-                background: #fff;
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
+            #secResult.active .result-card {
+                box-shadow: none !important; border: 1px solid #ddd;
+                -webkit-print-color-adjust: exact; print-color-adjust: exact;
             }
-            #secResult .result-card {
-                box-shadow: none !important;
-                border: 1px solid #ddd;
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-                background: linear-gradient(145deg, #fef8f0 0%, #fdf0e0 25%, #f8e8d0 50%, #f0e0c8 75%, #e8f5e8 100%) !important;
-            }
-            #secResult .result-card .card-body {
-                background: rgba(255, 255, 255, 0.70) !important;
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-            }
-            #secResult .result-card .print-btn,
-            #secResult .result-card .result-footer .print-btn {
+            #secResult.active .result-card .print-btn,
+            #secResult.active .btn-secondary { display: none !important; }
+
+            /* Aadhaar creator printing */
+            #secCreateAadhaar.active .aa-page-title,
+            #secCreateAadhaar.active .aa-page-sub,
+            #secCreateAadhaar.active .aa-form-card,
+            #secCreateAadhaar.active .aa-white-mode-btn,
+            #secCreateAadhaar.active .aa-print-actions {
                 display: none !important;
             }
-            .bottom-nav,
-            .dash-header,
-            .footer,
-            .page-section:not(#secResult) {
-                display: none !important;
+            #secCreateAadhaar.active .aa-preview-section {
+                display: flex !important; margin: 0 !important; padding: 0 !important;
             }
-            .dash-content {
-                padding: 0 !important;
-                max-height: none !important;
+            #secCreateAadhaar.active .aa-cards-wrapper {
+                display: flex !important; flex-direction: row !important;
+                gap: 8mm !important; justify-content: flex-start !important;
+                transform: none !important;
             }
+            #secCreateAadhaar.active .pvc-card {
+                box-shadow: none !important; border: 0.0px solid #ccc !important;
+                page-break-inside: avoid;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            @page { size: A4 portrait; margin: 10mm; }
         }
     </style>
 </head>
@@ -1899,7 +1241,7 @@
     DASHBOARD
     ============================================================ -->
     <div id="dashboardBlock">
-        <!-- ===== HEADER ===== -->
+        <!-- HEADER -->
         <header class="dash-header">
             <div class="header-left" id="headerLeftClick">
                 <img src="https://blogger.googleusercontent.com/img/a/AVvXsEhdHBrmzwSoARIy-GQ0vUBft7WOKi2uIi6D3paX01w2DAb47vH5jxenn9Wzoh-INA5wW0Qcu_yV9AbjZDgWNmcdw9hUSO0mrmF9niQgGML0ESlDxWBdO8vqVkGAo6J_wfJ8KWU6jHWJH3dULZ5zCc6fhw9KTivIoK2UEBBqKPDdUuegEUs3YkeVET9ah6vk" alt="Aadhaar Find" class="header-logo" />
@@ -1920,7 +1262,7 @@
             </div>
         </header>
 
-        <!-- ===== SIDEBAR ===== -->
+        <!-- SIDEBAR -->
         <div class="sidebar-overlay" id="sidebarOverlay"></div>
         <nav class="dash-sidebar" id="dashSidebar">
             <div class="sidebar-header">
@@ -1940,7 +1282,7 @@
             <div class="sidebar-item" id="sidebarLogout"><i class="fas fa-sign-out-alt"></i> Logout</div>
         </nav>
 
-        <!-- ===== MAIN CONTENT ===== -->
+        <!-- MAIN CONTENT -->
         <main class="dash-content" id="dashContent">
 
             <!-- ===== HOME ===== -->
@@ -1962,38 +1304,7 @@
 
                 <div class="section-title">Services</div>
                 <div class="service-grid" id="serviceGrid">
-                    <!-- Cards will be dynamically loaded from admin settings -->
-                    <!-- Default cards shown, but admin can override -->
-                    <div class="service-card" data-page="search" data-service="aadhaar">
-                        <div class="service-icon orange"><i class="fas fa-id-card"></i></div>
-                        <div class="service-name">Find Aadhaar</div>
-                        <div class="service-desc">Search Aadhaar details</div>
-                    </div>
-                    <div class="service-card" data-page="search" data-service="pan">
-                        <div class="service-icon blue"><i class="fas fa-credit-card"></i></div>
-                        <div class="service-name">Find PAN Card</div>
-                        <div class="service-desc">Search PAN details</div>
-                    </div>
-                    <div class="service-card" data-page="search" data-service="voter">
-                        <div class="service-icon green"><i class="fas fa-check-circle"></i></div>
-                        <div class="service-name">Find Voter ID</div>
-                        <div class="service-desc">Search voter details</div>
-                    </div>
-                    <div class="service-card" data-page="search" data-service="ration">
-                        <div class="service-icon navy"><i class="fas fa-utensils"></i></div>
-                        <div class="service-name">Find Ration Card</div>
-                        <div class="service-desc">Search ration details</div>
-                    </div>
-                    <div class="service-card" data-page="search" data-service="govt">
-                        <div class="service-icon purple"><i class="fas fa-file-alt"></i></div>
-                        <div class="service-name">Govt Documents</div>
-                        <div class="service-desc">Search govt records</div>
-                    </div>
-                    <div class="service-card" data-page="history" data-service="history">
-                        <div class="service-icon teal"><i class="fas fa-clock"></i></div>
-                        <div class="service-name">History</div>
-                        <div class="service-desc">View activity log</div>
-                    </div>
+                    <!-- Dynamically rendered -->
                 </div>
 
                 <div class="section-title">Quick Actions</div>
@@ -2070,9 +1381,7 @@
                                 </tr>
                             </thead>
                             <tbody id="historyBody">
-                                <tr>
-                                    <td colspan="4" class="text-center text-muted">No history found.</td>
-                                </tr>
+                                <tr><td colspan="4" class="text-center text-muted">No history found.</td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -2085,11 +1394,9 @@
                 <p class="text-muted" style="margin-bottom:16px;">Add money to your wallet via UPI</p>
 
                 <div class="card add-wallet-container">
-                    <!-- Pay ₹100 via UPI Button - Direct UPI Intent -->
                     <button class="pay-btn-upi-100" id="upiPay100Btn">
                         <i class="fas fa-phone-alt"></i> Pay ₹100 via UPI
                     </button>
-
                     <div class="qr-wrapper">
                         <div class="qr-code">
                             <img src="https://api.qrserver.com/v1/create-qr-code/?data=upi://pay?pa=sadiks486.wallet@phonepe&pn=Sadik%20Husain&tn=Thanks%20for%20Payment%20Aadhar%20find&cu=INR&am=100" alt="UPI QR" />
@@ -2099,11 +1406,9 @@
                             <span class="upi-id-display"><i class="fas fa-credit-card"></i> sadiks486.wallet@phonepe</span>
                         </div>
                     </div>
-
                     <button class="pay-btn-upi" id="upiPayBtn">
                         <i class="fas fa-phone-alt"></i> Pay via UPI (Custom Amount)
                     </button>
-
                     <div style="margin-top:20px;border-top:1px solid var(--border);padding-top:16px;">
                         <div class="card-title" style="font-size:0.95rem;margin-bottom:10px;">Verify Payment</div>
                         <div class="floating-group">
@@ -2159,13 +1464,10 @@
                 <h2 style="font-size:1.2rem;font-weight:700;color:var(--navy);margin-bottom:4px;">Admin Panel</h2>
                 <p class="text-muted" style="margin-bottom:16px;">Add new UID records, manage services & pending requests</p>
 
-                <!-- Service Management -->
                 <div class="card" style="margin-bottom:16px;">
                     <div class="card-title">Manage Service Cards</div>
                     <p class="text-muted" style="font-size:0.8rem;margin-bottom:12px;">Add, edit or remove service cards shown on home page</p>
-                    <div id="serviceManagementList" style="margin-bottom:12px;">
-                        <!-- Dynamic list of services -->
-                    </div>
+                    <div id="serviceManagementList" style="margin-bottom:12px;"></div>
                     <div style="display:flex;gap:10px;flex-wrap:wrap;">
                         <div class="floating-group" style="flex:2;min-width:140px;">
                             <input type="text" class="floating-input" id="newServiceName" placeholder=" " />
@@ -2237,7 +1539,7 @@
                             <label class="floating-label" for="adminEnrolDate">Enrolment Date</label>
                         </div>
                         <div class="floating-group" style="grid-column:1/3;">
-                            <input type="text" class="floating-input" id="adminEnrolTime" placeholder=" " pattern="\d{2}:\d{2}(:\d{2})?" />
+                            <input type="text" class="floating-input" id="adminEnrolTime" placeholder=" " />
                             <label class="floating-label" for="adminEnrolTime">Enrolment Time (HH:MM:SS)</label>
                         </div>
                     </div>
@@ -2309,6 +1611,165 @@
                 </div>
             </section>
 
+            <!-- ===== CREATE AADHAAR (EMBEDDED) ===== -->
+            <section class="page-section" id="secCreateAadhaar">
+                <h2 class="aa-page-title">Create Aadhaar Card</h2>
+                <p class="aa-page-sub">Fill in the details below and generate your Aadhaar card</p>
+
+                <button type="button" id="whiteModeBtn" class="aa-white-mode-btn" onclick="toggleWhiteMode()">White Card</button>
+
+                <form id="apaar-form" class="aa-form-card" onsubmit="return false;">
+                    <div class="aa-form-group">
+                        <label>Full Name (English)</label>
+                        <input type="text" id="fullName" placeholder="Type Name in English" oninput="updateCard()">
+                    </div>
+                    <div class="aa-form-group">
+                        <label>Full Name (Hindi)</label>
+                        <input type="text" id="fullNameHi" placeholder="नाम हिंदी में लिखें" oninput="updateCard()">
+                    </div>
+                    <div class="aa-form-group">
+                        <label>Date of Birth</label>
+                        <input type="date" id="dob" oninput="updateCard()">
+                    </div>
+                    <div class="aa-form-group">
+                        <label>Gender</label>
+                        <select id="gender" onchange="updateCard()">
+                            <option value="">Select Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="aa-form-group">
+                        <label>Issue Date (Front Side)</label>
+                        <input type="date" id="issueDate" onchange="updateIssueDate()">
+                    </div>
+                    <div class="aa-form-group">
+                        <label>Aadhaar ID</label>
+                        <input type="text" id="apaarId" placeholder="Aadhaar ID Number" oninput="updateCard()">
+                    </div>
+                    <div class="aa-form-group">
+                        <label>Upload Photo</label>
+                        <input type="file" id="photoInput" accept="image/*" onchange="updatePhoto(this)">
+                    </div>
+                    <div class="aa-form-group">
+                        <label>Care Of / अभिभावक का नाम (English)</label>
+                        <input type="text" id="careOfEn" placeholder="e.g. S/O EXAMPLE" oninput="updateCard()">
+                    </div>
+                    <div class="aa-form-group">
+                        <label>Care Of / अभिभावक का नाम (Hindi)</label>
+                        <input type="text" id="careOfHi" placeholder="जैसे पुत्र राम कुमार" oninput="updateCard()">
+                    </div>
+                    <div class="aa-form-group">
+                        <label>Address (English)</label>
+                        <textarea id="addressEn" rows="2" placeholder="Address in English" oninput="updateCard()"></textarea>
+                    </div>
+                    <div class="aa-form-group">
+                        <label>Address (Hindi)</label>
+                        <textarea id="addressHi" rows="2" placeholder="पता हिंदी में" oninput="updateCard()"></textarea>
+                    </div>
+                    <div class="aa-checkbox-group">
+                        <input type="checkbox" id="includeVid" onchange="toggleVid()">
+                        <label for="includeVid">Include VID Number</label>
+                    </div>
+                    <div class="aa-form-group" id="vidInputGroup" style="display: none;">
+                        <label>VID ID (16 digit)</label>
+                        <input type="text" id="nationalId" placeholder="e.g. 1234567890123456" oninput="updateCard()">
+                    </div>
+                    <div class="aa-form-group">
+                        <label>Upload QR Code (JPG)</label>
+                        <input type="file" id="qrUpload" accept="image/*" onchange="updateQRImage(this)">
+                    </div>
+                </form>
+
+                <div class="aa-preview-section" id="previewSection">
+                    <div class="aa-cards-wrapper">
+                        <!-- FRONT -->
+                        <div class="pvc-card front-card">
+                            <div class="ghost-photo-box">
+                                <img id="ghostPhoto" src="" alt="Ghost Image">
+                                <div class="ghost-aadhaar-no" id="ghost-apaarid"></div>
+                            </div>
+                            <div class="front-top-logos">
+                                <img class="moe-top" src="https://myaadhaar.uidai.gov.in/static/media/uidai_english_logo.37b7e790fc0b23da21bc9df098a66467.svg" alt="MoE">
+                                <img class="tiranga-center" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjP9jZAVbqFzWNCjFoKamt82F-iqpH9nXDBxtnvnvmgQZdkw4oh_7hGHkL_VXlMQTVvrX2TrxSK6gOmhXsUkyddB9wEEHiPSxKM-uszF7gAjo2qujyRGf8MwApFN4acHwduVpFvJRWWUn06KOixac6Ia0cYPrAj319ChPbNJm9nG4t8LIcibnBafod7_vY/s971/1000317230.png" alt="Govt of India">
+                                <img class="apaar-top" src="https://upload.wikimedia.org/wikipedia/commons/9/97/Aadhaar_(hindi).svg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original" alt="AADHAAR">
+                            </div>
+                            <div class="front-title"></div>
+                            <div class="front-main-row">
+                                <div class="front-date-vertical" id="issueDateVertical">Aadhaar no. issued: --/--/----</div>
+                                <div class="user-photo-box">
+                                    <img id="previewPhoto" src="" alt="User Photo" style="display: none;">
+                                </div>
+                                <div class="front-details">
+                                    <div class="name-hi" id="lbl-name-hi"></div>
+                                    <div class="name-en" id="lbl-name"></div>
+                                    <div class="detail-item">
+                                        <span class="label">जन्म तिथि/DOB:</span>
+                                        <span class="val" id="lbl-dob"></span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="val" id="lbl-gender"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="front-bottom-section">
+                                <div class="front-id-number" id="lbl-apaarid"></div>
+                                <div class="front-red-line"></div>
+                                <img class="front-bottom-logo" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiq_5ppMstLVgOX9RzAaIGD4tT6uzbRBqHIRr-E2BJfptBuTkyyxWnP8oRgcy8YE7e2u3fQcUDPrgBlwzu3YwH3cK9jgqtWw7MevW3JEZbnx7hrF_6JEGMi8OGNHGDikpJh2om5cJtlD-XBK6giFe_238Mp3qHhBc2wvIzsnlWe_APboWHVUrVBWhhQqW8/s2408/1000317562.png" alt="Mera Aadhaar Mera Pehchan">
+                            </div>
+                        </div>
+                        <!-- BACK -->
+                        <div class="pvc-card back-card">
+                            <div class="back-top-logos">
+                                <img class="moe-top" src="https://myaadhaar.uidai.gov.in/static/media/uidai_english_logo.37b7e790fc0b23da21bc9df098a66467.svg" alt="MoE">
+                                <img class="tiranga-center" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj00947ruyoFvU4tTOXn5iXU-LjBt7DIRbl1TyXy8S8me7TiUoOZKQeMssF_IHJEZRipdmHovEcP04c0VMlSQvNj4OGv4RpnlCOkIvj4ej14REBMdrxjoXBFS7OJGuasindVPWsPbAjWWIN6LVHKVt6_jTS83QhyphenhyphenUUBsy-eHSoTvoV6eO6wFD58NUy1z_Q/s888/1000317231.png" alt="Govt of India">
+                                <img class="apaar-top" src="https://myaadhaar.uidai.gov.in/static/media/aadhaar_english_logo.9a2d63795a7f7bdd7acb2148585336be.svg" alt="APAAR">
+                            </div>
+                            <div class="back-main-row">
+                                <div class="back-date-vertical" id="backDateVertical">Details as on: --/--/----</div>
+                                <div class="back-details">
+                                    <span class="lbl">पता:</span>
+                                    <span class="val" id="lbl-address-hi"></span>
+                                    <span class="lbl">Address:</span>
+                                    <span class="val" id="lbl-address-en"></span>
+                                </div>
+                                <div class="back-qr-box" id="backQrBox"></div>
+                            </div>
+                            <div class="back-bottom-section">
+                                <div class="back-id-number" id="lbl-apaarid-back"></div>
+                                <div class="back-vid-row" id="vidRow">VID : <span id="lbl-nationalid-back"></span></div>
+                                <div class="back-red-line"></div>
+                                <div class="back-contact-row">
+                                    <span>
+                                        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 122.9 98.9" style="enable-background:new 0 0 122.9 98.9" xml:space="preserve"><style type="text/css">.st0{fill-rule:evenodd;clip-rule:evenodd;}</style><g><path class="st0" d="M109,98.9H13.7v-14c0.5-16.3,14.9-28.7,23.6-42.8V29.7h14.5v8.9h19.5v-8.9h14.5v12.4 C95.2,57.2,109,67,109,84.7V98.9L109,98.9z M122.5,42.1c0-2.2,0.4-4.4,0.1-6.8c-10.7,3.5-21.1,2.5-31.3-3.1 c-0.4,3.8,0.2,7.2,1.6,10.4C96.5,50.6,122.2,53.3,122.5,42.1L122.5,42.1z M0.3,42.1c0-2.2-0.4-4.4-0.1-6.8 c10.7,3.5,21.1,2.5,31.3-3.1c0.4,3.8-0.2,7.2-1.6,10.4C26.3,50.6,0.5,53.3,0.3,42.1L0.3,42.1z M0,31.9C8.6-8.2,115.4-13,122.9,32 c-10.4,2.9-21,1.2-31.6-3.6c0.3-2.1-0.2-3.8-1.3-5.2c-6.3-7.9-51.4-8.2-57.2,0.3c-0.9,1.3-1.3,2.9-1.2,4.7 C21.1,34.6,10.5,36.1,0,31.9L0,31.9z M47.2,47.7c2.4,0,4.3,1.9,4.3,4.3c0,2.4-1.9,4.3-4.3,4.3c-2.4,0-4.3-1.9-4.3-4.3 C43,49.7,44.9,47.7,47.2,47.7L47.2,47.7z M74.8,71.7c2.4,0,4.3,1.9,4.3,4.3c0,2.4-1.9,4.3-4.3,4.3c-2.4,0-4.3-1.9-4.3-4.3 C70.5,73.7,72.4,71.7,74.8,71.7L74.8,71.7z M61,71.7c2.4,0,4.3,1.9,4.3,4.3c0,2.4-1.9,4.3-4.3,4.3c-2.4,0-4.3-1.9-4.3-4.3 C56.7,73.7,58.6,71.7,61,71.7L61,71.7z M47.2,71.7c2.4,0,4.3,1.9,4.3,4.3c0,2.4-1.9,4.3-4.3,4.3c-2.4,0-4.3-1.9-4.3-4.3 C43,73.7,44.9,71.7,47.2,71.7L47.2,71.7z M74.8,59.7c2.4,0,4.3,1.9,4.3,4.3c0,2.4-1.9,4.3-4.3,4.3c-2.4,0-4.3-1.9-4.3-4.3 C70.5,61.7,72.4,59.7,74.8,59.7L74.8,59.7z M61,59.7c2.4,0,4.3,1.9,4.3,4.3c0,2.4-1.9,4.3-4.3,4.3c-2.4,0-4.3-1.9-4.3-4.3 C56.7,61.7,58.6,59.7,61,59.7L61,59.7z M47.2,59.7c2.4,0,4.3,1.9,4.3,4.3c0,2.4-1.9,4.3-4.3,4.3c-2.4,0-4.3-1.9-4.3-4.3 C43,61.7,44.9,59.7,47.2,59.7L47.2,59.7z M74.8,47.7c2.4,0,4.3,1.9,4.3,4.3c0,2.4-1.9,4.3-4.3,4.3c-2.4,0-4.3-1.9-4.3-4.3 C70.5,49.7,72.4,47.7,74.8,47.7L74.8,47.7z M61,47.7c2.4,0,4.3,1.9,4.3,4.3c0,2.4-1.9,4.3-4.3,4.3c-2.4,0-4.3-1.9-4.3-4.3 C56.7,49.7,58.6,47.7,61,47.7L61,47.7z"/></g></svg>
+                                        1947
+                                    </span>
+                                    <span>|</span>
+                                    <span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 122.88 88.86"><title>email</title><path d="M7.05,0H115.83a7.07,7.07,0,0,1,7,7.05V81.81a7,7,0,0,1-1.22,4,2.78,2.78,0,0,1-.66,1,2.62,2.62,0,0,1-.66.46,7,7,0,0,1-4.51,1.65H7.05a7.07,7.07,0,0,1-7-7V7.05A7.07,7.07,0,0,1,7.05,0Zm-.3,78.84L43.53,40.62,6.75,9.54v69.3ZM49.07,45.39,9.77,83.45h103L75.22,45.39l-11,9.21h0a2.7,2.7,0,0,1-3.45,0L49.07,45.39Zm31.6-4.84,35.46,38.6V9.2L80.67,40.55ZM10.21,5.41,62.39,47.7,112.27,5.41Z"/></svg>
+                                        help@uidai.gov.in
+                                    </span>
+                                    <span>|</span>
+                                    <span>
+                                        <svg viewBox="0 0 24 24">
+                                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                                        </svg>
+                                        www.uidai.gov.in
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="aa-print-actions">
+                        <button class="aa-print-btn" id="printBtn" disabled onclick="window.print()">
+                            <i class="fas fa-print"></i> Print / Save as PDF
+                        </button>
+                    </div>
+                </div>
+            </section>
+
             <!-- ===== RESULT ===== -->
             <section class="page-section" id="secResult">
                 <div class="result-card">
@@ -2355,7 +1816,7 @@
 
         </main>
 
-        <!-- ===== BOTTOM NAV ===== -->
+        <!-- BOTTOM NAV -->
         <nav class="bottom-nav" id="bottomNav">
             <div class="nav-item active" data-page="home"><i class="fas fa-home"></i><span class="nav-label">Home</span></div>
             <div class="nav-item" data-page="search"><i class="fas fa-search"></i><span class="nav-label">Search</span></div>
@@ -2368,7 +1829,6 @@
     <!-- ============================================================
     MODALS
     ============================================================ -->
-    <!-- Don't Worry -->
     <div class="modal-overlay" id="dontWorryModal">
         <div class="modal-box">
             <span class="modal-close" id="dontWorryClose">&times;</span>
@@ -2378,7 +1838,6 @@
         </div>
     </div>
 
-    <!-- Avatar Editor -->
     <div class="modal-overlay avatar-editor" id="avatarEditorModal">
         <div class="modal-box">
             <span class="modal-close" id="avatarEditorClose">&times;</span>
@@ -2397,7 +1856,6 @@
         </div>
     </div>
 
-    <!-- Notification Modal -->
     <div class="modal-overlay" id="notificationModal">
         <div class="modal-box">
             <span class="modal-close" id="notificationModalClose">&times;</span>
@@ -2410,13 +1868,12 @@
     </div>
 
     <!-- ============================================================
-    JAVASCRIPT
+    MAIN DASHBOARD SCRIPT
     ============================================================ -->
     <script>
         (function() {
             'use strict';
 
-            // ===== IMPORTANT: Replace with your Apps Script Web App URL =====
             const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw5WkBaO9h6_Wskewau9eusnPXtB_EGGGTtcoerV4sM0SlxQPhYBYomseiH8_byr7qBJw/exec';
 
             let currentUser = null;
@@ -2432,26 +1889,31 @@
             function loadServiceCards() {
                 const saved = localStorage.getItem('aadhaarServices');
                 if (saved) {
-                    try {
-                        serviceCards = JSON.parse(saved);
-                        return serviceCards;
-                    } catch (e) { serviceCards = []; }
+                    try { serviceCards = JSON.parse(saved) || []; } catch (e) { serviceCards = []; }
+                } else { serviceCards = []; }
+
+                if (!serviceCards.length) {
+                    serviceCards = [
+                        { id: 'aadhaar', name: 'Find Aadhaar', icon: 'fas fa-id-card', color: 'orange', desc: 'Search Aadhaar details', page: 'search' },
+                        { id: 'createAadhaar', name: 'Create Aadhaar', icon: 'fas fa-id-card-alt', color: 'red', desc: 'Generate Aadhaar card', page: 'createAadhaar' },
+                        { id: 'pan', name: 'Find PAN Card', icon: 'fas fa-credit-card', color: 'blue', desc: 'Search PAN details', page: 'search' },
+                        { id: 'voter', name: 'Find Voter ID', icon: 'fas fa-check-circle', color: 'green', desc: 'Search voter details', page: 'search' },
+                        { id: 'ration', name: 'Find Ration Card', icon: 'fas fa-utensils', color: 'navy', desc: 'Search ration details', page: 'search' },
+                        { id: 'govt', name: 'Govt Documents', icon: 'fas fa-file-alt', color: 'purple', desc: 'Search govt records', page: 'search' },
+                        { id: 'history', name: 'History', icon: 'fas fa-clock', color: 'teal', desc: 'View activity log', page: 'history' }
+                    ];
                 }
-                // Default services
-                serviceCards = [
-                    { id: 'aadhaar', name: 'Find Aadhaar', icon: 'fas fa-id-card', color: 'orange', desc: 'Search Aadhaar details',
-                        page: 'search' },
-                    { id: 'pan', name: 'Find PAN Card', icon: 'fas fa-credit-card', color: 'blue', desc: 'Search PAN details',
-                        page: 'search' },
-                    { id: 'voter', name: 'Find Voter ID', icon: 'fas fa-check-circle', color: 'green',
-                        desc: 'Search voter details', page: 'search' },
-                    { id: 'ration', name: 'Find Ration Card', icon: 'fas fa-utensils', color: 'navy',
-                        desc: 'Search ration details', page: 'search' },
-                    { id: 'govt', name: 'Govt Documents', icon: 'fas fa-file-alt', color: 'purple', desc: 'Search govt records',
-                        page: 'search' },
-                    { id: 'history', name: 'History', icon: 'fas fa-clock', color: 'teal', desc: 'View activity log',
-                        page: 'history' }
-                ];
+
+                if (!serviceCards.some(c => c.id === 'createAadhaar')) {
+                    const newCard = {
+                        id: 'createAadhaar', name: 'Create Aadhaar', icon: 'fas fa-id-card-alt',
+                        color: 'red', desc: 'Generate Aadhaar card', page: 'createAadhaar'
+                    };
+                    const idx = serviceCards.findIndex(c => c.id === 'aadhaar');
+                    if (idx >= 0) serviceCards.splice(idx + 1, 0, newCard);
+                    else serviceCards.push(newCard);
+                }
+
                 saveServiceCards();
                 return serviceCards;
             }
@@ -2466,14 +1928,8 @@
                 grid.innerHTML = '';
                 serviceCards.forEach(card => {
                     const colorMap = {
-                        orange: 'orange',
-                        blue: 'blue',
-                        green: 'green',
-                        navy: 'navy',
-                        purple: 'purple',
-                        teal: 'teal',
-                        red: 'red',
-                        indigo: 'indigo'
+                        orange: 'orange', blue: 'blue', green: 'green', navy: 'navy',
+                        purple: 'purple', teal: 'teal', red: 'red', indigo: 'indigo'
                     };
                     const colorClass = colorMap[card.color] || 'orange';
                     const div = document.createElement('div');
@@ -2486,12 +1942,17 @@
                         <div class="service-desc">${card.desc || 'Click to search'}</div>
                     `;
                     div.addEventListener('click', function() {
+                        const sid = this.dataset.service;
                         const page = this.dataset.page;
-                        if (page === 'history') {
-                            navigateTo('history');
-                        } else {
-                            navigateTo('search');
+
+                        // 👉 Create Aadhaar card → open embedded creator
+                        if (sid === 'createAadhaar' || page === 'createAadhaar') {
+                            navigateTo('createAadhaar');
+                            return;
                         }
+
+                        if (page === 'history') navigateTo('history');
+                        else navigateTo('search');
                     });
                     grid.appendChild(div);
                 });
@@ -2532,28 +1993,15 @@
                 });
             }
 
-            // Add service
             document.getElementById('addServiceBtn')?.addEventListener('click', function() {
                 const name = document.getElementById('newServiceName').value.trim();
                 const icon = document.getElementById('newServiceIcon').value.trim();
                 const errEl = document.getElementById('serviceMgmtError');
-                if (!name) {
-                    errEl.textContent = 'Please enter a service name.';
-                    errEl.className = 'error-msg';
-                    return;
-                }
-                if (!icon) {
-                    errEl.textContent = 'Please enter an icon class (e.g., fas fa-id-card).';
-                    errEl.className = 'error-msg';
-                    return;
-                }
+                if (!name) { errEl.textContent = 'Please enter a service name.'; errEl.className = 'error-msg'; return; }
+                if (!icon) { errEl.textContent = 'Please enter an icon class.'; errEl.className = 'error-msg'; return; }
                 const newCard = {
-                    id: 'custom_' + Date.now(),
-                    name: name,
-                    icon: icon,
-                    color: 'orange',
-                    desc: 'Custom service',
-                    page: 'search'
+                    id: 'custom_' + Date.now(), name: name, icon: icon,
+                    color: 'orange', desc: 'Custom service', page: 'search'
                 };
                 serviceCards.push(newCard);
                 saveServiceCards();
@@ -2563,8 +2011,7 @@
                 document.getElementById('newServiceIcon').value = 'fas fa-id-card';
                 errEl.textContent = '✅ Service added successfully!';
                 errEl.className = 'success-msg';
-                setTimeout(() => { errEl.textContent = '';
-                    errEl.className = 'error-msg'; }, 3000);
+                setTimeout(() => { errEl.textContent = ''; errEl.className = 'error-msg'; }, 3000);
             });
 
             // ===== SESSION =====
@@ -2577,40 +2024,29 @@
                             currentUser = user;
                             enterDashboard();
                             return true;
-                        } else {
-                            localStorage.removeItem('aadhaarUser');
-                        }
-                    } catch (e) {
-                        localStorage.removeItem('aadhaarUser');
-                    }
+                        } else localStorage.removeItem('aadhaarUser');
+                    } catch (e) { localStorage.removeItem('aadhaarUser'); }
                 }
                 return false;
             }
 
-            function saveSession(user) {
-                localStorage.setItem('aadhaarUser', JSON.stringify(user));
-            }
-
-            function clearSession() {
-                localStorage.removeItem('aadhaarUser');
-            }
+            function saveSession(user) { localStorage.setItem('aadhaarUser', JSON.stringify(user)); }
+            function clearSession() { localStorage.removeItem('aadhaarUser'); }
 
             const $ = id => document.getElementById(id);
 
-            // ========== AUTH DOM ==========
+            // AUTH DOM
             const authBlock = $('authBlock');
             const dashboardBlock = $('dashboardBlock');
             const loginForm = $('loginForm');
             const signupForm = $('signupForm');
             const forgotForm = $('forgotForm');
             const authSubtitle = $('authSubtitle');
-
             const loginId = $('loginId');
             const loginPass = $('loginPass');
             const loginError = $('loginError');
             const loginBtn = $('loginBtn');
             const loginPassToggle = $('loginPassToggle');
-
             const signupName = $('signupName');
             const signupEmail = $('signupEmail');
             const signupMobile = $('signupMobile');
@@ -2621,7 +2057,6 @@
             const verifySignupOtpBtn = $('verifySignupOtpBtn');
             const otpStatus = $('otpStatus');
             const signupTimer = $('signupTimer');
-
             const forgotEmail = $('forgotEmail');
             const forgotOtp = $('forgotOtp');
             const forgotError = $('forgotError');
@@ -2631,7 +2066,7 @@
             const forgotOtpStatus = $('forgotOtpStatus');
             const forgotTimer = $('forgotTimer');
 
-            // ========== DASHBOARD DOM ==========
+            // DASHBOARD DOM
             const walletBalance = $('walletBalance');
             const walletClick = $('walletClick');
             const headerAvatarInitial = $('headerAvatarInitial');
@@ -2644,7 +2079,6 @@
             const userNameDisplay = $('userNameDisplay');
             const headerLeftClick = $('headerLeftClick');
 
-            // Pages
             const pages = {
                 home: $('secHome'),
                 search: $('secSearch'),
@@ -2652,6 +2086,7 @@
                 addWallet: $('secAddWallet'),
                 profile: $('secProfile'),
                 adminPanel: $('secAdminPanel'),
+                createAadhaar: $('secCreateAadhaar'),
                 result: $('secResult'),
             };
 
@@ -2668,10 +2103,8 @@
             const findUidError = $('findUidError');
             const findByUidBtn = $('findByUidBtn');
 
-            // History
             const historyBody = $('historyBody');
 
-            // Add Wallet
             const paymentTxn = $('paymentTxn');
             const paymentAmount = $('paymentAmount');
             const paymentError = $('paymentError');
@@ -2679,7 +2112,6 @@
             const upiPayBtn = $('upiPayBtn');
             const upiPay100Btn = $('upiPay100Btn');
 
-            // Admin
             const adminUid = $('adminUid');
             const adminName = $('adminName');
             const adminFather = $('adminFather');
@@ -2712,7 +2144,6 @@
             const addUserError = $('addUserError');
             const addUserBtn = $('addUserBtn');
 
-            // Profile
             const profileBeneficiaryId = $('profileBeneficiaryId');
             const profileFullName = $('profileFullName');
             const profileEmail = $('profileEmail');
@@ -2725,7 +2156,6 @@
             const profilePicEditBtn = $('profilePicEditBtn');
             const profileLogoutBtn = $('profileLogoutBtn');
 
-            // Result
             const resultUid = $('resultUid');
             const resultBeneficiary = $('resultBeneficiary');
             const resultBeneficiaryTag = $('resultBeneficiaryTag');
@@ -2744,7 +2174,6 @@
             const rEnrolDate = $('rEnrolDate');
             const rEnrolTime = $('rEnrolTime');
 
-            // Modals
             const dontWorryModal = $('dontWorryModal');
             const dontWorryClose = $('dontWorryClose');
             const avatarEditorModal = $('avatarEditorModal');
@@ -2760,12 +2189,8 @@
             const notificationBtn = $('notificationBtn');
             const notiDot = $('notiDot');
 
-            // ========== UTILITY ==========
-            function showAuthError(el, msg) { el.textContent = msg;
-                el.className = 'error-msg'; }
-
-            function showAuthSuccess(el, msg) { el.textContent = msg;
-                el.className = 'success-msg'; }
+            function showAuthError(el, msg) { el.textContent = msg; el.className = 'error-msg'; }
+            function showAuthSuccess(el, msg) { el.textContent = msg; el.className = 'success-msg'; }
 
             function formatDateForDisplay(dateStr) {
                 if (!dateStr || dateStr === '—') return '—';
@@ -2821,13 +2246,10 @@
                 return interval;
             }
 
-            // ===== NOTIFICATIONS =====
             function loadNotifications() {
                 const saved = localStorage.getItem('aadhaarNotifications');
                 if (saved) {
-                    try {
-                        return JSON.parse(saved);
-                    } catch (e) { return []; }
+                    try { return JSON.parse(saved); } catch (e) { return []; }
                 }
                 return [];
             }
@@ -2840,27 +2262,14 @@
             function updateNotiDot(notifications) {
                 if (notifications && notifications.length > 0) {
                     const unread = notifications.filter(n => !n.read);
-                    if (unread.length > 0) {
-                        notiDot.style.display = 'block';
-                    } else {
-                        notiDot.style.display = 'none';
-                    }
-                } else {
-                    notiDot.style.display = 'none';
-                }
+                    notiDot.style.display = unread.length > 0 ? 'block' : 'none';
+                } else notiDot.style.display = 'none';
             }
 
             function addNotification(title, desc) {
                 const notis = loadNotifications();
-                notis.unshift({
-                    id: Date.now(),
-                    title: title,
-                    desc: desc,
-                    time: new Date().toISOString(),
-                    read: false
-                });
+                notis.unshift({ id: Date.now(), title, desc, time: new Date().toISOString(), read: false });
                 saveNotifications(notis);
-                updateNotiDot(notis);
             }
 
             function renderNotifications() {
@@ -2871,25 +2280,22 @@
                 }
                 let html = '';
                 notis.forEach(n => {
-                    const timeStr = formatDateTimeForDisplay(n.time);
                     html += `
                         <div class="notification-item">
                             <div class="noti-icon"><i class="fas fa-bell"></i></div>
                             <div class="noti-content">
                                 <div class="noti-title">${n.title}</div>
                                 <div class="noti-desc">${n.desc}</div>
-                                <div class="noti-time">${timeStr}</div>
+                                <div class="noti-time">${formatDateTimeForDisplay(n.time)}</div>
                             </div>
                         </div>
                     `;
                 });
                 notificationList.innerHTML = html;
-                const updated = notis.map(n => ({ ...n, read: true }));
-                saveNotifications(updated);
+                saveNotifications(notis.map(n => ({ ...n, read: true })));
                 notiDot.style.display = 'none';
             }
 
-            // ===== NAVIGATION =====
             function navigateTo(page) {
                 if (page === 'result') return;
                 currentPage = page;
@@ -2897,16 +2303,13 @@
                 document.querySelectorAll('.sidebar-item[data-page]').forEach(el => {
                     el.classList.toggle('active', el.dataset.page === page);
                 });
-
                 document.querySelectorAll('.bottom-nav .nav-item').forEach(el => {
                     el.classList.toggle('active', el.dataset.page === page);
                 });
-
                 Object.entries(pages).forEach(([key, el]) => {
-                    el.classList.toggle('active', key === page);
+                    if (el) el.classList.toggle('active', key === page);
                 });
-
-                pages.result.classList.remove('active');
+                if (pages.result) pages.result.classList.remove('active');
 
                 if (page === 'history') loadHistory();
                 if (page === 'adminPanel' && currentUser?.isAdmin) {
@@ -2914,35 +2317,27 @@
                     renderServiceManagement();
                 }
                 if (page === 'profile') updateProfilePage();
-                if (page === 'addWallet') {
-                    if (paymentAmount) paymentAmount.value = 100;
-                }
+                if (page === 'addWallet') { if (paymentAmount) paymentAmount.value = 100; }
 
                 closeSidebar();
+                document.getElementById('dashContent').scrollTop = 0;
             }
 
-            // ===== SIDEBAR =====
             function openSidebar() {
                 dashSidebar.classList.add('open');
                 sidebarOverlay.classList.add('show');
                 document.body.style.overflow = 'hidden';
             }
-
             function closeSidebar() {
                 dashSidebar.classList.remove('open');
                 sidebarOverlay.classList.remove('show');
                 document.body.style.overflow = '';
             }
-
             function toggleSidebar() {
-                if (dashSidebar.classList.contains('open')) {
-                    closeSidebar();
-                } else {
-                    openSidebar();
-                }
+                if (dashSidebar.classList.contains('open')) closeSidebar();
+                else openSidebar();
             }
 
-            // ===== AUTH TOGGLES =====
             function showAuthForm(form) {
                 [loginForm, signupForm, forgotForm].forEach(f => f.classList.add('hidden'));
                 form.classList.remove('hidden');
@@ -2966,33 +2361,20 @@
             document.getElementById('gotoForgot').addEventListener('click', () => showAuthForm(forgotForm));
             document.getElementById('gotoLoginFromForgot').addEventListener('click', () => showAuthForm(loginForm));
 
-            // ===== PASSWORD TOGGLE =====
             loginPassToggle.addEventListener('click', function() {
                 const type = loginPass.getAttribute('type') === 'password' ? 'text' : 'password';
                 loginPass.setAttribute('type', type);
                 this.innerHTML = type === 'password' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
             });
 
-            // ========== SIGNUP OTP ==========
             sendOtpBtn.addEventListener('click', async function() {
                 const email = signupEmail.value.trim();
                 const fullName = signupName.value.trim();
                 const mobile = signupMobile.value.trim();
-                if (!email || !fullName || !mobile) {
-                    otpStatus.textContent = 'Please fill all fields.';
-                    otpStatus.className = 'error-msg';
-                    return;
-                }
-                if (mobile.length !== 10 || !/^\d{10}$/.test(mobile)) {
-                    otpStatus.textContent = 'Enter valid 10-digit mobile.';
-                    otpStatus.className = 'error-msg';
-                    return;
-                }
-                this.disabled = true;
-                this.textContent = 'Sending...';
-                otpStatus.textContent = '';
-                signupOtpVerified = false;
-                signupBtn.disabled = true;
+                if (!email || !fullName || !mobile) { otpStatus.textContent = 'Please fill all fields.'; otpStatus.className = 'error-msg'; return; }
+                if (mobile.length !== 10 || !/^\d{10}$/.test(mobile)) { otpStatus.textContent = 'Enter valid 10-digit mobile.'; otpStatus.className = 'error-msg'; return; }
+                this.disabled = true; this.textContent = 'Sending...'; otpStatus.textContent = '';
+                signupOtpVerified = false; signupBtn.disabled = true;
                 verifySignupOtpBtn.style.display = 'none';
                 const res = await apiCall('send_otp', { email, fullName, mobile });
                 if (res.status === 'success') {
@@ -3004,56 +2386,34 @@
                         otpStatus.textContent = 'OTP expired. Please resend.';
                         otpStatus.className = 'error-msg';
                     });
-                } else {
-                    showAuthError(otpStatus, res.message);
-                }
-                this.disabled = false;
-                this.textContent = 'Send OTP';
+                } else showAuthError(otpStatus, res.message);
+                this.disabled = false; this.textContent = 'Send OTP';
             });
 
             verifySignupOtpBtn.addEventListener('click', async function() {
                 const email = signupEmail.value.trim();
                 const otp = signupOtp.value.trim();
-                if (!email || !otp) {
-                    otpStatus.textContent = 'Enter OTP.';
-                    otpStatus.className = 'error-msg';
-                    return;
-                }
-                this.disabled = true;
-                this.textContent = 'Verifying...';
-                otpStatus.textContent = '';
+                if (!email || !otp) { otpStatus.textContent = 'Enter OTP.'; otpStatus.className = 'error-msg'; return; }
+                this.disabled = true; this.textContent = 'Verifying...'; otpStatus.textContent = '';
                 const res = await apiCall('verify_signup_otp', { email, otp });
                 if (res.status === 'success') {
-                    signupOtpVerified = true;
-                    signupBtn.disabled = false;
+                    signupOtpVerified = true; signupBtn.disabled = false;
                     showAuthSuccess(otpStatus, 'OTP verified! You can now create account.');
                     if (signupTimerInterval) clearInterval(signupTimerInterval);
                     signupTimer.textContent = '✓';
                     verifySignupOtpBtn.style.display = 'none';
-                } else {
-                    showAuthError(otpStatus, res.message);
-                }
-                this.disabled = false;
-                this.textContent = 'Verify OTP';
+                } else showAuthError(otpStatus, res.message);
+                this.disabled = false; this.textContent = 'Verify OTP';
             });
 
-            // ========== SIGNUP ==========
             signupBtn.addEventListener('click', async function() {
-                if (!signupOtpVerified) {
-                    signupError.textContent = 'Please verify OTP first.';
-                    return;
-                }
+                if (!signupOtpVerified) { signupError.textContent = 'Please verify OTP first.'; return; }
                 const email = signupEmail.value.trim();
                 const fullName = signupName.value.trim();
                 const mobile = signupMobile.value.trim();
                 const otp = signupOtp.value.trim();
-                if (!email || !fullName || !mobile || !otp) {
-                    signupError.textContent = 'All fields required.';
-                    return;
-                }
-                this.disabled = true;
-                this.textContent = 'Creating...';
-                signupError.textContent = '';
+                if (!email || !fullName || !mobile || !otp) { signupError.textContent = 'All fields required.'; return; }
+                this.disabled = true; this.textContent = 'Creating...'; signupError.textContent = '';
                 const res = await apiCall('signup', { email, fullName, mobile, otp });
                 if (res.status === 'success') {
                     showAuthSuccess(signupError, '✅ Your account created! Please visit your email box.');
@@ -3067,26 +2427,14 @@
                         signupError.textContent = '';
                         signupError.className = 'error-msg';
                     }, 4000);
-                } else {
-                    showAuthError(signupError, res.message);
-                    this.disabled = false;
-                    this.textContent = 'Create Account';
-                }
+                } else { showAuthError(signupError, res.message); this.disabled = false; this.textContent = 'Create Account'; }
             });
 
-            // ========== FORGOT OTP ==========
             sendForgotOtpBtn.addEventListener('click', async function() {
                 const email = forgotEmail.value.trim();
-                if (!email) {
-                    forgotOtpStatus.textContent = 'Enter your email.';
-                    forgotOtpStatus.className = 'error-msg';
-                    return;
-                }
-                this.disabled = true;
-                this.textContent = 'Sending...';
-                forgotOtpStatus.textContent = '';
-                forgotOtpVerified = false;
-                forgotBtn.disabled = true;
+                if (!email) { forgotOtpStatus.textContent = 'Enter your email.'; forgotOtpStatus.className = 'error-msg'; return; }
+                this.disabled = true; this.textContent = 'Sending...'; forgotOtpStatus.textContent = '';
+                forgotOtpVerified = false; forgotBtn.disabled = true;
                 verifyForgotOtpBtn.style.display = 'none';
                 const res = await apiCall('send_forgot_otp', { email });
                 if (res.status === 'success') {
@@ -3098,28 +2446,18 @@
                         forgotOtpStatus.textContent = 'OTP expired. Please resend.';
                         forgotOtpStatus.className = 'error-msg';
                     });
-                } else {
-                    showAuthError(forgotOtpStatus, res.message);
-                }
-                this.disabled = false;
-                this.textContent = 'Send OTP';
+                } else showAuthError(forgotOtpStatus, res.message);
+                this.disabled = false; this.textContent = 'Send OTP';
             });
 
             verifyForgotOtpBtn.addEventListener('click', async function() {
                 const email = forgotEmail.value.trim();
                 const otp = forgotOtp.value.trim();
-                if (!email || !otp) {
-                    forgotOtpStatus.textContent = 'Enter OTP.';
-                    forgotOtpStatus.className = 'error-msg';
-                    return;
-                }
-                this.disabled = true;
-                this.textContent = 'Verifying...';
-                forgotOtpStatus.textContent = '';
+                if (!email || !otp) { forgotOtpStatus.textContent = 'Enter OTP.'; forgotOtpStatus.className = 'error-msg'; return; }
+                this.disabled = true; this.textContent = 'Verifying...'; forgotOtpStatus.textContent = '';
                 const res = await apiCall('verify_forgot_otp', { email, otp });
                 if (res.status === 'success') {
-                    forgotOtpVerified = true;
-                    forgotBtn.disabled = false;
+                    forgotOtpVerified = true; forgotBtn.disabled = false;
                     showAuthSuccess(forgotOtpStatus, '✅ Verified! Credentials sent to your email.');
                     if (forgotTimerInterval) clearInterval(forgotTimerInterval);
                     forgotTimer.textContent = '✓';
@@ -3131,37 +2469,24 @@
                         forgotError.textContent = '';
                         forgotError.className = 'error-msg';
                     }, 5000);
-                } else {
-                    showAuthError(forgotOtpStatus, res.message);
-                }
-                this.disabled = false;
-                this.textContent = 'Verify OTP';
+                } else showAuthError(forgotOtpStatus, res.message);
+                this.disabled = false; this.textContent = 'Verify OTP';
             });
 
-            // ========== LOGIN ==========
             loginBtn.addEventListener('click', async function() {
                 const id = loginId.value.trim();
                 const pass = loginPass.value.trim();
-                if (!id || !pass) {
-                    loginError.textContent = 'Please enter both User ID and Password.';
-                    return;
-                }
-                this.disabled = true;
-                this.textContent = 'Logging in...';
-                loginError.textContent = '';
+                if (!id || !pass) { loginError.textContent = 'Please enter both User ID and Password.'; return; }
+                this.disabled = true; this.textContent = 'Logging in...'; loginError.textContent = '';
                 const res = await apiCall('login', { beneficiaryId: id, password: pass });
                 if (res.status === 'success') {
                     currentUser = res.user;
                     saveSession(currentUser);
                     enterDashboard();
-                } else {
-                    loginError.textContent = res.message;
-                }
-                this.disabled = false;
-                this.textContent = 'Login';
+                } else loginError.textContent = res.message;
+                this.disabled = false; this.textContent = 'Login';
             });
 
-            // ========== DASHBOARD ==========
             function enterDashboard() {
                 authBlock.style.display = 'none';
                 dashboardBlock.classList.add('active');
@@ -3169,12 +2494,8 @@
                 renderServiceCards();
                 updateUserUI();
                 loadHistory();
-                checkBalance();
-                if (currentUser.isAdmin) {
-                    adminNavItem.style.display = 'flex';
-                } else {
-                    adminNavItem.style.display = 'none';
-                }
+                if (currentUser.isAdmin) adminNavItem.style.display = 'flex';
+                else adminNavItem.style.display = 'none';
                 navigateTo('home');
                 updateProfilePage();
                 updateNotiDot(loadNotifications());
@@ -3184,7 +2505,6 @@
                 const name = currentUser.fullName || 'User';
                 const initial = name.charAt(0).toUpperCase();
                 userNameDisplay.textContent = name;
-
                 headerAvatarInitial.textContent = initial;
                 headerAvatarInitial.style.display = 'block';
                 headerAvatarImg.style.display = 'none';
@@ -3215,8 +2535,6 @@
                 }
             }
 
-            function checkBalance() {}
-
             function updateBalance(newBal) {
                 currentUser.balance = newBal;
                 walletBalance.textContent = newBal;
@@ -3224,7 +2542,6 @@
                 saveSession(currentUser);
             }
 
-            // ========== LOGOUT ==========
             function performLogout() {
                 currentUser = null;
                 clearSession();
@@ -3233,7 +2550,7 @@
                 loginId.value = '';
                 loginPass.value = '';
                 loginError.textContent = '';
-                Object.values(pages).forEach(p => p.classList.remove('active'));
+                Object.values(pages).forEach(p => { if (p) p.classList.remove('active'); });
                 pages.home.classList.add('active');
                 closeSidebar();
             }
@@ -3241,10 +2558,7 @@
             profileLogoutBtn.addEventListener('click', performLogout);
             document.getElementById('sidebarLogout').addEventListener('click', performLogout);
 
-            // ========== EVENT LISTENERS ==========
-            headerAvatar.addEventListener('click', function() {
-                navigateTo('profile');
-            });
+            headerAvatar.addEventListener('click', function() { navigateTo('profile'); });
 
             headerLeftClick.addEventListener('click', function(e) {
                 if (!e.target.closest('.header-avatar') && !e.target.closest('.notification-btn')) {
@@ -3252,9 +2566,7 @@
                 }
             });
 
-            walletClick.addEventListener('click', function() {
-                navigateTo('addWallet');
-            });
+            walletClick.addEventListener('click', function() { navigateTo('addWallet'); });
 
             sidebarClose.addEventListener('click', closeSidebar);
             sidebarOverlay.addEventListener('click', closeSidebar);
@@ -3268,23 +2580,18 @@
             });
 
             document.querySelectorAll('.bottom-nav .nav-item').forEach(item => {
-                item.addEventListener('click', function() {
-                    navigateTo(this.dataset.page);
-                });
+                item.addEventListener('click', function() { navigateTo(this.dataset.page); });
             });
 
-            // ===== NOTIFICATIONS =====
             notificationBtn.addEventListener('click', function() {
                 renderNotifications();
                 notificationModal.classList.add('show');
             });
-
             notificationModalClose.addEventListener('click', () => notificationModal.classList.remove('show'));
             notificationModal.addEventListener('click', function(e) {
                 if (e.target === this) this.classList.remove('show');
             });
 
-            // ===== PROFILE PASSWORD TOGGLE =====
             let profilePasswordVisible = false;
             profilePassToggle.addEventListener('click', function() {
                 profilePasswordVisible = !profilePasswordVisible;
@@ -3297,7 +2604,6 @@
                 }
             });
 
-            // ===== PROFILE PIC EDIT =====
             profilePicEditBtn.addEventListener('click', function() {
                 avatarUrlInput.value = currentUser.profilePic || '';
                 updateAvatarPreview(currentUser.profilePic || null);
@@ -3319,28 +2625,18 @@
 
             avatarSaveBtn.addEventListener('click', async function() {
                 const url = avatarUrlInput.value.trim();
-                if (!url) {
-                    avatarError.textContent = 'Please enter an image URL.';
-                    return;
-                }
-                this.disabled = true;
-                this.textContent = 'Updating...';
-                avatarError.textContent = '';
+                if (!url) { avatarError.textContent = 'Please enter an image URL.'; return; }
+                this.disabled = true; this.textContent = 'Updating...'; avatarError.textContent = '';
                 const res = await apiCall('update_profile_pic', {
-                    beneficiaryId: currentUser.beneficiaryId,
-                    picUrl: url
+                    beneficiaryId: currentUser.beneficiaryId, picUrl: url
                 });
-                this.disabled = false;
-                this.textContent = 'Update';
+                this.disabled = false; this.textContent = 'Update';
                 if (res.status === 'success') {
                     currentUser.profilePic = url;
-                    updateUserUI();
-                    updateProfilePage();
+                    updateUserUI(); updateProfilePage();
                     saveSession(currentUser);
                     avatarEditorModal.classList.remove('show');
-                } else {
-                    avatarError.textContent = res.message || 'Failed to update.';
-                }
+                } else avatarError.textContent = res.message || 'Failed to update.';
             });
 
             avatarEditorClose.addEventListener('click', () => avatarEditorModal.classList.remove('show'));
@@ -3348,31 +2644,24 @@
                 if (e.target === this) this.classList.remove('show');
             });
 
-            // ===== UPI PAY BUTTONS =====
-            // Pay ₹100 via UPI - Direct Intent with exact URI
             upiPay100Btn.addEventListener('click', function() {
-                const upiUri =
-                    'upi://pay?pa=sadiks486.wallet@phonepe&pn=Sadik%20Husain&tn=Thanks%20for%20Payment%20Aadhar%20find&cu=INR&am=100';
+                const upiUri = 'upi://pay?pa=sadiks486.wallet@phonepe&pn=Sadik%20Husain&tn=Thanks%20for%20Payment%20Aadhar%20find&cu=INR&am=100';
                 window.open(upiUri, '_blank');
                 paymentError.textContent = '💳 UPI app opened. Please enter your PIN to complete payment.';
                 paymentError.className = 'success-msg';
                 if (paymentAmount) paymentAmount.value = 100;
-                // Add notification for payment attempt
                 addNotification('Payment Initiated', '₹100 UPI payment opened');
             });
 
-            // Custom UPI amount
             upiPayBtn.addEventListener('click', function() {
                 const amt = paymentAmount ? parseFloat(paymentAmount.value) || 100 : 100;
-                const upiUri =
-                    `upi://pay?pa=sadiks486.wallet@phonepe&pn=Sadik%20Husain&tn=Thanks%20for%20Payment%20Aadhar%20find&cu=INR&am=${amt}`;
+                const upiUri = `upi://pay?pa=sadiks486.wallet@phonepe&pn=Sadik%20Husain&tn=Thanks%20for%20Payment%20Aadhar%20find&cu=INR&am=${amt}`;
                 window.open(upiUri, '_blank');
                 paymentError.textContent = `💳 UPI app opened for ₹${amt}. Please enter your PIN.`;
                 paymentError.className = 'success-msg';
                 addNotification('Payment Initiated', `₹${amt} UPI payment opened`);
             });
 
-            // ===== FIND BY NAME =====
             findByNameBtn.addEventListener('click', async function() {
                 const name = findName.value.trim();
                 const father = findFather.value.trim();
@@ -3381,23 +2670,14 @@
                 const district = findDistrict.value.trim();
                 const pincode = findPincode.value.trim();
 
-                if (!name || !dob) {
-                    findError.textContent = 'Full Name and DOB are required.';
-                    return;
-                }
+                if (!name || !dob) { findError.textContent = 'Full Name and DOB are required.'; return; }
                 this.disabled = true;
                 this.innerHTML = '<span class="btn-content"><i class="fas fa-spinner fa-spin"></i> Searching...</span>';
                 findError.textContent = '';
 
                 const res = await apiCall('find_data', {
-                    beneficiaryId: currentUser.beneficiaryId,
-                    searchType: 'by_details',
-                    fullName: name,
-                    fatherName: father,
-                    dob: dob,
-                    state: state,
-                    district: district,
-                    pincode: pincode
+                    beneficiaryId: currentUser.beneficiaryId, searchType: 'by_details',
+                    fullName: name, fatherName: father, dob, state, district, pincode
                 });
 
                 this.disabled = false;
@@ -3405,41 +2685,31 @@
 
                 if (res.status === 'success') {
                     if (!currentUser.isAdmin) updateBalance(res.newBalance);
-                    showResult(res.data);
-                    loadHistory();
-                    if (!currentUser.isAdmin) {
-                        addNotification('Search Successful', `Found record for ${name}`);
-                    }
+                    showResult(res.data); loadHistory();
+                    if (!currentUser.isAdmin) addNotification('Search Successful', `Found record for ${name}`);
                 } else if (res.status === 'pending') {
                     if (!currentUser.isAdmin) updateBalance(res.newBalance);
-                    findError.textContent = res.message;
-                    findError.className = 'success-msg';
-                    loadHistory();
-                    alert('🔍 ' + res.message);
+                    findError.textContent = res.message; findError.className = 'success-msg';
+                    loadHistory(); alert('🔍 ' + res.message);
                 } else if (res.status === 'low_balance') {
-                    findError.textContent = res.message;
-                    findError.className = 'error-msg';
+                    findError.textContent = res.message; findError.className = 'error-msg';
                 } else {
                     findError.textContent = res.message || 'Something went wrong.';
                     findError.className = 'error-msg';
                 }
             });
 
-            // ===== FIND BY UID =====
             findByUidBtn.addEventListener('click', async function() {
                 const uid = findUidInput.value.trim();
                 if (!uid || uid.length !== 12 || !/^\d{12}$/.test(uid)) {
-                    findUidError.textContent = 'Enter a valid 12-digit UID.';
-                    return;
+                    findUidError.textContent = 'Enter a valid 12-digit UID.'; return;
                 }
                 this.disabled = true;
                 this.innerHTML = '<span class="btn-content"><i class="fas fa-spinner fa-spin"></i> Searching...</span>';
                 findUidError.textContent = '';
 
                 const res = await apiCall('find_data', {
-                    beneficiaryId: currentUser.beneficiaryId,
-                    searchType: 'by_uid',
-                    uanNumber: uid
+                    beneficiaryId: currentUser.beneficiaryId, searchType: 'by_uid', uanNumber: uid
                 });
 
                 this.disabled = false;
@@ -3447,27 +2717,20 @@
 
                 if (res.status === 'success') {
                     if (!currentUser.isAdmin) updateBalance(res.newBalance);
-                    showResult(res.data);
-                    loadHistory();
-                    if (!currentUser.isAdmin) {
-                        addNotification('Search Successful', `Found record for UID ${uid}`);
-                    }
+                    showResult(res.data); loadHistory();
+                    if (!currentUser.isAdmin) addNotification('Search Successful', `Found record for UID ${uid}`);
                 } else if (res.status === 'pending') {
                     if (!currentUser.isAdmin) updateBalance(res.newBalance);
-                    findUidError.textContent = res.message;
-                    findUidError.className = 'success-msg';
-                    loadHistory();
-                    alert('🔍 ' + res.message);
+                    findUidError.textContent = res.message; findUidError.className = 'success-msg';
+                    loadHistory(); alert('🔍 ' + res.message);
                 } else if (res.status === 'low_balance') {
-                    findUidError.textContent = res.message;
-                    findUidError.className = 'error-msg';
+                    findUidError.textContent = res.message; findUidError.className = 'error-msg';
                 } else {
                     findUidError.textContent = res.message || 'Something went wrong.';
                     findUidError.className = 'error-msg';
                 }
             });
 
-            // ===== SHOW RESULT =====
             function showResult(data) {
                 resultUid.textContent = data.uid || '—';
                 rFullName.textContent = data.fullName || '—';
@@ -3486,7 +2749,7 @@
                 resultBeneficiary.textContent = beneficiary;
                 resultBeneficiaryTag.textContent = `ID: ${beneficiary}`;
 
-                Object.values(pages).forEach(p => p.classList.remove('active'));
+                Object.values(pages).forEach(p => { if (p) p.classList.remove('active'); });
                 pages.result.classList.add('active');
                 document.getElementById('dashContent').scrollTop = 0;
             }
@@ -3494,34 +2757,21 @@
             printResultBtn.addEventListener('click', () => window.print());
             backFromResult.addEventListener('click', () => navigateTo(currentPage || 'home'));
 
-            // ===== PAYMENT =====
             paymentBtn.addEventListener('click', async function() {
                 const txn = paymentTxn.value.trim();
                 const amount = paymentAmount.value.trim();
                 if (!txn || !amount || isNaN(amount) || parseFloat(amount) <= 0) {
-                    paymentError.textContent = 'Valid Transaction ID and Amount required.';
-                    return;
+                    paymentError.textContent = 'Valid Transaction ID and Amount required.'; return;
                 }
-                this.disabled = true;
-                this.textContent = 'Submitting...';
-                paymentError.textContent = '';
-
+                this.disabled = true; this.textContent = 'Submitting...'; paymentError.textContent = '';
                 const res = await apiCall('submit_payment', {
-                    beneficiaryId: currentUser.beneficiaryId,
-                    txnId: txn,
-                    amount: parseFloat(amount)
+                    beneficiaryId: currentUser.beneficiaryId, txnId: txn, amount: parseFloat(amount)
                 });
-
-                this.disabled = false;
-                this.textContent = 'Submit Payment';
-
+                this.disabled = false; this.textContent = 'Submit Payment';
                 if (res.status === 'success') {
-                    paymentError.textContent = res.message;
-                    paymentError.className = 'success-msg';
-                    paymentTxn.value = '';
-                    paymentAmount.value = 100;
-                    const balRes = await apiCall('login', { beneficiaryId: currentUser.beneficiaryId, password: currentUser
-                            .password || '' });
+                    paymentError.textContent = res.message; paymentError.className = 'success-msg';
+                    paymentTxn.value = ''; paymentAmount.value = 100;
+                    const balRes = await apiCall('login', { beneficiaryId: currentUser.beneficiaryId, password: currentUser.password || '' });
                     if (balRes.status === 'success') {
                         currentUser.balance = balRes.user.balance;
                         walletBalance.textContent = currentUser.balance;
@@ -3529,48 +2779,30 @@
                         saveSession(currentUser);
                         addNotification('Wallet Updated', `₹${amount} added to your wallet`);
                     }
-                } else {
-                    paymentError.textContent = res.message || 'Payment failed.';
-                    paymentError.className = 'error-msg';
-                }
+                } else { paymentError.textContent = res.message || 'Payment failed.'; paymentError.className = 'error-msg'; }
             });
 
-            // ===== HISTORY =====
             async function loadHistory() {
                 if (!currentUser) return;
                 const res = await apiCall('get_history', { beneficiaryId: currentUser.beneficiaryId });
-                if (res.status === 'success' && res.data) {
-                    renderHistory(res.data);
-                } else {
-                    historyBody.innerHTML =
-                        '<tr><td colspan="4" class="text-center text-muted">No history found.</td></tr>';
-                }
+                if (res.status === 'success' && res.data) renderHistory(res.data);
+                else historyBody.innerHTML = '<tr><td colspan="4" class="text-center text-muted">No history found.</td></tr>';
             }
 
             function renderHistory(data) {
                 if (!data || data.length === 0) {
-                    historyBody.innerHTML =
-                        '<tr><td colspan="4" class="text-center text-muted">No history found.</td></tr>';
+                    historyBody.innerHTML = '<tr><td colspan="4" class="text-center text-muted">No history found.</td></tr>';
                     return;
                 }
                 let html = '';
                 data.forEach(row => {
                     const status = row.Status || 'Pending';
                     const isPending = status.toLowerCase() === 'pending';
-                    const isSuccess = status.toLowerCase() === 'success';
                     let displayDate = row.SearchDate || '—';
-                    if (displayDate !== '—') {
-                        displayDate = formatDateTimeForDisplay(displayDate);
-                    }
+                    if (displayDate !== '—') displayDate = formatDateTimeForDisplay(displayDate);
                     let extra = '';
-                    if (isPending) {
-                        extra =
-                            `<button class="btn-dont-worry" data-uid="${row.UID || ''}" data-name="${row.SearchedName || ''}">Don't Worry</button>`;
-                    }
-                    if (currentUser && currentUser.isAdmin) {
-                        extra +=
-                            ` <button class="delete-btn" data-uid="${row.UID || ''}" data-date="${row.SearchDate || ''}"><i class="fas fa-trash"></i></button>`;
-                    }
+                    if (isPending) extra = `<button class="btn-dont-worry" data-uid="${row.UID || ''}" data-name="${row.SearchedName || ''}">Don't Worry</button>`;
+                    if (currentUser && currentUser.isAdmin) extra += ` <button class="delete-btn" data-uid="${row.UID || ''}" data-date="${row.SearchDate || ''}"><i class="fas fa-trash"></i></button>`;
                     html += `<tr>
                                 <td>${displayDate}</td>
                                 <td>${row.UID || '—'}</td>
@@ -3591,19 +2823,13 @@
                         const uid = this.dataset.uid;
                         if (!uid) return;
                         const res = await apiCall('get_uid_data', { uid });
-                        if (res.status === 'success') {
-                            showResult(res.data);
-                        } else {
-                            alert('Could not fetch data: ' + res.message);
-                        }
+                        if (res.status === 'success') showResult(res.data);
+                        else alert('Could not fetch data: ' + res.message);
                     });
                 });
-
                 document.querySelectorAll('.btn-dont-worry').forEach(btn => {
-                    btn.addEventListener('click', e => { e.stopPropagation();
-                        dontWorryModal.classList.add('show'); });
+                    btn.addEventListener('click', e => { e.stopPropagation(); dontWorryModal.classList.add('show'); });
                 });
-
                 document.querySelectorAll('.delete-btn').forEach(btn => {
                     btn.addEventListener('click', async function(e) {
                         e.stopPropagation();
@@ -3612,82 +2838,54 @@
                         if (!uid) return;
                         if (confirm('Are you sure you want to delete this history record?')) {
                             const res = await apiCall('admin_delete_history', {
-                                uid: uid,
-                                searchDate: date,
-                                beneficiaryId: currentUser.beneficiaryId
+                                uid, searchDate: date, beneficiaryId: currentUser.beneficiaryId
                             });
                             if (res.status === 'success') {
                                 alert('✅ History record deleted successfully!');
                                 loadHistory();
                                 addNotification('History Deleted', `Record for UID ${uid} removed`);
-                            } else {
-                                alert('❌ ' + (res.message || 'Failed to delete.'));
-                            }
+                            } else alert('❌ ' + (res.message || 'Failed to delete.'));
                         }
                     });
                 });
             }
 
-            // ===== DON'T WORRY =====
             dontWorryClose.addEventListener('click', () => dontWorryModal.classList.remove('show'));
             dontWorryModal.addEventListener('click', function(e) {
                 if (e.target === this) this.classList.remove('show');
             });
 
-            // ===== ADMIN: Add UID =====
             adminAddBtn.addEventListener('click', async function() {
                 const payload = {
-                    uid: adminUid.value.trim(),
-                    fullName: adminName.value.trim(),
-                    fatherName: adminFather.value.trim(),
-                    dob: adminDob.value,
-                    ageBand: adminAgeBand.value.trim(),
-                    gender: adminGender.value,
-                    mobile: adminMobile.value.trim(),
-                    state: adminState.value.trim(),
-                    district: adminDistrict.value.trim(),
-                    pincode: adminPincode.value.trim(),
-                    enrolmentNo: adminEnrolNo.value.trim(),
-                    enrolmentDate: adminEnrolDate.value,
+                    uid: adminUid.value.trim(), fullName: adminName.value.trim(),
+                    fatherName: adminFather.value.trim(), dob: adminDob.value,
+                    ageBand: adminAgeBand.value.trim(), gender: adminGender.value,
+                    mobile: adminMobile.value.trim(), state: adminState.value.trim(),
+                    district: adminDistrict.value.trim(), pincode: adminPincode.value.trim(),
+                    enrolmentNo: adminEnrolNo.value.trim(), enrolmentDate: adminEnrolDate.value,
                     enrolmentTime: adminEnrolTime.value.trim()
                 };
-
                 if (!payload.uid || payload.uid.length !== 12 || !/^\d{12}$/.test(payload.uid)) {
-                    adminError.textContent = 'Valid 12-digit UID required.';
-                    return;
+                    adminError.textContent = 'Valid 12-digit UID required.'; return;
                 }
                 if (!payload.fullName || !payload.dob || !payload.mobile || payload.mobile.length !== 10) {
-                    adminError.textContent = 'All required fields.';
-                    return;
+                    adminError.textContent = 'All required fields.'; return;
                 }
                 if (payload.enrolmentTime && !/^\d{2}:\d{2}(:\d{2})?$/.test(payload.enrolmentTime)) {
-                    adminError.textContent = 'Time must be in HH:MM or HH:MM:SS format.';
-                    return;
+                    adminError.textContent = 'Time must be in HH:MM or HH:MM:SS format.'; return;
                 }
-
                 this.disabled = true;
                 this.innerHTML = '<span class="btn-content"><i class="fas fa-spinner fa-spin"></i> Adding...</span>';
                 adminError.textContent = '';
                 const res = await apiCall('admin_add_data', payload);
                 this.disabled = false;
                 this.innerHTML = '<span class="btn-content"><i class="fas fa-plus-circle"></i> Add UID Data</span>';
-
                 if (res.status === 'success') {
-                    adminError.textContent = res.message;
-                    adminError.className = 'success-msg';
-                    adminUid.value = '';
-                    adminName.value = '';
-                    adminFather.value = '';
-                    adminDob.value = '';
-                    adminAgeBand.value = '';
-                    adminGender.value = 'Male';
-                    adminMobile.value = '';
-                    adminState.value = '';
-                    adminDistrict.value = '';
-                    adminPincode.value = '';
-                    adminEnrolNo.value = '';
-                    adminEnrolDate.value = '';
-                    adminEnrolTime.value = '';
+                    adminError.textContent = res.message; adminError.className = 'success-msg';
+                    adminUid.value = ''; adminName.value = ''; adminFather.value = '';
+                    adminDob.value = ''; adminAgeBand.value = ''; adminGender.value = '';
+                    adminMobile.value = ''; adminState.value = ''; adminDistrict.value = '';
+                    adminPincode.value = ''; adminEnrolNo.value = ''; adminEnrolDate.value = ''; adminEnrolTime.value = '';
                     loadPendingRequests();
                     addNotification('UID Added', `New UID ${payload.uid} added for ${payload.fullName}`);
                 } else {
@@ -3696,45 +2894,21 @@
                 }
             });
 
-            // ===== ADMIN: Add Admin =====
             addAdminBtn.addEventListener('click', async function() {
                 const name = addAdminName.value.trim();
                 const email = addAdminEmail.value.trim();
                 const mobile = addAdminMobile.value.trim();
                 const pass = addAdminPass.value.trim();
-
-                if (!name || !email || !mobile || !pass) {
-                    addAdminError.textContent = 'All fields required.';
-                    return;
-                }
-                if (mobile.length !== 10 || !/^\d{10}$/.test(mobile)) {
-                    addAdminError.textContent = 'Valid 10-digit mobile required.';
-                    return;
-                }
-                if (pass.length < 6) {
-                    addAdminError.textContent = 'Password must be at least 6 characters.';
-                    return;
-                }
-
-                this.disabled = true;
-                this.textContent = 'Creating...';
-                addAdminError.textContent = '';
-                const res = await apiCall('admin_add_admin', {
-                    fullName: name,
-                    email: email,
-                    mobile: mobile,
-                    password: pass
-                });
-                this.disabled = false;
-                this.textContent = 'Create Admin';
-
+                if (!name || !email || !mobile || !pass) { addAdminError.textContent = 'All fields required.'; return; }
+                if (mobile.length !== 10 || !/^\d{10}$/.test(mobile)) { addAdminError.textContent = 'Valid 10-digit mobile required.'; return; }
+                if (pass.length < 6) { addAdminError.textContent = 'Password must be at least 6 characters.'; return; }
+                this.disabled = true; this.textContent = 'Creating...'; addAdminError.textContent = '';
+                const res = await apiCall('admin_add_admin', { fullName: name, email, mobile, password: pass });
+                this.disabled = false; this.textContent = 'Create Admin';
                 if (res.status === 'success') {
-                    addAdminError.textContent = res.message;
-                    addAdminError.className = 'success-msg';
-                    addAdminName.value = '';
-                    addAdminEmail.value = '';
-                    addAdminMobile.value = '';
-                    addAdminPass.value = '';
+                    addAdminError.textContent = res.message; addAdminError.className = 'success-msg';
+                    addAdminName.value = ''; addAdminEmail.value = '';
+                    addAdminMobile.value = ''; addAdminPass.value = '';
                     addNotification('Admin Added', `New admin ${name} created`);
                 } else {
                     addAdminError.textContent = res.message || 'Failed to create admin.';
@@ -3742,45 +2916,21 @@
                 }
             });
 
-            // ===== ADMIN: Add User =====
             addUserBtn.addEventListener('click', async function() {
                 const name = addUserName.value.trim();
                 const email = addUserEmail.value.trim();
                 const mobile = addUserMobile.value.trim();
                 const pass = addUserPass.value.trim();
-
-                if (!name || !email || !mobile || !pass) {
-                    addUserError.textContent = 'All fields required.';
-                    return;
-                }
-                if (mobile.length !== 10 || !/^\d{10}$/.test(mobile)) {
-                    addUserError.textContent = 'Valid 10-digit mobile required.';
-                    return;
-                }
-                if (pass.length < 6) {
-                    addUserError.textContent = 'Password must be at least 6 characters.';
-                    return;
-                }
-
-                this.disabled = true;
-                this.textContent = 'Creating...';
-                addUserError.textContent = '';
-                const res = await apiCall('admin_add_user', {
-                    fullName: name,
-                    email: email,
-                    mobile: mobile,
-                    password: pass
-                });
-                this.disabled = false;
-                this.textContent = 'Create User';
-
+                if (!name || !email || !mobile || !pass) { addUserError.textContent = 'All fields required.'; return; }
+                if (mobile.length !== 10 || !/^\d{10}$/.test(mobile)) { addUserError.textContent = 'Valid 10-digit mobile required.'; return; }
+                if (pass.length < 6) { addUserError.textContent = 'Password must be at least 6 characters.'; return; }
+                this.disabled = true; this.textContent = 'Creating...'; addUserError.textContent = '';
+                const res = await apiCall('admin_add_user', { fullName: name, email, mobile, password: pass });
+                this.disabled = false; this.textContent = 'Create User';
                 if (res.status === 'success') {
-                    addUserError.textContent = res.message;
-                    addUserError.className = 'success-msg';
-                    addUserName.value = '';
-                    addUserEmail.value = '';
-                    addUserMobile.value = '';
-                    addUserPass.value = '';
+                    addUserError.textContent = res.message; addUserError.className = 'success-msg';
+                    addUserName.value = ''; addUserEmail.value = '';
+                    addUserMobile.value = ''; addUserPass.value = '';
                     addNotification('User Added', `New user ${name} created`);
                 } else {
                     addUserError.textContent = res.message || 'Failed to create user.';
@@ -3788,7 +2938,6 @@
                 }
             });
 
-            // ===== ADMIN: Pending =====
             async function loadPendingRequests() {
                 if (!currentUser || !currentUser.isAdmin) return;
                 const res = await apiCall('admin_get_pending');
@@ -3800,11 +2949,11 @@
                         let html = '';
                         pending.forEach(item => {
                             html += `<tr>
-                                        <td>${item.beneficiaryId}</td>
-                                        <td>${item.searchDate}</td>
-                                        <td>${item.searchedName}</td>
-                                        <td><button class="btn-sm btn-success resolve-pending" data-bid="${item.beneficiaryId}" data-date="${item.searchDate}" data-uid="${item.uid}">Resolve</button></td>
-                                    </tr>`;
+                                <td>${item.beneficiaryId}</td>
+                                <td>${item.searchDate}</td>
+                                <td>${item.searchedName}</td>
+                                <td><button class="btn-sm btn-success resolve-pending" data-bid="${item.beneficiaryId}" data-date="${item.searchDate}" data-uid="${item.uid}">Resolve</button></td>
+                            </tr>`;
                         });
                         pendingTableBody.innerHTML = html;
                         document.querySelectorAll('.resolve-pending').forEach(btn => {
@@ -3813,29 +2962,24 @@
                                 const date = this.dataset.date;
                                 const uid = this.dataset.uid;
                                 if (confirm('Resolve this pending request?')) {
-                                    const res = await apiCall('admin_resolve_pending', { beneficiaryId: bid,
-                                        searchDate: date, uid: uid });
+                                    const res = await apiCall('admin_resolve_pending', { beneficiaryId: bid, searchDate: date, uid });
                                     if (res.status === 'success') {
                                         alert('Resolved!');
                                         loadPendingRequests();
                                         loadHistory();
                                         addNotification('Request Resolved', `Pending request for ${bid} resolved`);
-                                    } else {
-                                        alert('Error: ' + res.message);
-                                    }
+                                    } else alert('Error: ' + res.message);
                                 }
                             });
                         });
                     }
                 } else {
-                    pendingTableBody.innerHTML =
-                        '<tr><td colspan="4" class="text-center text-muted">Could not load pending.</td></tr>';
+                    pendingTableBody.innerHTML = '<tr><td colspan="4" class="text-center text-muted">Could not load pending.</td></tr>';
                 }
             }
 
             refreshPendingBtn.addEventListener('click', loadPendingRequests);
 
-            // ===== KEYBOARD ESCAPE =====
             document.addEventListener('keydown', function(e) {
                 if (e.key === 'Escape') {
                     closeSidebar();
@@ -3845,19 +2989,163 @@
                 }
             });
 
-            // ===== INIT =====
             const sessionLoaded = loadSession();
             if (!sessionLoaded) {
                 authBlock.style.display = 'flex';
                 dashboardBlock.classList.remove('active');
             }
-
-            console.log('💡 SCRIPT_URL:', SCRIPT_URL);
-            if (SCRIPT_URL.includes('YOUR_SCRIPT_ID')) {
-                console.warn('⚠️ Please replace SCRIPT_URL with your Apps Script Web App URL.');
-            }
-
         })();
+    </script>
+
+    <!-- ============================================================
+    AADHAAR CREATOR SCRIPT (Global – for inline handlers)
+    ============================================================ -->
+    <script>
+        var hasPhoto = false;
+        var hasQR = false;
+
+        function setIssueDate() {
+            const now = new Date();
+            const formattedDate = String(now.getDate()).padStart(2, '0') + '/' +
+                String(now.getMonth() + 1).padStart(2, '0') + '/' +
+                now.getFullYear();
+            const backDateEl = document.getElementById('backDateVertical');
+            const issueEl = document.getElementById('issueDateVertical');
+            const issueInput = document.getElementById('issueDate');
+            if (backDateEl) backDateEl.innerText = 'Details as on: ' + formattedDate;
+            if (issueEl && issueInput && !issueInput.value) {
+                issueEl.innerText = 'Aadhaar no. issued: ' + formattedDate;
+            }
+        }
+
+        function updateIssueDate() {
+            const dateVal = document.getElementById('issueDate').value;
+            if (dateVal) {
+                const parts = dateVal.split('-');
+                document.getElementById('issueDateVertical').innerText = 'Aadhaar no. issued: ' + parts[2] + '/' + parts[1] + '/' + parts[0];
+            } else setIssueDate();
+        }
+
+        function toggleVid() {
+            const isChecked = document.getElementById('includeVid').checked;
+            const vidRow = document.getElementById('vidRow');
+            const vidInputGroup = document.getElementById('vidInputGroup');
+            if (isChecked) {
+                vidRow.style.display = 'block';
+                vidInputGroup.style.display = 'block';
+            } else {
+                vidRow.style.display = 'none';
+                vidInputGroup.style.display = 'none';
+            }
+        }
+
+        function toggleWhiteMode() {
+            const cards = document.querySelectorAll('#secCreateAadhaar .pvc-card');
+            const btn = document.getElementById('whiteModeBtn');
+            let isWhite = false;
+            cards.forEach(c => {
+                c.classList.toggle('white-mode');
+                if (c.classList.contains('white-mode')) isWhite = true;
+            });
+            if (isWhite) { btn.textContent = 'Color Card'; btn.classList.add('active'); }
+            else { btn.textContent = 'White Card'; btn.classList.remove('active'); }
+        }
+
+        function groupDigits(value, groupSize) {
+            const digits = (value || '').replace(/\D/g, '');
+            if (!digits) return '';
+            const groups = [];
+            for (let i = 0; i < digits.length; i += groupSize) groups.push(digits.slice(i, i + groupSize));
+            return groups.join(' ');
+        }
+
+        function updateCard() {
+            document.getElementById('lbl-name').innerText = document.getElementById('fullName').value;
+            document.getElementById('lbl-name-hi').innerText = document.getElementById('fullNameHi').value;
+
+            const dobVal = document.getElementById('dob').value;
+            if (dobVal) {
+                const parts = dobVal.split('-');
+                document.getElementById('lbl-dob').innerText = parts[2] + '/' + parts[1] + '/' + parts[0];
+            } else document.getElementById('lbl-dob').innerText = "";
+
+            const genderSelect = document.getElementById('gender').value;
+            const genderMap = { 'Male': 'पुरुष/ MALE', 'Female': 'महिला/ FEMALE', 'Other': 'अन्य/ OTHER' };
+            document.getElementById('lbl-gender').innerText = genderMap[genderSelect] || '';
+
+            const apaarVal = document.getElementById('apaarId').value;
+            const apaarFormatted = groupDigits(apaarVal, 4) || apaarVal;
+            document.getElementById('lbl-apaarid').innerText = apaarFormatted;
+            document.getElementById('lbl-apaarid-back').innerText = apaarFormatted;
+            document.getElementById('ghost-apaarid').innerText = apaarFormatted;
+
+            const isVidChecked = document.getElementById('includeVid').checked;
+            if (isVidChecked) {
+                const nationalIdVal = document.getElementById('nationalId').value;
+                document.getElementById('lbl-nationalid-back').innerText = groupDigits(nationalIdVal, 4) || nationalIdVal;
+            } else document.getElementById('lbl-nationalid-back').innerText = "";
+
+            const careOfHi = document.getElementById('careOfHi').value.trim();
+            const addressHi = document.getElementById('addressHi').value.trim();
+            const careOfEn = document.getElementById('careOfEn').value.trim();
+            const addressEn = document.getElementById('addressEn').value.trim();
+
+            document.getElementById('lbl-address-hi').innerText = [careOfHi, addressHi].filter(Boolean).join(', ');
+            document.getElementById('lbl-address-en').innerText = [careOfEn, addressEn].filter(Boolean).join(', ');
+
+            validateForm();
+        }
+
+        function updatePhoto(input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const preview = document.getElementById('previewPhoto');
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                    const ghostPreview = document.getElementById('ghostPhoto');
+                    ghostPreview.src = e.target.result;
+                    ghostPreview.style.display = 'block';
+                    hasPhoto = true;
+                    validateForm();
+                };
+                reader.readAsDataURL(input.files[0]);
+            } else { hasPhoto = false; validateForm(); }
+        }
+
+        function updateQRImage(input) {
+            const qrContainer = document.getElementById('backQrBox');
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    qrContainer.innerHTML = "";
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.alt = "QR Code";
+                    qrContainer.appendChild(img);
+                    hasQR = true;
+                    validateForm();
+                };
+                reader.readAsDataURL(input.files[0]);
+            } else { qrContainer.innerHTML = ""; hasQR = false; validateForm(); }
+        }
+
+        function validateForm() {
+            const name = document.getElementById('fullName').value.trim();
+            const dob = document.getElementById('dob').value.trim();
+            const gender = document.getElementById('gender').value.trim();
+            const apaarId = document.getElementById('apaarId').value.trim();
+            const isComplete = Boolean(name && dob && gender && apaarId && hasPhoto && hasQR);
+            const btn = document.getElementById('printBtn');
+            if (btn) btn.disabled = !isComplete;
+        }
+
+        // Initialize the Aadhaar creator date
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', setIssueDate);
+        } else {
+            setIssueDate();
+        }
     </script>
 
 </body>

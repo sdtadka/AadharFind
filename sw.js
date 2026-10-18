@@ -1,4 +1,4 @@
-const CACHE="AADHAR FIND";
+const CACHE="Smart Digital Online";
 
 self.addEventListener("install",e=>{
 self.skipWaiting();
